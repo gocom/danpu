@@ -1,6 +1,6 @@
 <?php
 
-/*!
+/*
  * Danpu - Database backup library
  * https://github.com/gocom/danpu
  *
