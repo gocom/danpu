@@ -24,5 +24,10 @@
         "php": ">=5.2.0",
         "ext-pdo": "*",
         "ext-zlib": "*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        }
     }
 }
