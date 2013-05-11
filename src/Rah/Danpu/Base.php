@@ -189,7 +189,7 @@ abstract class Rah_Danpu_Base
      * Opens a file for writing.
      *
      * @param string $filename The filename
-     * @param string $flags
+     * @param string $flags    Flags
      */
 
     protected function open($filename, $flags)
@@ -213,9 +213,10 @@ abstract class Rah_Danpu_Base
     }
 
     /**
-     * Writes a SQL statement to the file.
+     * Writes a line to the file.
      *
      * @param string $string  The string to write
+     * @param bool   $format  Format the string
      */
 
     protected function write($string, $format = true)
@@ -232,7 +233,7 @@ abstract class Rah_Danpu_Base
     }
 
     /**
-     * Moves temporary file to the final location.
+     * Moves a temporary file to the final location.
      */
 
     protected function move()
