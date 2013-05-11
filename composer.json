@@ -1,0 +1,26 @@
+{
+    "name": "rah/danpu",
+    "description": "Optimized MySQL dump tool written in PHP",
+    "keywords": ["mysql", "sql", "dump", "backup", "mysqldump", "export", "import"],
+    "homepage": "https://github.com/gocom/danpu",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jukka Svahn",
+            "homepage": "https://github.com/gocom",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/gocom/danpu/issues",
+        "source": "https://github.com/gocom/danpu"
+    },
+    "autoload": {
+        "psr-0": {
+            "Rah_Danpu_": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.2.0"
+    }
+}
