@@ -29,14 +29,14 @@ class Rah_Danpu_Import extends Rah_Danpu_Base
         if ($this->compress)
         {
             $gzip = new Rah_Danpu_Compress();
-            $gzip->unpack($this->temp, $this->filename);
+            $gzip->unpack($this->filename, $this->temp);
         }
         else
         {
             copy($this->filename, $this->temp);
         }
 
-        $this->fopen($this->temp, 'r');
+        $this->open($this->temp, 'r');
         $this->import();
         fclose($this->file);
     }
@@ -60,12 +60,15 @@ class Rah_Danpu_Import extends Rah_Danpu_Base
         while (!feof($this->file))
         {
             $line = fgets($this->file, 4096);
+            $trim = trim($line);
 
-            if (trim($line) !== '' && strpos(ltrim($line), '--') !== 0)
+            if ($trim !== '' && strpos($trim, '--') !== 0 && strpos($trim, '/*') !== 0)
             {
-                if (substr(rtrim($query), -1) === ';')
+                $query .= $line;
+
+                if (substr($trim, -1) === ';')
                 {
-                    $this->pdo->exec($query);
+                    $this->pdo->exec(substr(trim($query), 0, -1));
                     $query = '';
                 }
             }
