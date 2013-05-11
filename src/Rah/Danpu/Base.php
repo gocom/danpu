@@ -87,7 +87,6 @@ abstract class Rah_Danpu_Base
     /**
      * Constructor.
      *
-     * @param string $filename  The SQL dump file
      * @param Rah_Danpu_Dump The config
      */
 
