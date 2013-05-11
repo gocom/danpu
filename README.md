@@ -47,3 +47,10 @@ new Rah_Danpu_Import($dump);
 ```
 
 Where the ```$dump``` would be an instance of Rah_Danpu_Dump.
+
+Changelog
+---------
+
+### Version 1.0.0 - 2013/05/11
+
+* The initial legacy release.
