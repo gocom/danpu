@@ -1,6 +1,8 @@
 Danpu - MySQL dump tool for PHP
 =========
 
+[Packagist](https://packagist.org/packages/rah/danpu) | [Twitter](http://twitter.com/gocom) | [Donate](http://rahforum.biz/donate/danpu)
+
 Danpu is a dependency-free, cross-platform, portable PHP library for backing up MySQL databases. It has no hard dependencies, and is fit for use in restricted, shared-hosting environments. It requires nothing more than access to your database, PDO and a directory it can write the backup to. The script is optimized and has low memory-footprint, allowing it to handle even larger databases.
 
 Installing
