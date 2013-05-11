@@ -257,4 +257,15 @@ abstract class Rah_Danpu_Base
 
         throw new Exception('Unable to move the temporary file.');
     }
+
+    /**
+     * Returns a path to the target file.
+     *
+     * @return string
+     */
+
+    public function __toString()
+    {
+        return (string) $this->filename;
+    }
 }
