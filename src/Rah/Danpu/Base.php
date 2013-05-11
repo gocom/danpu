@@ -24,16 +24,18 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+namespace Rah\Danpu;
+
 /**
  * The base class.
  */
 
-abstract class Rah_Danpu_Base
+abstract class Base
 {
     /**
      * The config.
      *
-     * @var Rah_Danpu_Dump
+     * @var Rah\Danpu\Dump
      */
 
     protected $config;
@@ -87,8 +89,7 @@ abstract class Rah_Danpu_Base
     /**
      * Constructor.
      *
-     * @param string $filename  The SQL dump file
-     * @param Rah_Danpu_Dump The config
+     * @param Rah\Danpu\Dump The config
      */
 
     public function __construct($config)
@@ -125,7 +126,12 @@ abstract class Rah_Danpu_Base
     {
         try
         {
-            $this->pdo = new PDO("mysql:dbname={$this->config->db};host={$this->config->host}", $this->config->user, $this->config->pass);
+            $this->pdo = new \PDO(
+                "mysql:dbname={$this->config->db};host={$this->config->host}",
+                $this->config->user,
+                $this->config->pass
+            );
+
             $this->pdo->exec('SET NAMES '.$this->config->encoding);
 
             foreach ($this->config->attributes as $name => $value)
@@ -240,7 +246,7 @@ abstract class Rah_Danpu_Base
     {
         if ($this->compress)
         {
-            $gzip = new Rah_Danpu_Compress();
+            $gzip = new Compress();
             $gzip->pack($this->temp, $this->filename);
             unlink($this->temp);
             return true;

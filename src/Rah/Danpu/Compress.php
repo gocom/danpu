@@ -24,13 +24,15 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+namespace Rah\Danpu;
+
 /**
  * Creates a gzip file from the backup.
  *
  * @example
  */
 
-class Rah_Danpu_Compress
+class Compress
 {
     /**
      * Compresses files.

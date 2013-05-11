@@ -24,11 +24,15 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+namespace Rah\Danpu;
+
 /**
  * Restores a database from a SQL dump file.
  *
  * @example
- * $config = new Rah_Danpu_Dump;
+ * use Rah\Danpu\Dump;
+ * use Rah\Danpu\Import;
+ * $config = new Dump;
  * $config
  *    ->file('/path/to/target/dump/file.sql')
  *    ->db('database')
@@ -37,10 +41,10 @@
  *    ->pass('password')
  *    ->temp('/tmp');
  *
- * new Rah_Danpu_Import($config);
+ * new Import($config);
  */
 
-class Rah_Danpu_Import extends Rah_Danpu_Base
+class Import extends Base
 {
     /**
      * Runs the dump file.
@@ -52,7 +56,7 @@ class Rah_Danpu_Import extends Rah_Danpu_Base
 
         if ($this->compress)
         {
-            $gzip = new Rah_Danpu_Compress();
+            $gzip = new Compress();
             $gzip->unpack($this->filename, $this->temp);
         }
         else

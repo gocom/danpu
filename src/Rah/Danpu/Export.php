@@ -24,11 +24,15 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+namespace Rah\Danpu;
+
 /**
  * Creates a SQL dump file from a database.
  *
  * @example
- * $config = new Rah_Danpu_Dump;
+ * use Rah\Danpu\Dump;
+ * use Rah\Danpu\Export;
+ * $config = new Dump;
  * $config
  *    ->file('/path/to/target/dump/file.sql')
  *    ->db('database')
@@ -37,10 +41,10 @@
  *    ->pass('password')
  *    ->temp('/tmp');
  *
- * new Rah_Danpu_Export($config);
+ * new Export($config);
  */
 
-class Rah_Danpu_Export extends Rah_Danpu_Base
+class Export extends Base
 {
     /**
      * Dumps the database.
@@ -109,7 +113,7 @@ class Rah_Danpu_Export extends Rah_Danpu_Base
             $rows = $this->pdo->prepare('select * from `'.$table.'`');
             $rows->execute();
 
-            while ($a = $rows->fetch(PDO::FETCH_ASSOC))
+            while ($a = $rows->fetch(\PDO::FETCH_ASSOC))
             {
                 $this->write("INSERT INTO `{$table}` VALUES (".implode(',', array_map(array($this, 'escape'), $a)).")");
             }

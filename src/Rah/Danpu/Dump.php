@@ -24,17 +24,20 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+namespace Rah\Danpu;
+
 /**
  * Config template and defaults.
  *
  * @example
- * $dump = new Rah_Danpu_Dump();
+ * use Rah\Danpu\Dump;
+ * $dump = new Dump();
  * $dump
  *     ->db('database')
  *     ->file('/path/to/dump.sql');
  */
 
-class Rah_Danpu_Dump
+class Dump
 {
     /**
      * The database name.
@@ -126,15 +129,15 @@ class Rah_Danpu_Dump
     public function __construct()
     {
         $this->attributes = array(
-            PDO::ATTR_ORACLE_NULLS             => PDO::NULL_NATURAL,
-            PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false,
+            \PDO::ATTR_ORACLE_NULLS             => \PDO::NULL_NATURAL,
+            \PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false,
         );
     }
 
     /**
      * Sets database connection details.
      *
-     * @return Rah_Danpu_Dump
+     * @return Rah\Danpu\Dump
      */
 
     public function __call($name, $args)
