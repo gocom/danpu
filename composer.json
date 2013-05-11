@@ -1,6 +1,6 @@
 {
     "name": "rah/danpu",
-    "description": "Optimized MySQL dump tool written in PHP",
+    "description": "MySQL database dump tool implemented in PHP",
     "keywords": ["mysql", "sql", "dump", "backup", "mysqldump", "export", "import"],
     "homepage": "https://github.com/gocom/danpu",
     "license": "MIT",
