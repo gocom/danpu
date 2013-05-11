@@ -22,6 +22,7 @@ Backups are created by the Export class. The class exports the database to a SQL
 ```php
 use Rah\Danpu\Dump;
 use Rah\Danpu\Export;
+
 $dump = new Dump;
 $dump
     ->file('/path/to/target/dump/file.sql.gz')
