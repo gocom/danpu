@@ -52,6 +52,12 @@ Where the ```$dump``` would be an instance of Rah_Danpu_Dump.
 Changelog
 ---------
 
+### Version 1.3.0 - 2013/05/13
+
+* Fixed: Errors in the given examples. The Rah_Danpu_Dump::temp() should be Rah_Danpu_Dump::tmp().
+* Added: Rah_Danpu_Config class. Allows creating configs by extending.
+* Added: Rah_Danpu_Dump now validates the given configuration option names.
+
 ### Version 1.2.0 - 2013/05/13
 
 * Added: Database connection details are set using a DSN string. Deprecates Rah_Danpu_Dump::$db and Rah_Danpu_Dump::$host.
