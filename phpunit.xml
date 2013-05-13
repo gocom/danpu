@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="tests/bootstrap.php">
+    <php>
+        <const name="test_db_dsn" value="mysql:dbname=danpu;host=localhost"/>
+        <const name="test_db_user" value="root"/>
+        <const name="test_db_pass" value="root"/>
+    </php>
+
+    <testsuites>
+        <testsuite name="Danpu Test Suite">
+            <directory>./tests/Rah/Danpu/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
