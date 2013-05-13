@@ -51,6 +51,10 @@ Where the ```$dump``` would be an instance of Rah\Danpu\Dump.
 Changelog
 ---------
 
+### Version 2.2.0 - 2013/05/13
+
+* Added: Database connection details are set using a DSN string. Deprecates Rah\Danpu\Dump::$db and Rah\Danpu\Dump::$host.
+
 ### Version 2.1.1 - 2013/05/13
 
 * Fixed: Catch PDOExcepiton.
