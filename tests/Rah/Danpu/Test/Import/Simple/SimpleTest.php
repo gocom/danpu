@@ -1,10 +1,10 @@
 <?php
 
-namespace Rah\Danpu\Test;
+namespace Rah\Danpu\Test\Import\Simple;
 use Rah\Danpu\Dump;
-use Rah\Danpu\Export;
+use Rah\Danpu\Import;
 
-class RestoreTest extends \PHPUnit_Framework_TestCase
+class SimpleTest extends \PHPUnit_Framework_TestCase
 {
     private $dump;
 
@@ -12,7 +12,7 @@ class RestoreTest extends \PHPUnit_Framework_TestCase
     {
         $this->dump = new Dump;
         $this->dump
-            ->file(dirname(dirname(dirname(__DIR__))) . '/database.sql')
+            ->file(__DIR__ . '/dump.sql')
             ->dsn(\test_db_dsn)
             ->user(\test_db_user)
             ->pass(\test_db_pass)
