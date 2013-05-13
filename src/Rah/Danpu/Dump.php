@@ -119,6 +119,7 @@ class Dump
      * data from the backup.
      *
      * @var string
+     * @since 2.1.0
      * @example
      * $dump->ignore(array('access_tokens', 'sync_keys'));
      */
