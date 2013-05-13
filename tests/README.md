@@ -9,4 +9,4 @@ The project uses [PHPunit](http://phpunit.de) for running its unit tests. Before
 
     $ ./vendor/bin/phpunit /path/to/your/phpunit.xml
 
-The config should follow the [../phpunit.dist.xml](https://github.com/gocom/danpu/blob/master/phpunit.xml) template.
+The config should follow the [../phpunit.dist.xml](https://github.com/gocom/danpu/blob/master/phpunit.dist.xml) template.
