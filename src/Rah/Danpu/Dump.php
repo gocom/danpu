@@ -25,7 +25,7 @@
  */
 
 /**
- * Config template and defaults.
+ * Configures a dump instance.
  *
  * @example
  * $dump = new Rah_Danpu_Dump();
@@ -34,117 +34,8 @@
  *     ->file('/path/to/dump.sql');
  */
 
-class Rah_Danpu_Dump
+class Rah_Danpu_Dump extends Rah_Danpu_Config
 {
-    /**
-     * Data source name.
-     *
-     * @var string
-     * @since 1.2.0
-     * @example
-     * $dump->dsn('mysql:dbname=database;host=localhost')
-     */
-
-    public $dsn;
-
-    /**
-     * The database name.
-     *
-     * @var string
-     * @deprecated 1.2.0
-     * @example
-     * $dump->db('myDatabase');
-     */
-
-    public $db;
-
-    /**
-     * The hostname.
-     *
-     * @var string
-     * @deprecated 1.2.0
-     * @example
-     * $dump->host('hostname.test');
-     */
-
-    public $host = 'localhost';
-
-    /**
-     * The username.
-     *
-     * @var string
-     * @example
-     * $dump->user('username');
-     */
-
-    public $user;
-
-    /**
-     * The password.
-     *
-     * @var string
-     * @example
-     * $dump->pass('password');
-     */
-
-    public $pass = '';
-
-    /**
-     * Connection attributes.
-     *
-     * @var array
-     * @example
-     * $dump->attributes(array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true));
-     */
-
-    public $attributes = array();
-
-    /**
-     * Encoding.
-     *
-     * @var string
-     * @example
-     * $dump->encoding('latin1');
-     */
-
-    public $encoding = 'utf8';
-
-    /**
-     * An array of ignored tables.
-     *
-     * This can be used to exclude confidential or temporary
-     * data from the backup.
-     *
-     * @var string
-     * @example
-     * $dump->ignore(array('access_tokens', 'sync_keys'));
-     */
-
-    public $ignore = array();
-
-    /**
-     * Temporary directory.
-     *
-     * @var string
-     * @example
-     * $dump->tmp('/path/to/temp/dir');
-     */
-
-    public $tmp = '/tmp';
-
-    /**
-     * The target SQL dump file.
-     *
-     * To enable Gzipping, add '.gz' extension
-     * to the filename.
-     *
-     * @var string
-     * @example
-     * $dump->file('/path/to/dump.sql');
-     */
-
-    public $file;
-
     /**
      * Constructor.
      */
