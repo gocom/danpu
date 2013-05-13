@@ -38,7 +38,7 @@ namespace Rah\Danpu;
  * }
  */
 
-class Config
+abstract class Config
 {
     /**
      * Data source name.
