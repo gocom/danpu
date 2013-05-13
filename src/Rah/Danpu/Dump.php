@@ -43,6 +43,7 @@ class Dump
      * Data source name.
      *
      * @var string
+     * @since 2.2.0
      * @example
      * $dump->dsn('mysql:dbname=database;host=localhost');
      */
