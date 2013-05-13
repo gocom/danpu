@@ -52,9 +52,13 @@ Where the ```$dump``` would be an instance of Rah\Danpu\Dump.
 Changelog
 ---------
 
+### Version 2.1.0 - 2013/05/13
+
+* Added: Option to ignore database tables.
+
 ### Version 2.0.1 - 2013/05/11
 
-* Fixes error in the composer.json.
+* Fixed: Error in the composer.json.
 
 ### Version 2.0.0 - 2013/05/11
 
