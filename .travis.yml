@@ -1,0 +1,15 @@
+language: php
+php:
+  - 5.5
+  - 5.4
+  - 5.3
+
+env:
+  - DB=mysql
+
+before_script:
+  - composer install
+  - if [[ "$DB" == "mysql" ]]; then mysql -e "drop database IF EXISTS danpu;" -uroot; fi
+  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database danpu;" -uroot; fi
+
+script: phpunit --configuration tests/phpunit.xml --coverage-text
