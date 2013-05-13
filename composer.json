@@ -25,6 +25,9 @@
         "ext-pdo": "*",
         "ext-zlib": "*"
     },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "2.x-dev"
