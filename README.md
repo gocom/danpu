@@ -30,7 +30,7 @@ $dump
     ->dsn('mysql:dbname=database;host=localhost')
     ->user('username')
     ->pass('password')
-    ->temp('/tmp');
+    ->tmp('/tmp');
 
 new Rah_Danpu_Export($dump);
 ```
