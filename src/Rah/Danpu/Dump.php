@@ -53,6 +53,7 @@ class Dump
      * The database name.
      *
      * @var string
+     * @deprecated 2.2.0
      * @example
      * $dump->db('myDatabase');
      */
@@ -63,6 +64,7 @@ class Dump
      * The hostname.
      *
      * @var string
+     * @deprecated 2.2.0
      * @example
      * $dump->host('hostname.test');
      */
