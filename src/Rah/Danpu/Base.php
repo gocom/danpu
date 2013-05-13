@@ -149,7 +149,7 @@ abstract class Base
         {
             foreach ($tables as $table)
             {
-                if (!in_array($table, $this->config->ignore))
+                if (!in_array($table, $this->config->ignore, true))
                 {
                     $this->tables[] = current($table);
                 }
