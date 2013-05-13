@@ -27,7 +27,7 @@
 /**
  * Dump config.
  *
- * @since 2.3.0
+ * @since 1.3.0
  * @example
  * class myConfig Extends Rah_Danpu_Config
  * {
