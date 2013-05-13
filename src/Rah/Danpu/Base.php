@@ -131,7 +131,7 @@ abstract class Base
                 $this->pdo->setAttribute($name, $value);
             }
         }
-        catch (PDOException $e)
+        catch (\PDOException $e)
         {
             throw new Exception('Connecting to database failed with message: '.$e->getMessage());
         }
