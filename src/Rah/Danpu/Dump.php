@@ -33,12 +33,22 @@ namespace Rah\Danpu;
  * use Rah\Danpu\Dump;
  * $dump = new Dump();
  * $dump
- *     ->db('database')
+ *     ->dsn('mysql:dbname=database;host=localhost')
  *     ->file('/path/to/dump.sql');
  */
 
 class Dump
 {
+    /**
+     * Data source name.
+     *
+     * @var string
+     * @example
+     * $dump->dsn('mysql:dbname=database;host=localhost');
+     */
+
+    public $dsn;
+
     /**
      * The database name.
      *

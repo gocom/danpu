@@ -116,10 +116,19 @@ abstract class Base
 
     public function connect()
     {
+        if ($this->config->dsn)
+        {
+            $dsn = $this->config->dsn;
+        }
+        else
+        {
+            $dsn = "mysql:dbname={$this->config->db};host={$this->config->host}";
+        }
+
         try
         {
             $this->pdo = new \PDO(
-                "mysql:dbname={$this->config->db};host={$this->config->host}",
+                $dsn,
                 $this->config->user,
                 $this->config->pass
             );
