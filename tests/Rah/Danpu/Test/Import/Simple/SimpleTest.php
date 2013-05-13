@@ -16,7 +16,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
             ->dsn(\test_db_dsn)
             ->user(\test_db_user)
             ->pass(\test_db_pass)
-            ->temp('/tmp');
+            ->tmp('/tmp');
     }
 
     public function testRestoreUncompressed()
