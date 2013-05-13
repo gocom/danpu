@@ -50,6 +50,10 @@ Where the ```$dump``` would be an instance of Rah_Danpu_Dump.
 Changelog
 ---------
 
+### Version 1.2.0 - 2013/05/13
+
+* Added: Database connection details are set using a DSN string. Deprecates Rah_Danpu_Dump::$db and Rah_Danpu_Dump::$host.
+
 ### Version 1.1.0 - 2013/05/13
 
 * Added: Option to ignore database tables.
