@@ -52,6 +52,10 @@ Where the ```$dump``` would be an instance of Rah_Danpu_Dump.
 Changelog
 ---------
 
+### Version 1.3.1 - 2013/05/13
+
+* Fixed: Missing quotes in the README's installation instructions.
+
 ### Version 1.3.0 - 2013/05/13
 
 * Fixed: Errors in the given examples. The Rah_Danpu_Dump::temp() should be Rah_Danpu_Dump::tmp().
