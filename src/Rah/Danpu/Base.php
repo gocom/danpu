@@ -49,14 +49,6 @@ abstract class Base
     protected $tables = array();
 
     /**
-     * Ignored tables.
-     *
-     * @var array
-     */
-
-    protected $ignored = array();
-
-    /**
      * File pointer.
      *
      * @var resource
@@ -157,7 +149,7 @@ abstract class Base
         {
             foreach ($tables as $table)
             {
-                if (!in_array($table, $this->ignored))
+                if (!in_array($table, $this->config->ignore))
                 {
                     $this->tables[] = current($table);
                 }
