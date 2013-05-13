@@ -31,8 +31,7 @@
  * $config = new Rah_Danpu_Dump;
  * $config
  *    ->file('/path/to/target/dump/file.sql')
- *    ->db('database')
- *    ->host('localhost')
+ *    ->dsn('mysql:dbname=database;host=localhost')
  *    ->user('username')
  *    ->pass('password')
  *    ->temp('/tmp');

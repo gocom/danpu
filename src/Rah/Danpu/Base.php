@@ -114,9 +114,23 @@ abstract class Rah_Danpu_Base
 
     public function connect()
     {
+        if ($this->config->dsn)
+        {
+            $dsn = $this->config->dsn;
+        }
+        else
+        {
+            $dsn = "mysql:dbname={$this->config->db};host={$this->config->host}";
+        }
+
         try
         {
-            $this->pdo = new PDO("mysql:dbname={$this->config->db};host={$this->config->host}", $this->config->user, $this->config->pass);
+            $this->pdo = new PDO(
+                $dsn,
+                $this->config->user,
+                $this->config->pass
+            );
+
             $this->pdo->exec('SET NAMES '.$this->config->encoding);
 
             foreach ($this->config->attributes as $name => $value)

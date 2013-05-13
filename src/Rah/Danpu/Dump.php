@@ -30,16 +30,28 @@
  * @example
  * $dump = new Rah_Danpu_Dump();
  * $dump
- *     ->db('database')
+ *     ->dsn('mysql:dbname=database;host=localhost')
  *     ->file('/path/to/dump.sql');
  */
 
 class Rah_Danpu_Dump
 {
     /**
+     * Data source name.
+     *
+     * @var string
+     * @since 1.2.0
+     * @example
+     * $dump->dsn('mysql:dbname=database;host=localhost')
+     */
+
+    public $dsn;
+
+    /**
      * The database name.
      *
      * @var string
+     * @deprecated 1.2.0
      * @example
      * $dump->db('myDatabase');
      */
@@ -50,6 +62,7 @@ class Rah_Danpu_Dump
      * The hostname.
      *
      * @var string
+     * @deprecated 1.2.0
      * @example
      * $dump->host('hostname.test');
      */

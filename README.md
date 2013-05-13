@@ -27,8 +27,7 @@ Backups are created by the Rah_Danpu_Export class. The class exports the databas
 $dump = new Rah_Danpu_Dump;
 $dump
     ->file('/path/to/target/dump/file.sql.gz')
-    ->db('database')
-    ->host('localhost')
+    ->dsn('mysql:dbname=database;host=localhost')
     ->user('username')
     ->pass('password')
     ->temp('/tmp');
