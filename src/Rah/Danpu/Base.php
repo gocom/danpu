@@ -47,14 +47,6 @@ abstract class Rah_Danpu_Base
     protected $tables = array();
 
     /**
-     * Ignored tables.
-     *
-     * @var array
-     */
-
-    protected $ignored = array();
-
-    /**
      * File pointer.
      *
      * @var resource
@@ -150,7 +142,7 @@ abstract class Rah_Danpu_Base
         {
             foreach ($tables as $table)
             {
-                if (!in_array($table, $this->ignored))
+                if (!in_array($table, $this->config->ignore, true))
                 {
                     $this->tables[] = current($table);
                 }

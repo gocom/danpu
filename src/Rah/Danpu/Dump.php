@@ -97,6 +97,19 @@ class Rah_Danpu_Dump
     public $encoding = 'utf8';
 
     /**
+     * An array of ignored tables.
+     *
+     * This can be used to exclude confidential or temporary
+     * data from the backup.
+     *
+     * @var string
+     * @example
+     * $dump->ignore(array('access_tokens', 'sync_keys'));
+     */
+
+    public $ignore = array();
+
+    /**
      * Temporary directory.
      *
      * @var string
