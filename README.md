@@ -51,6 +51,10 @@ Where the ```$dump``` would be an instance of Rah_Danpu_Dump.
 Changelog
 ---------
 
+### Version 1.0.1 - 2013/05/13
+
+* Added: Option to ignore database tables.
+
 ### Version 1.0.0 - 2013/05/11
 
 * The initial legacy release.
