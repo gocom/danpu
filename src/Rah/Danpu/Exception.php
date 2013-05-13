@@ -26,6 +26,10 @@
 
 namespace Rah\Danpu;
 
+/**
+ * Generic exception.
+ */
+
 class Exception extends \Exception
 {
 }
