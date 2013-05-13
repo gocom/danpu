@@ -12,7 +12,7 @@ Installing
 
 Using [Composer](http://getcomposer.org):
 
-    $ composer.phar require rah/danpu 1.*
+    $ composer.phar require "rah/danpu 1.*"
 
 v.1.x.x are PHP 5.2 compatible.
 
