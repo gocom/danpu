@@ -12,4 +12,4 @@ before_script:
   - if [[ "$DB" == "mysql" ]]; then mysql -e "drop database IF EXISTS danpu;" -uroot; fi
   - if [[ "$DB" == "mysql" ]]; then mysql -e "create database danpu;" -uroot; fi
 
-script: phpunit --configuration tests/phpunit.xml --coverage-text
+script: phpunit --configuration tests/travis/phpunit.$DB.xml
