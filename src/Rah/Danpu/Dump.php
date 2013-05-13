@@ -59,6 +59,11 @@ class Dump extends Config
 
     public function __call($name, $args)
     {
+        if (property_exists($this, $name) === false)
+        {
+            throw new Exception('Unknown config option given: '.$name);
+        }
+
         $this->$name = $args[0];
         return $this;
     }
