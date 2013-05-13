@@ -30,6 +30,16 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         return file_exists($this->temp);
     }
 
+    public function testIgnoredTable()
+    {
+        $this->dump->file(__DIR__ . '/dump.sql');
+        new Import($this->dump);
+        $this->dump->file($this->temp);
+        $this->dump->ignore(array('test_table_2'));
+        new Export($this->dump);
+        return file_exists($this->temp) && strpos('test_table_2', file_get_contents($this->temp)) === false;
+    }
+
     public function tearDown()
     {
         unlink($this->temp);
