@@ -84,7 +84,7 @@ abstract class Base
      * @param Rah\Danpu\Dump The config
      */
 
-    public function __construct(Dump $config)
+    public function __construct(Config $config)
     {
         $this->config = $config;
         $this->filename = $this->config->file;
