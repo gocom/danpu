@@ -51,6 +51,10 @@ Where the ```$dump``` would be an instance of Rah\Danpu\Dump.
 Changelog
 ---------
 
+### Version 2.3.1 - 2013/05/14
+
+* Fixed: Can pass instance of Rah\Danpu\Config to a worker. Rah\Base now correctly hints Rah\Danpu\Config instead of Rah\Danpu\Dump.
+
 ### Version 2.3.0 - 2013/05/13
 
 * Fixed: Errors in the given examples. The Rah\Danpu\Dump::temp() should be Rah\Danpu\Dump::tmp().
