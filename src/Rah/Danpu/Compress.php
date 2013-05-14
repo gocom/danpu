@@ -35,6 +35,18 @@ namespace Rah\Danpu;
 class Compress
 {
     /**
+     * Constructor.
+     */
+
+    public function __construct()
+    {
+        if (!function_exists('gzopen'))
+        {
+            throw new Exception('Zlib support is not enabled in PHP. Try uncompressed file.');
+        }
+    }
+
+    /**
      * Compresses files.
      *
      * @param string $from
