@@ -41,7 +41,7 @@ abstract class Base
     protected $config;
 
     /**
-     * An instance of PDO
+     * An instance of PDO.
      *
      * @var \PDO
      */
