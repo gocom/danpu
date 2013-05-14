@@ -51,6 +51,10 @@ Where the ```$dump``` would be an instance of Rah\Danpu\Dump.
 Changelog
 ---------
 
+### Version 2.3.2 - 2013/05/14
+
+* Fixed: Define Rah\Danpu\Base::$pdo property as protected.
+
 ### Version 2.3.1 - 2013/05/14
 
 * Fixed: Can pass instance of Rah\Danpu\Config to a worker. Rah\Base now correctly hints Rah\Danpu\Config instead of Rah\Danpu\Dump.
