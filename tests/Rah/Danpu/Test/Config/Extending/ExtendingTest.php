@@ -20,7 +20,6 @@ class MyConfig extends Config
 class ExtendingTest extends \PHPUnit_Framework_TestCase
 {
     private $dump;
-	private $temp;
 
     public function setUp()
     {
@@ -30,8 +29,8 @@ class ExtendingTest extends \PHPUnit_Framework_TestCase
 
     public function testExtending()
     {
-        new Export(new MyConfig());
-        return file_exists($this->temp);
+        new Export($this->dump);
+        return file_exists($this->dump->file);
     }
 
     public function tearDown()
