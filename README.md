@@ -52,6 +52,10 @@ Where the ```$dump``` would be an instance of Rah_Danpu_Dump.
 Changelog
 ---------
 
+### Version 1.3.2 - 2014/05/14
+
+* Fixed: Define Rah_Danpu_Base::$pdo property as protected.
+
 ### Version 1.3.1 - 2013/05/13
 
 * Fixed: Missing quotes in the README's installation instructions.
