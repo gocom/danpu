@@ -41,7 +41,7 @@ abstract class Base
     protected $config;
 
     /**
-     * An array of table in the database.
+     * An array of tables in the database.
      *
      * @var array
      */
