@@ -41,6 +41,14 @@ abstract class Base
     protected $config;
 
     /**
+     * An instance of PDO
+     *
+     * @var \PDO
+     */
+
+    protected $pdo;
+
+    /**
      * An array of tables in the database.
      *
      * @var array
