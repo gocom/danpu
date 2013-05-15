@@ -33,6 +33,20 @@
 class Rah_Danpu_Compress
 {
     /**
+     * Constructor.
+     *
+     * @since 1.3.3
+     */
+
+    public function __construct()
+    {
+        if (!function_exists('gzopen'))
+        {
+            throw new Exception('Zlib support is not enabled in PHP. Try uncompressed file.');
+        }
+    }
+
+    /**
      * Compresses files.
      *
      * @param string $from

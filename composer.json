@@ -22,7 +22,9 @@
     },
     "require": {
         "php": ">=5.2.0",
-        "ext-pdo": "*",
+        "ext-pdo": "*"
+    },
+    "suggest": {
         "ext-zlib": "*"
     },
     "require-dev": {
