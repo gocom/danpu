@@ -52,6 +52,7 @@ class Export extends Base
     public function init()
     {
         $this->connect();
+        $this->tmpFile();
         $this->open($this->temp, 'wb');
         $this->getTables();
         $this->lock();

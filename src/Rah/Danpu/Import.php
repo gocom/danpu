@@ -52,6 +52,7 @@ class Import extends Base
     public function init()
     {
         $this->connect();
+        $this->tmpFile();
 
         if ($this->compress)
         {

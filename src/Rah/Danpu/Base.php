@@ -96,8 +96,6 @@ abstract class Base
     {
         $this->config = $config;
         $this->filename = $this->config->file;
-        $this->temp = tempnam($this->config->tmp . '/' . $this->temp, 'Rah_Danpu_');
-        unlink($this->temp);
         $this->compress = pathinfo($this->filename, PATHINFO_EXTENSION) === 'gz';
         $this->init();
     }
@@ -198,6 +196,18 @@ abstract class Base
     protected function unlock()
     {
         return $this->pdo->exec('UNLOCK TABLES');
+    }
+
+    /**
+     * Gets a path to a temporary file acting as a buffer.
+     */
+
+    protected function tmpFile()
+    {
+        if (($this->temp = tempnam($this->config->tmp, 'Rah_Danpu_')) === false || unlink($this->temp) === false)
+        {
+            throw new Exception('Unable to create a temporary file, check the configured tmp directory.');
+        }
     }
 
     /**
