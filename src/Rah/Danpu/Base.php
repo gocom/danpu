@@ -105,12 +105,7 @@ abstract class Rah_Danpu_Base
     public function __destruct()
     {
         $this->close();
-
-        if (file_exists($this->temp))
-        {
-            unlink($this->temp);
-        }
-
+        $this->clean();
         $this->unlock();
     }
 
@@ -207,6 +202,20 @@ abstract class Rah_Danpu_Base
         if (($this->temp = tempnam($this->config->tmp, 'Rah_Danpu_')) === false || unlink($this->temp) === false)
         {
             throw new Exception('Unable to create a temporary file, check the configured tmp directory.');
+        }
+    }
+
+    /**
+     * Cleans left over temporary file trash.
+     *
+     * @since 1.3.4
+     */
+
+    protected function clean()
+    {
+        if (file_exists($this->temp))
+        {
+            unlink($this->temp);
         }
     }
 

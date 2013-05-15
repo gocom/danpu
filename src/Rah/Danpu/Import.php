@@ -62,7 +62,8 @@ class Rah_Danpu_Import extends Rah_Danpu_Base
 
         $this->open($this->temp, 'r');
         $this->import();
-        fclose($this->file);
+        $this->close();
+        $this->clean();
     }
 
     /**
