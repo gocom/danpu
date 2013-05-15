@@ -120,5 +120,7 @@ class Export extends Base
 
             $this->write('UNLOCK TABLES');
         }
+
+        $this->write("\n\n-- Completed on: " . date('c'), false);
     }
 }
