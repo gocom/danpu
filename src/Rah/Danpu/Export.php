@@ -48,6 +48,7 @@ class Rah_Danpu_Export extends Rah_Danpu_Base
     public function init()
     {
         $this->connect();
+        $this->tmpFile();
         $this->open($this->temp, 'wb');
         $this->getTables();
         $this->lock();

@@ -48,6 +48,7 @@ class Rah_Danpu_Import extends Rah_Danpu_Base
     public function init()
     {
         $this->connect();
+        $this->tmpFile();
 
         if ($this->compress)
         {
