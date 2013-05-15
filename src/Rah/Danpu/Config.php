@@ -131,7 +131,7 @@ abstract class Config
     public $file;
 
     /**
-     * Do not dump table data, only structure.
+     * Dump table data.
      *
      * @var   bool
      * @since 2.4.0
