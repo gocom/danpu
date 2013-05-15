@@ -107,18 +107,21 @@ class Export extends Base
                 $this->write(end($row));
             }
 
-            $this->write("\n\n-- Dumping data for table `{$table}`\n\n", false);
-            $this->write("LOCK TABLES `{$table}` WRITE");
-
-            $rows = $this->pdo->prepare('select * from `'.$table.'`');
-            $rows->execute();
-
-            while ($a = $rows->fetch(\PDO::FETCH_ASSOC))
+            if ($this->config->data)
             {
-                $this->write("INSERT INTO `{$table}` VALUES (".implode(',', array_map(array($this, 'escape'), $a)).")");
-            }
+                $this->write("\n\n-- Dumping data for table `{$table}`\n\n", false);
+                $this->write("LOCK TABLES `{$table}` WRITE");
 
-            $this->write('UNLOCK TABLES');
+                $rows = $this->pdo->prepare('select * from `'.$table.'`');
+                $rows->execute();
+
+                while ($a = $rows->fetch(\PDO::FETCH_ASSOC))
+                {
+                    $this->write("INSERT INTO `{$table}` VALUES (".implode(',', array_map(array($this, 'escape'), $a)).")");
+                }
+
+                $this->write('UNLOCK TABLES');
+            }
         }
 
         $this->write("\n\n-- Completed on: " . date('c'), false);

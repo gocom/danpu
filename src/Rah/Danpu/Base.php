@@ -196,7 +196,7 @@ abstract class Base
     /**
      * Gets a path to a temporary file acting as a buffer.
      *
-     * @since 2.3.4
+     * @since 2.4.0
      */
 
     protected function tmpFile()
@@ -210,7 +210,7 @@ abstract class Base
     /**
      * Cleans left over temporary file trash.
      *
-     * @since 2.3.4
+     * @since 2.4.0
      */
 
     protected function clean()
