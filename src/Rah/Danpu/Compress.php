@@ -28,6 +28,8 @@
  * Creates a gzip file from the backup.
  *
  * @example
+ * $gz = new Rah_Danpu_Compress();
+ * $gz->pack('/source/dump.sql', '/source/dump.sql.gz');
  */
 
 class Rah_Danpu_Compress
@@ -47,10 +49,10 @@ class Rah_Danpu_Compress
     }
 
     /**
-     * Compresses files.
+     * Compresses a file.
      *
-     * @param string $from
-     * @param string $to
+     * @param string $from The source
+     * @param string $to   The target
      */
 
     public function pack($from, $to)
@@ -78,8 +80,8 @@ class Rah_Danpu_Compress
     /**
      * Uncompresses a file.
      *
-     * @param string $from
-     * @param string $to
+     * @param string $from The source
+     * @param string $to   The target
      */
 
     public function unpack($from, $to)
