@@ -66,7 +66,8 @@ class Import extends Base
 
         $this->open($this->temp, 'r');
         $this->import();
-        fclose($this->file);
+        $this->close();
+        $this->clean();
     }
 
     /**
