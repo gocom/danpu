@@ -52,6 +52,10 @@ Where the ```$dump``` would be an instance of Rah_Danpu_Dump.
 Changelog
 ---------
 
+### Version 1.3.3 - 2014/05/15
+
+* Suggest Zlib, but do not require. Zlib isn't required if the file isn't compressed.
+
 ### Version 1.3.2 - 2014/05/14
 
 * Fixed: Define Rah_Danpu_Base::$pdo property as protected.
