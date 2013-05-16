@@ -126,4 +126,13 @@ abstract class Rah_Danpu_Config
      */
 
     public $file;
+
+    /**
+     * Dump table data.
+     *
+     * @var   bool
+     * @since 1.4.0
+     */
+
+    public $data = true;
 }

@@ -194,7 +194,7 @@ abstract class Rah_Danpu_Base
     /**
      * Gets a path to a temporary file acting as a buffer.
      *
-     * @since 1.3.4
+     * @since 1.4.0
      */
 
     protected function tmpFile()
@@ -208,7 +208,7 @@ abstract class Rah_Danpu_Base
     /**
      * Cleans left over temporary file trash.
      *
-     * @since 1.3.4
+     * @since 1.4.0
      */
 
     protected function clean()
