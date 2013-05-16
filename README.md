@@ -52,6 +52,12 @@ Where the ```$dump``` would be an instance of Rah_Danpu_Dump.
 Changelog
 ---------
 
+### Version 1.4.0 - 2013/05/16
+
+* Fixed: Makes sure creating the temporary file was successful.
+* Added: Adds completed on line to the dump file.
+* Added: Option to only dump table structures and no rows.
+
 ### Version 1.3.3 - 2013/05/15
 
 * Suggest Zlib, but do not require. Zlib isn't required if the file isn't compressed.
