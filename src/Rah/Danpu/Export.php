@@ -94,7 +94,7 @@ class Export extends Base
 
         foreach ($this->tables as $table)
         {
-            if (($structure = $this->pdo->query('SHOW CREATE TABLE `'.$table.'`')) === false)
+            if (($structure = $this->pdo->query('show create table `'.$table.'`')) === false)
             {
                 throw new Exception('Unable to get the structure for "'.$table.'"');
             }
