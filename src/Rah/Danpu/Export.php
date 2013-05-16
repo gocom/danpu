@@ -116,5 +116,7 @@ class Rah_Danpu_Export extends Rah_Danpu_Base
 
             $this->write('UNLOCK TABLES');
         }
+
+        $this->write("\n\n-- Completed on: " . date('c'), false);
     }
 }
