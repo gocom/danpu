@@ -97,7 +97,7 @@ class Import extends Base
 
                 if (substr($trim, -1) === ';')
                 {
-                    $this->pdo->exec(substr(trim($query), 0, -1));
+                    $this->pdo->exec($query);
                     $query = '';
                 }
             }
