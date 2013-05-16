@@ -135,7 +135,7 @@ class Export extends Base
                 $this->write('DROP TRIGGER IF EXISTS `'.$a['Trigger'].'`');
                 $this->write(
                     "DELIMITER //\nCREATE TRIGGER `{$a['Trigger']}` {$a['Timing']} {$a['Event']} ".
-                        "ON `{$a['Table']}` FOR EACH ROW\n{$a['Statement']}\n//\nDELIMITER ;"
+                    "ON `{$a['Table']}` FOR EACH ROW\n{$a['Statement']}\n//\nDELIMITER ;\n", false
                 );
             }
         }
