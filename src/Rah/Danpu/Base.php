@@ -159,9 +159,11 @@ abstract class Base
         {
             foreach ($tables as $table)
             {
-                if (!in_array($table, $this->config->ignore, true))
+                $name = current($table);
+
+                if (!in_array($name, $this->config->ignore, true))
                 {
-                    $this->tables[] = current($table);
+                    $this->tables[] = $name;
                 }
             }
 
