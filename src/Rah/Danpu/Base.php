@@ -157,32 +157,6 @@ abstract class Base
     }
 
     /**
-     * Gets an array of tables.
-     *
-     * @return array|bool
-     */
-
-    protected function getTables()
-    {
-        if ($tables = $this->pdo->query('SHOW TABLES'))
-        {
-            foreach ($tables as $table)
-            {
-                $name = current($table);
-
-                if (!in_array($name, $this->config->ignore, true))
-                {
-                    $this->tables[] = $name;
-                }
-            }
-
-            return $this->tables;
-        }
-
-        return false;
-    }
-
-    /**
      * Locks all tables.
      *
      * @return bool

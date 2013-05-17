@@ -54,7 +54,6 @@ class Export extends Base
         $this->connect();
         $this->tmpFile();
         $this->open($this->temp, 'wb');
-        $this->getTables();
         $this->lock();
         $this->dump();
         $this->unlock();
@@ -92,8 +91,20 @@ class Export extends Base
     {
         $this->write('-- '. date('c') . ' - ' . $this->config->db . '@' . $this->config->host, false);
 
-        foreach ($this->tables as $table)
+        $tables = $this->pdo->prepare('show tables');
+        $tables->execute();
+
+        while ($a = $tables->fetch(\PDO::FETCH_ASSOC))
         {
+            $table = current($a);
+
+            if (in_array($table, (array) $this->config->ignore, true))
+            {
+                continue;
+            }
+
+            $tables->closeCursor();
+
             if (($structure = $this->pdo->query('show create table `'.$table.'`')) === false)
             {
                 throw new Exception('Unable to get the structure for "'.$table.'"');
