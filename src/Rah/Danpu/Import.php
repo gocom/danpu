@@ -91,15 +91,23 @@ class Import extends Base
             $line = fgets($this->file, 4096);
             $trim = trim($line);
 
-            if ($trim !== '' && strpos($trim, '--') !== 0 && strpos($trim, '/*') !== 0)
+            if ($trim === '' || strpos($trim, '--') === 0 || strpos($trim, '/*') === 0)
             {
-                $query .= $line;
+                continue;
+            }
 
-                if (substr($trim, -1) === ';')
-                {
-                    $this->pdo->exec($query);
-                    $query = '';
-                }
+            if (strpos($trim, 'DELIMITER ') === 0)
+            {
+                $this->delimiter = substr($trim, 10);
+                continue;
+            }
+
+            $query .= $line;
+
+            if (substr($trim, -1) === $this->delimiter)
+            {
+                $this->pdo->exec($query);
+                $query = '';
             }
         }
     }

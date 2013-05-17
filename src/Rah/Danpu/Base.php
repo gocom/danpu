@@ -87,6 +87,15 @@ abstract class Base
     protected $compress = false;
 
     /**
+     * The query delimiter.
+     *
+     * @var   string
+     * @since 2.5.0
+     */
+
+    protected $delimiter = ';';
+
+    /**
      * Constructor.
      *
      * @param Rah\Danpu\Dump The config
@@ -261,7 +270,7 @@ abstract class Base
     {
         if ($format)
         {
-            $string .= ";\n";
+            $string .= $this->delimiter . "\n";
         }
 
         if (fwrite($this->file, $string, strlen($string)) === false)
