@@ -54,6 +54,7 @@ class Export extends Base
         $this->connect();
         $this->tmpFile();
         $this->open($this->temp, 'wb');
+        $this->getTables();
         $this->lock();
         $this->dump();
         $this->unlock();
@@ -90,11 +91,9 @@ class Export extends Base
     protected function dump()
     {
         $this->write('-- '. date('c') . ' - ' . $this->config->db . '@' . $this->config->host, false);
+        $this->tables->execute();
 
-        $tables = $this->pdo->prepare('show tables');
-        $tables->execute();
-
-        while ($a = $tables->fetch(\PDO::FETCH_ASSOC))
+        foreach ($this->tables->fetchAll(\PDO::FETCH_ASSOC) as $a)
         {
             $table = current($a);
 
@@ -102,8 +101,6 @@ class Export extends Base
             {
                 continue;
             }
-
-            $tables->closeCursor();
 
             if (($structure = $this->pdo->query('show create table `'.$table.'`')) === false)
             {
