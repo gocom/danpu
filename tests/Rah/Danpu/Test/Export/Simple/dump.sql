@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `test_table_2`;
 CREATE TABLE `test_table_2` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `title` varchar(255) NOT NULL
+  `title` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `name_idx` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -39,7 +39,7 @@ DROP TABLE IF EXISTS `test_table_3`;
 CREATE TABLE `test_table_3` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `title` varchar(255) NOT NULL
+  `title` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `name_idx` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
