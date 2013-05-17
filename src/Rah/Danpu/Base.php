@@ -49,9 +49,9 @@ abstract class Base
     protected $pdo;
 
     /**
-     * An array of tables in the database.
+     * Tables in the database.
      *
-     * @var array
+     * @var \PDOStatement
      */
 
     protected $tables = array();
@@ -157,6 +157,15 @@ abstract class Base
     }
 
     /**
+     * Get tables.
+     */
+
+    protected function getTables()
+    {
+        $this->tables = $this->pdo->prepare("show full tables where Table_type != 'VIEW'");
+    }
+
+    /**
      * Locks all tables.
      *
      * @return bool
@@ -164,7 +173,15 @@ abstract class Base
 
     protected function lock()
     {
-        return $this->pdo->exec('LOCK TABLES `' . implode('` WRITE, `', $this->tables).'` WRITE');
+        $this->tables->execute();
+        $table = array();
+
+        while ($a = $this->tables->fetch(\PDO::FETCH_ASSOC))
+        {
+            $table[] = current($a);
+        }
+
+        return !$table || $this->pdo->exec('LOCK TABLES `' . implode('` WRITE, `', $table).'` WRITE');
     }
 
     /**
