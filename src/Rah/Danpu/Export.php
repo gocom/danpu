@@ -148,14 +148,13 @@ class Export extends Base
             }
         }
 
-        $views = $this->pdo->prepare("show full tables where Table_type = 'VIEW'");
-        $views->execute();
+        $this->tables->execute();
 
-        foreach ($views->fetchAll(\PDO::FETCH_ASSOC) as $a)
+        foreach ($this->tables->fetchAll(\PDO::FETCH_ASSOC) as $a)
         {
             $view = current($a);
 
-            if (in_array($view, (array) $this->config->ignore, true) === false)
+            if ($a['Table_type'] === 'VIEW' && in_array($view, (array) $this->config->ignore, true) === false)
             {
                 if (($structure = $this->pdo->query('show create view `'.$view.'`')) === false)
                 {
