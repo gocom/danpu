@@ -104,9 +104,9 @@ class Import extends Base
 
             $query .= $line;
 
-            if (substr($trim, -1) === $this->delimiter)
+            if (substr($trim, strlen($this->delimiter) * -1) === $this->delimiter)
             {
-                $this->pdo->exec($query);
+                $this->pdo->exec(substr(trim($query), 0, strlen($this->delimiter) * -1));
                 $query = '';
             }
         }
