@@ -181,7 +181,7 @@ abstract class Base
             $table[] = current($a);
         }
 
-        return !$table || $this->pdo->exec('LOCK TABLES `' . implode('` WRITE, `', $table).'` WRITE');
+        return !$table || $this->pdo->exec('LOCK TABLES `'.implode('` WRITE, `', $table).'` WRITE');
     }
 
     /**

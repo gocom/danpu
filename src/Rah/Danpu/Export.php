@@ -63,7 +63,7 @@ class Export extends Base
         }
         catch (\Exception $e)
         {
-            throw new Exception('Exporting database failed: ' . $e->getMessage());
+            throw new Exception('Exporting database failed: '.$e->getMessage());
         }
 
         $this->unlock();
@@ -99,7 +99,7 @@ class Export extends Base
 
     protected function dump()
     {
-        $this->write('-- '. date('c') . ' - ' . $this->config->db . '@' . $this->config->host, false);
+        $this->write('-- '.date('c').' - '.$this->config->db.'@'.$this->config->host, false);
         $this->tables->execute();
 
         foreach ($this->tables->fetchAll(\PDO::FETCH_ASSOC) as $a)
@@ -178,6 +178,6 @@ class Export extends Base
             }
         }
 
-        $this->write("\n\n-- Completed on: " . date('c'), false);
+        $this->write("\n\n-- Completed on: ".date('c'), false);
     }
 }
