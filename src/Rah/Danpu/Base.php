@@ -162,7 +162,7 @@ abstract class Base
 
     protected function getTables()
     {
-        $this->tables = $this->pdo->prepare("show full tables where Table_type != 'VIEW'");
+        $this->tables = $this->pdo->prepare('show full tables');
     }
 
     /**

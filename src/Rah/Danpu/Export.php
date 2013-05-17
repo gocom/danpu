@@ -97,7 +97,7 @@ class Export extends Base
         {
             $table = current($a);
 
-            if (in_array($table, (array) $this->config->ignore, true))
+            if ($a['Table_type'] === 'VIEW' || in_array($table, (array) $this->config->ignore, true))
             {
                 continue;
             }
@@ -145,6 +145,28 @@ class Export extends Base
                     "DELIMITER //\nCREATE TRIGGER `{$a['Trigger']}` {$a['Timing']} {$a['Event']} ".
                     "ON `{$a['Table']}` FOR EACH ROW\n{$a['Statement']}\n//\nDELIMITER ;\n", false
                 );
+            }
+        }
+
+        $views = $this->pdo->prepare("show full tables where Table_type = 'VIEW'");
+        $views->execute();
+
+        foreach ($views->fetchAll(\PDO::FETCH_ASSOC) as $a)
+        {
+            $view = current($a);
+
+            if (in_array($view, (array) $this->config->ignore, true) === false)
+            {
+                if (($structure = $this->pdo->query('show create view `'.$view.'`')) === false)
+                {
+                    throw new Exception('Unable to get the structure for view "'.$view.'"');
+                }
+
+                if ($structure = $structure->fetch(\PDO::FETCH_ASSOC))
+                {
+                    $this->write("\n\n-- Structure for view `{$view}`\n\n", false);
+                    $this->write($structure['Create View']);
+                }
             }
         }
 
