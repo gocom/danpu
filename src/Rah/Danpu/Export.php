@@ -56,7 +56,16 @@ class Export extends Base
         $this->open($this->temp, 'wb');
         $this->getTables();
         $this->lock();
-        $this->dump();
+
+        try
+        {
+            $this->dump();
+        }
+        catch(Exception $e)
+        {
+            throw new Exception('Exporting database failed: ' . $e->getMessage());
+        }
+
         $this->unlock();
         $this->close();
         $this->move();
