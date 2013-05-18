@@ -45,6 +45,7 @@ class Rah_Danpu_Dump extends Rah_Danpu_Config
         $this->attributes = array(
             PDO::ATTR_ORACLE_NULLS             => PDO::NULL_NATURAL,
             PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false,
+            PDO::ATTR_ERRMODE                  => PDO::ERRMODE_EXCEPTION,
         );
     }
 
