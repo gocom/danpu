@@ -157,9 +157,11 @@ abstract class Rah_Danpu_Base
         {
             foreach ($tables as $table)
             {
+                $table = current($table);
+
                 if (!in_array($table, $this->config->ignore, true))
                 {
-                    $this->tables[] = current($table);
+                    $this->tables[] = $table;
                 }
             }
 
