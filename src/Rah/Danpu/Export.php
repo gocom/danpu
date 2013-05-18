@@ -100,6 +100,18 @@ class Export extends Base
     protected function dump()
     {
         $this->write('-- '.date('c').' - '.$this->config->db.'@'.$this->config->host, false);
+        $this->dumpTables();
+        $this->dumpViews();
+        $this->dumpTriggers();
+        $this->write("\n\n-- Completed on: ".date('c'), false);
+    }
+
+    /**
+     * Dumps tables.
+     */
+
+    protected function dumpTables()
+    {
         $this->tables->execute();
 
         foreach ($this->tables->fetchAll(\PDO::FETCH_ASSOC) as $a)
@@ -140,23 +152,14 @@ class Export extends Base
                 $this->write('UNLOCK TABLES');
             }
         }
+    }
 
-        $triggers = $this->pdo->prepare('show triggers');
-        $triggers->execute();
+    /**
+     * Dumps views.
+     */
 
-        while ($a = $triggers->fetch(\PDO::FETCH_ASSOC))
-        {
-            if (in_array($a['Table'], (array) $this->config->ignore, true) === false)
-            {
-                $this->write("\n\n-- Trigger structure `{$a['Trigger']}`\n\n", false);
-                $this->write('DROP TRIGGER IF EXISTS `'.$a['Trigger'].'`');
-                $this->write(
-                    "DELIMITER //\nCREATE TRIGGER `{$a['Trigger']}` {$a['Timing']} {$a['Event']} ".
-                    "ON `{$a['Table']}` FOR EACH ROW\n{$a['Statement']}\n//\nDELIMITER ;\n", false
-                );
-            }
-        }
-
+    protected function dumpViews()
+    {
         $this->tables->execute();
 
         foreach ($this->tables->fetchAll(\PDO::FETCH_ASSOC) as $a)
@@ -177,7 +180,28 @@ class Export extends Base
                 }
             }
         }
+    }
 
-        $this->write("\n\n-- Completed on: ".date('c'), false);
+    /**
+     * Dumps the triggers.
+     */
+
+    protected function dumpTriggers()
+    {
+        $triggers = $this->pdo->prepare('show triggers');
+        $triggers->execute();
+
+        while ($a = $triggers->fetch(\PDO::FETCH_ASSOC))
+        {
+            if (in_array($a['Table'], (array) $this->config->ignore, true) === false)
+            {
+                $this->write("\n\n-- Trigger structure `{$a['Trigger']}`\n\n", false);
+                $this->write('DROP TRIGGER IF EXISTS `'.$a['Trigger'].'`');
+                $this->write(
+                    "DELIMITER //\nCREATE TRIGGER `{$a['Trigger']}` {$a['Timing']} {$a['Event']} ".
+                    "ON `{$a['Table']}` FOR EACH ROW\n{$a['Statement']}\n//\nDELIMITER ;\n", false
+                );
+            }
+        }
     }
 }
