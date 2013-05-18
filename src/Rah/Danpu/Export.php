@@ -108,6 +108,8 @@ class Export extends Base
 
     /**
      * Dumps tables.
+     *
+     * @since 2.5.0
      */
 
     protected function dumpTables()
@@ -156,6 +158,8 @@ class Export extends Base
 
     /**
      * Dumps views.
+     *
+     * @since 2.5.0
      */
 
     protected function dumpViews()
@@ -183,7 +187,9 @@ class Export extends Base
     }
 
     /**
-     * Dumps the triggers.
+     * Dumps triggers.
+     *
+     * @since 2.5.0
      */
 
     protected function dumpTriggers()
