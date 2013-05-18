@@ -99,7 +99,7 @@ class Compress
             throw new Exception('Unable to open the target.');
         }
 
-        while ($string = gzread($zip, 4096))
+        while ($string = gzread($gzip, 4096))
         {
             fwrite($target, $string, strlen($string));
         }
