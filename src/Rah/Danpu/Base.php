@@ -179,7 +179,7 @@ abstract class Rah_Danpu_Base
 
     protected function lock()
     {
-        return $this->pdo->exec('LOCK TABLES `' . implode('` WRITE, `', $this->tables).'` WRITE');
+        return !$this->tables || $this->pdo->exec('LOCK TABLES `' . implode('` WRITE, `', $this->tables).'` WRITE');
     }
 
     /**
