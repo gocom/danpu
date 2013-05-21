@@ -195,19 +195,22 @@ class Export extends Base
 
     protected function dumpTriggers()
     {
-        $triggers = $this->pdo->prepare('show triggers');
-        $triggers->execute();
-
-        while ($a = $triggers->fetch(\PDO::FETCH_ASSOC))
+        if ($this->config->triggers)
         {
-            if (in_array($a['Table'], (array) $this->config->ignore, true) === false)
+            $triggers = $this->pdo->prepare('show triggers');
+            $triggers->execute();
+
+            while ($a = $triggers->fetch(\PDO::FETCH_ASSOC))
             {
-                $this->write("\n\n-- Trigger structure `{$a['Trigger']}`\n\n", false);
-                $this->write('DROP TRIGGER IF EXISTS `'.$a['Trigger'].'`');
-                $this->write(
+                if (in_array($a['Table'], (array) $this->config->ignore, true) === false)
+                {
+                    $this->write("\n\n-- Trigger structure `{$a['Trigger']}`\n\n", false);
+                    $this->write('DROP TRIGGER IF EXISTS `'.$a['Trigger'].'`');
+                    $this->write(
                     "DELIMITER //\nCREATE TRIGGER `{$a['Trigger']}` {$a['Timing']} {$a['Event']} ".
                     "ON `{$a['Table']}` FOR EACH ROW\n{$a['Statement']}\n//\nDELIMITER ;\n", false
-                );
+                    );
+                }
             }
         }
     }
