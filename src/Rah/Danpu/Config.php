@@ -43,7 +43,7 @@ abstract class Config
     /**
      * Data source name.
      *
-     * @var string
+     * @var   string
      * @since 2.2.0
      */
 
@@ -52,7 +52,7 @@ abstract class Config
     /**
      * The database name.
      *
-     * @var string
+     * @var        string
      * @deprecated 2.2.0
      */
 
@@ -61,7 +61,7 @@ abstract class Config
     /**
      * The hostname.
      *
-     * @var string
+     * @var        string
      * @deprecated 2.2.0
      */
 
@@ -105,7 +105,7 @@ abstract class Config
      * This can be used to exclude confidential or temporary
      * data from the backup.
      *
-     * @var string
+     * @var   string
      * @since 2.1.0
      */
 
