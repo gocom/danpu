@@ -120,7 +120,7 @@ class Export extends Base
         {
             $table = current($a);
 
-            if ($a['Table_type'] === 'VIEW' || in_array($table, (array) $this->config->ignore, true))
+            if ((isset($a['Table_type']) && $a['Table_type'] === 'VIEW') || in_array($table, (array) $this->config->ignore, true))
             {
                 continue;
             }
@@ -170,7 +170,7 @@ class Export extends Base
         {
             $view = current($a);
 
-            if ($a['Table_type'] === 'VIEW' && in_array($view, (array) $this->config->ignore, true) === false)
+            if (isset($a['Table_type']) && $a['Table_type'] === 'VIEW' && in_array($view, (array) $this->config->ignore, true) === false)
             {
                 if (($structure = $this->pdo->query('show create view `'.$view.'`')) === false)
                 {
