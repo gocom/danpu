@@ -57,7 +57,7 @@ class Rah_Danpu_Export extends Rah_Danpu_Base
         {
             $this->dump();
         }
-        catch (\Exception $e)
+        catch (Exception $e)
         {
             throw new Exception('Exporting database failed: '.$e->getMessage());
         }
