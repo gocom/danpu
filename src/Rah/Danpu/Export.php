@@ -52,7 +52,16 @@ class Rah_Danpu_Export extends Rah_Danpu_Base
         $this->open($this->temp, 'wb');
         $this->getTables();
         $this->lock();
-        $this->dump();
+
+        try
+        {
+            $this->dump();
+        }
+        catch (\Exception $e)
+        {
+            throw new Exception('Exporting database failed: '.$e->getMessage());
+        }
+
         $this->unlock();
         $this->close();
         $this->move();
@@ -86,11 +95,33 @@ class Rah_Danpu_Export extends Rah_Danpu_Base
 
     protected function dump()
     {
-        $this->write('-- '. date('c') . ' - ' . $this->config->db . '@' . $this->config->host, false);
+        $this->write('-- '.date('c').' - '.$this->config->db.'@'.$this->config->host, false);
+        $this->dumpTables();
+        $this->dumpViews();
+        $this->dumpTriggers();
+        $this->write("\n\n-- Completed on: ".date('c'), false);
+    }
 
-        foreach ($this->tables as $table)
+    /**
+     * Dumps tables.
+     *
+     * @since 1.5.0
+     */
+
+    protected function dumpTables()
+    {
+        $this->tables->execute();
+
+        foreach ($this->tables->fetchAll(PDO::FETCH_ASSOC) as $a)
         {
-            if (($structure = $this->pdo->query('SHOW CREATE TABLE `'.$table.'`')) === false)
+            $table = current($a);
+
+            if ((isset($a['Table_type']) && $a['Table_type'] === 'VIEW') || in_array($table, (array) $this->config->ignore, true))
+            {
+                continue;
+            }
+
+            if (($structure = $this->pdo->query('show create table `'.$table.'`')) === false)
             {
                 throw new Exception('Unable to get the structure for "'.$table.'"');
             }
@@ -119,7 +150,64 @@ class Rah_Danpu_Export extends Rah_Danpu_Base
                 $this->write('UNLOCK TABLES');
             }
         }
+    }
 
-        $this->write("\n\n-- Completed on: " . date('c'), false);
+    /**
+     * Dumps views.
+     *
+     * @since 1.5.0
+     */
+
+    protected function dumpViews()
+    {
+        $this->tables->execute();
+
+        foreach ($this->tables->fetchAll(PDO::FETCH_ASSOC) as $a)
+        {
+            $view = current($a);
+
+            if (isset($a['Table_type']) && $a['Table_type'] === 'VIEW' && in_array($view, (array) $this->config->ignore, true) === false)
+            {
+                if (($structure = $this->pdo->query('show create view `'.$view.'`')) === false)
+                {
+                    throw new Exception('Unable to get the structure for view "'.$view.'"');
+                }
+
+                if ($structure = $structure->fetch(PDO::FETCH_ASSOC))
+                {
+                    $this->write("\n\n-- Structure for view `{$view}`\n\n", false);
+                    $this->write('DROP VIEW IF EXISTS `'.$view.'`');
+                    $this->write($structure['Create View']);
+                }
+            }
+        }
+    }
+
+    /**
+     * Dumps triggers.
+     *
+     * @since 1.5.0
+     */
+
+    protected function dumpTriggers()
+    {
+        if ($this->config->triggers)
+        {
+            $triggers = $this->pdo->prepare('show triggers');
+            $triggers->execute();
+
+            while ($a = $triggers->fetch(PDO::FETCH_ASSOC))
+            {
+                if (in_array($a['Table'], (array) $this->config->ignore, true) === false)
+                {
+                    $this->write("\n\n-- Trigger structure `{$a['Trigger']}`\n\n", false);
+                    $this->write('DROP TRIGGER IF EXISTS `'.$a['Trigger'].'`');
+                    $this->write(
+                    "DELIMITER //\nCREATE TRIGGER `{$a['Trigger']}` {$a['Timing']} {$a['Event']} ".
+                    "ON `{$a['Table']}` FOR EACH ROW\n{$a['Statement']}\n//\nDELIMITER ;\n", false
+                    );
+                }
+            }
+        }
     }
 }

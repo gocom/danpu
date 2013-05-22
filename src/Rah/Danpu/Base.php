@@ -49,10 +49,10 @@ abstract class Rah_Danpu_Base
     /**
      * An array of table in the database.
      *
-     * @var array
+     * @var \PDOStatement
      */
 
-    protected $tables = array();
+    protected $tables;
 
     /**
      * File pointer.
@@ -147,28 +147,11 @@ abstract class Rah_Danpu_Base
 
     /**
      * Gets an array of tables.
-     *
-     * @return array|bool
      */
 
     protected function getTables()
     {
-        if ($tables = $this->pdo->query('SHOW TABLES'))
-        {
-            foreach ($tables as $table)
-            {
-                $table = current($table);
-
-                if (!in_array($table, $this->config->ignore, true))
-                {
-                    $this->tables[] = $table;
-                }
-            }
-
-            return $this->tables;
-        }
-
-        return false;
+        $this->tables = $this->pdo->prepare('show full tables');
     }
 
     /**
@@ -179,7 +162,15 @@ abstract class Rah_Danpu_Base
 
     protected function lock()
     {
-        return !$this->tables || $this->pdo->exec('LOCK TABLES `' . implode('` WRITE, `', $this->tables).'` WRITE');
+        $this->tables->execute();
+        $table = array();
+
+        while ($a = $this->tables->fetch(PDO::FETCH_ASSOC))
+        {
+            $table[] = current($a);
+        }
+
+        return !$table || $this->pdo->exec('LOCK TABLES `'.implode('` WRITE, `', $table).'` WRITE');
     }
 
     /**
