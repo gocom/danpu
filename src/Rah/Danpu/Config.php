@@ -143,5 +143,5 @@ abstract class Rah_Danpu_Config
      * @since 1.5.0
      */
 
-    public $triggers = true;
+    public $triggers = false;
 }
