@@ -87,15 +87,23 @@ class Rah_Danpu_Import extends Rah_Danpu_Base
             $line = fgets($this->file, 4096);
             $trim = trim($line);
 
-            if ($trim !== '' && strpos($trim, '--') !== 0 && strpos($trim, '/*') !== 0)
+            if ($trim === '' || strpos($trim, '--') === 0 || strpos($trim, '/*') === 0)
             {
-                $query .= $line;
+                continue;
+            }
 
-                if (substr($trim, -1) === ';')
-                {
-                    $this->pdo->exec(substr(trim($query), 0, -1));
-                    $query = '';
-                }
+            if (strpos($trim, 'DELIMITER ') === 0)
+            {
+                $this->delimiter = substr($trim, 10);
+                continue;
+            }
+
+            $query .= $line;
+
+            if (substr($trim, strlen($this->delimiter) * -1) === $this->delimiter)
+            {
+                $this->pdo->exec(substr(trim($query), 0, strlen($this->delimiter) * -1));
+                $query = '';
             }
         }
     }
