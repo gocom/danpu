@@ -45,7 +45,7 @@ class Rah_Danpu_Export extends Rah_Danpu_Base
      * Dumps the database.
      */
 
-    public function init()
+    protected function init()
     {
         $this->connect();
         $this->tmpFile();

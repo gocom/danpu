@@ -45,7 +45,7 @@ class Rah_Danpu_Import extends Rah_Danpu_Base
      * Runs the dump file.
      */
 
-    public function init()
+    protected function init()
     {
         $this->connect();
         $this->tmpFile();
