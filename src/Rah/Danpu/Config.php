@@ -41,7 +41,7 @@ abstract class Rah_Danpu_Config
     /**
      * Data source name.
      *
-     * @var string
+     * @var   string
      * @since 1.2.0
      */
 
@@ -50,7 +50,7 @@ abstract class Rah_Danpu_Config
     /**
      * The database name.
      *
-     * @var string
+     * @var        string
      * @deprecated 1.2.0
      */
 
@@ -59,7 +59,7 @@ abstract class Rah_Danpu_Config
     /**
      * The hostname.
      *
-     * @var string
+     * @var        string
      * @deprecated 1.2.0
      */
 
