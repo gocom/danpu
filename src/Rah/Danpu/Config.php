@@ -98,7 +98,7 @@ abstract class Rah_Danpu_Config
     public $encoding = 'utf8';
 
     /**
-     * An array of ignored tables.
+     * An array of ignored tables, views and triggers based on the target table.
      *
      * This can be used to exclude confidential or temporary
      * data from the backup.
