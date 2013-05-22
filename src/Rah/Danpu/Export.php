@@ -49,7 +49,7 @@ class Export extends Base
      * Dumps the database.
      */
 
-    public function init()
+    protected function init()
     {
         $this->connect();
         $this->tmpFile();

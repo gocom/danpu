@@ -49,7 +49,7 @@ class Import extends Base
      * Runs the dump file.
      */
 
-    public function init()
+    protected function init()
     {
         $this->connect();
         $this->tmpFile();
