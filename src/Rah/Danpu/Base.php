@@ -54,7 +54,7 @@ abstract class Base
      * @var \PDOStatement
      */
 
-    protected $tables = array();
+    protected $tables;
 
     /**
      * File pointer.
