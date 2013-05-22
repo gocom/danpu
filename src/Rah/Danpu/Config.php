@@ -140,7 +140,7 @@ abstract class Rah_Danpu_Config
      * Dump triggers.
      *
      * @var   bool
-     * @since 2.5.0
+     * @since 1.5.0
      */
 
     public $triggers = true;
