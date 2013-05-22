@@ -52,6 +52,15 @@ Where the ```$dump``` would be an instance of Rah_Danpu_Dump.
 Changelog
 ---------
 
+### Version 1.5.0 - 2013/05/22
+
+* Fixed: Database table ignoring.
+* Fixed: Importer's decompressor.
+* Fixed: Table locking doesn't generate errors if the database doesn't have tables.
+* Added: Support for triggers and views.
+* Added: Importer supports delimiter keyword.
+* Changed: Any SQL error is thrown as exception.
+
 ### Version 1.4.0 - 2013/05/16
 
 * Fixed: Makes sure creating the temporary file was successful.
