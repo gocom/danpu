@@ -30,7 +30,7 @@ namespace Rah\Danpu;
  * The base class.
  */
 
-abstract class Base
+abstract class Base implements BaseTemplate
 {
     /**
      * The config.
@@ -96,9 +96,7 @@ abstract class Base
     protected $delimiter = ';';
 
     /**
-     * Constructor.
-     *
-     * @param Rah\Danpu\Dump The config
+     * {@inheritdoc}
      */
 
     public function __construct(Config $config)
@@ -110,7 +108,7 @@ abstract class Base
     }
 
     /**
-     * Destructor.
+     * {@inheritdoc}
      */
 
     public function __destruct()
@@ -121,7 +119,7 @@ abstract class Base
     }
 
     /**
-     * Connects to the database.
+     * {@inheritdoc}
      */
 
     public function connect()
@@ -298,9 +296,7 @@ abstract class Base
     }
 
     /**
-     * Returns a path to the target file.
-     *
-     * @return string
+     * {@inheritdoc}
      */
 
     public function __toString()
