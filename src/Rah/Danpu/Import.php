@@ -46,10 +46,10 @@ namespace Rah\Danpu;
 class Import extends Base
 {
     /**
-     * Runs the dump file.
+     * {@inheritdoc}
      */
 
-    protected function init()
+    public function init()
     {
         $this->connect();
         $this->tmpFile();

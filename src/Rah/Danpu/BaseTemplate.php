@@ -43,6 +43,12 @@ interface BaseTemplate
     public function __construct(Config $config);
 
     /**
+     * Initializes the action.
+     */
+
+    public function init();
+
+    /**
      * Destructor.
      *
      * Cleans trash and safely destructs the instance.

@@ -46,10 +46,10 @@ namespace Rah\Danpu;
 class Export extends Base
 {
     /**
-     * Dumps the database.
+     * {@inheritdoc}
      */
 
-    protected function init()
+    public function init()
     {
         $this->connect();
         $this->tmpFile();
