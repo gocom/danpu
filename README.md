@@ -10,7 +10,7 @@ Installing
 
 Using [Composer](http://getcomposer.org):
 
-    $ composer.phar require rah/danpu
+    $ composer require rah/danpu
 
 Usage
 ---------
