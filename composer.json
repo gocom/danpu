@@ -1,7 +1,7 @@
 {
     "name": "rah/danpu",
-    "description": "MySQL database dump and restoration tool implemented in PHP",
-    "keywords": ["mysql", "sql", "dump", "backup", "restore", "export", "import"],
+    "description": "Zero-dependency MySQL dump library for easily exporting and importing databases",
+    "keywords": ["mysql", "sql", "dump", "backup", "restore", "export", "import", "library", "mysqldump", "database", "db"],
     "homepage": "https://github.com/gocom/danpu",
     "license": "MIT",
     "authors": [
