@@ -70,6 +70,10 @@ This of course requires that you have access to these values and you actually ha
 Changelog
 ---------
 
+### Version 2.6.0 - upcoming
+
+* Added: Rah\Danpu\BaseTemplate interface.
+
 ### Version 2.5.0 - 2013/05/22
 
 * Fixed: Database table ignoring.
