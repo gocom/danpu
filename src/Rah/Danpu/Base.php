@@ -155,7 +155,7 @@ abstract class Base implements BaseTemplate
     }
 
     /**
-     * Get tables.
+     * Gets tables.
      */
 
     protected function getTables()
