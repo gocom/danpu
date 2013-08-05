@@ -82,6 +82,8 @@ abstract class Base implements BaseTemplate
 
     /**
      * Compress the dump file.
+     *
+     * @var bool
      */
 
     protected $compress = false;
