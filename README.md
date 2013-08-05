@@ -15,11 +15,17 @@ Using [Composer](http://getcomposer.org):
 Usage
 ---------
 
-To create a new backup or import one, configure a new ```Dump``` instance and pass it to one of the worker classes. All classes throw exceptions on failures.
+To create a new backup or import one, configure a new ```Dump``` instance and pass it to one of the worker classes. To begin, first make sure you have included Composer's autoloader file in your project:
+
+```php
+include './vendor/autoload.php';
+```
+
+If you are already using other Composer packages, or a modern Composer-managed framework, this should be taken care of already. If not, merely add the autoloader to your base bootstrap includes. See [Composer's documentation](http://getcomposer.org) for more information.
 
 ### Take a backup
 
-Backups can be created with the ```Export``` class. The class exports the database to a SQL file. The file is compressed if the target filename ends to a .gz extension.
+Backups can be created with the ```Export``` class. The class exports the database to a SQL file, or throws exceptions on errors. The file is compressed if the target filename ends to a .gz extension.
 
 ```php
 use Rah\Danpu\Dump;
@@ -48,7 +54,7 @@ To import a backup, create a new instance of the Import class. It uncompresses a
 new Rah\Danpu\Import($dump);
 ```
 
-Where the ```$dump``` would be an instance of Rah\Danpu\Dump.
+Where the ```$dump``` would be an instance of Rah\Danpu\Dump as in the *Take backup* example.
 
 Troubleshooting
 ---------
