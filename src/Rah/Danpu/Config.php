@@ -147,4 +147,13 @@ abstract class Config
      */
 
     public $triggers = true;
+
+    /**
+     * Table prefix.
+     *
+     * @var   string
+     * @since 2.6.0
+     */
+
+    public $prefix = '';
 }
