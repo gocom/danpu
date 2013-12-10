@@ -37,15 +37,12 @@ $dump
     ->dsn('mysql:dbname=database;host=localhost')
     ->user('username')
     ->pass('password')
-    ->prefix('my_')
     ->tmp('/tmp');
 
 new Export($dump);
 ```
 
 The database is dumped in chunks, one row at the time without buffering huge amount of data to the memory. This makes the script very memory efficient, and can allow Danpu to handle databases of any size, given the system limitations of course. You physically won't be able backup rows that take more memory than can be allocated to PHP, nor write backups if there isn't enough space for the files.
-
-The prefix is optional but if used only those tables with names beginning with the given character sequence will be included in the dump.
 
 ### Import a backup
 
