@@ -178,19 +178,26 @@ class Export extends Base
         {
             $view = current($a);
 
-            if (isset($a['Table_type']) && $a['Table_type'] === 'VIEW' && in_array($view, (array) $this->config->ignore, true) === false)
+            if (!isset($a['Table_type']) || $a['Table_type'] !== 'VIEW' || in_array($view, (array) $this->config->ignore, true))
             {
-                if (($structure = $this->pdo->query('show create view `'.$view.'`')) === false)
-                {
-                    throw new Exception('Unable to get the structure for view "'.$view.'"');
-                }
+                continue;
+            }
 
-                if ($structure = $structure->fetch(\PDO::FETCH_ASSOC))
-                {
-                    $this->write("\n\n-- Structure for view `{$view}`\n\n", false);
-                    $this->write('DROP VIEW IF EXISTS `'.$view.'`');
-                    $this->write($structure['Create View']);
-                }
+            if ((string) $this->config->prefix !== '' && strpos($view, $this->config->prefix) !== 0)
+            {
+                continue;
+            }
+
+            if (($structure = $this->pdo->query('show create view `'.$view.'`')) === false)
+            {
+                throw new Exception('Unable to get the structure for view "'.$view.'"');
+            }
+
+            if ($structure = $structure->fetch(\PDO::FETCH_ASSOC))
+            {
+                $this->write("\n\n-- Structure for view `{$view}`\n\n", false);
+                $this->write('DROP VIEW IF EXISTS `'.$view.'`');
+                $this->write($structure['Create View']);
             }
         }
     }
@@ -210,12 +217,19 @@ class Export extends Base
 
             while ($a = $triggers->fetch(\PDO::FETCH_ASSOC))
             {
-                if (in_array($a['Table'], (array) $this->config->ignore, true) === false)
+                if (in_array($a['Table'], (array) $this->config->ignore, true))
                 {
-                    $this->write("\n\n-- Trigger structure `{$a['Trigger']}`\n\n", false);
-                    $this->write('DROP TRIGGER IF EXISTS `'.$a['Trigger'].'`');
-                    $this->write("DELIMITER //\nCREATE TRIGGER `{$a['Trigger']}` {$a['Timing']} {$a['Event']} ON `{$a['Table']}` FOR EACH ROW\n{$a['Statement']}\n//\nDELIMITER ;\n", false);
+                    continue;
                 }
+
+                if ((string) $this->config->prefix !== '' && strpos($a['Table'], $this->config->prefix) !== 0)
+                {
+                    continue;
+                }
+
+                $this->write("\n\n-- Trigger structure `{$a['Trigger']}`\n\n", false);
+                $this->write('DROP TRIGGER IF EXISTS `'.$a['Trigger'].'`');
+                $this->write("DELIMITER //\nCREATE TRIGGER `{$a['Trigger']}` {$a['Timing']} {$a['Event']} ON `{$a['Table']}` FOR EACH ROW\n{$a['Statement']}\n//\nDELIMITER ;\n", false);
             }
         }
     }

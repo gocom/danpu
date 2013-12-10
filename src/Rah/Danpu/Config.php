@@ -149,9 +149,10 @@ abstract class Config
     public $triggers = true;
 
     /**
-     * Table prefix.
+     * A prefix used by tables, views and triggers.
      *
-     * Include only tables starting with the prefix.
+     * Taken backup will only include items that start
+     * with the prefix.
      *
      * @var   string
      * @since 2.6.0
