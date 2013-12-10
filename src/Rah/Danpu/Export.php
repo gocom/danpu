@@ -126,11 +126,10 @@ class Export extends Base
                 continue;
             }
 
-			// Filter table names with a given prefix.
-			if ($this->config->prefix !== null && strpos($table, $this->config->prefix) !== 0)
-			{
-				continue;
-			}
+            if ((string) $this->config->prefix !== '' && strpos($table, $this->config->prefix) !== 0)
+            {
+                continue;
+            }
 
             if (($structure = $this->pdo->query('show create table `'.$table.'`')) === false)
             {
