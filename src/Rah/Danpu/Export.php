@@ -38,6 +38,7 @@ namespace Rah\Danpu;
  *    ->dsn('mysql:dbname=database;host=localhost')
  *    ->user('username')
  *    ->pass('password')
+ *    ->prefix('my_')
  *    ->tmp('/tmp');
  *
  * new Export($config);
@@ -124,6 +125,12 @@ class Export extends Base
             {
                 continue;
             }
+
+			// Filter table names with a given prefix.
+			if ($this->config->prefix !== null && strpos($table, $this->config->prefix) !== 0)
+			{
+				continue;
+			}
 
             if (($structure = $this->pdo->query('show create table `'.$table.'`')) === false)
             {
