@@ -29,13 +29,15 @@ namespace Rah\Danpu;
 /**
  * Dump config.
  *
- * @since 2.3.0
- * @example
+ * <code>
  * class myConfig Extends \Rah\Danpu\Config
  * {
  *  $this->dsn = 'mysql:dbname=database;host=localhost';
  *  $this->file = '/path/to/dump.sql';
  * }
+ * </code>
+ *
+ * @since 2.3.0
  */
 
 abstract class Config
