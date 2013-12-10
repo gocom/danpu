@@ -27,7 +27,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
     {
         new Export($this->dump);
         new Import($this->dump);
-        return file_exists($this->temp);
+        $this->assertTrue(file_exists($this->temp));
     }
 
     public function testIgnoredTable()
@@ -37,7 +37,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $this->dump->file($this->temp);
         $this->dump->ignore(array('test_table_2'));
         new Export($this->dump);
-        return file_exists($this->temp) && strpos('test_table_2', file_get_contents($this->temp)) === false;
+        $this->assertTrue(file_exists($this->temp) && strpos('test_table_2', file_get_contents($this->temp)) === false);
     }
 
     public function tearDown()

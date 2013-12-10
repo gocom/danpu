@@ -30,7 +30,7 @@ class ExtendingTest extends \PHPUnit_Framework_TestCase
     public function testExtending()
     {
         new Export($this->dump);
-        return file_exists($this->dump->file);
+        $this->assertTrue(file_exists($this->dump->file));
     }
 
     public function tearDown()
