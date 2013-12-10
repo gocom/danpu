@@ -29,7 +29,7 @@ namespace Rah\Danpu;
 /**
  * Creates a SQL dump file from a database.
  *
- * @example
+ * <code>
  * use Rah\Danpu\Dump;
  * use Rah\Danpu\Export;
  * $config = new Dump;
@@ -38,10 +38,10 @@ namespace Rah\Danpu;
  *    ->dsn('mysql:dbname=database;host=localhost')
  *    ->user('username')
  *    ->pass('password')
- *    ->prefix('my_')
  *    ->tmp('/tmp');
  *
  * new Export($config);
+ * </code>
  */
 
 class Export extends Base
@@ -110,7 +110,8 @@ class Export extends Base
     /**
      * Dumps tables.
      *
-     * @since 2.5.0
+     * @throws Exception
+     * @since  2.5.0
      */
 
     protected function dumpTables()
@@ -165,7 +166,8 @@ class Export extends Base
     /**
      * Dumps views.
      *
-     * @since 2.5.0
+     * @throws Exception
+     * @since  2.5.0
      */
 
     protected function dumpViews()

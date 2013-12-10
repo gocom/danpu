@@ -29,10 +29,11 @@ namespace Rah\Danpu;
 /**
  * Creates a gzip file from the backup.
  *
- * @example
+ * <code>
  * use Rah\Danpu\Compress;
  * $gz = new Compress();
  * $gz->pack('/source/dump.sql', '/target/dump.sql.gz');
+ * </code>
  */
 
 class Compress
@@ -40,7 +41,8 @@ class Compress
     /**
      * Constructor.
      *
-     * @since 2.3.3
+     * @throws Exception
+     * @since  2.3.3
      */
 
     public function __construct()
@@ -54,8 +56,9 @@ class Compress
     /**
      * Compresses a file.
      *
-     * @param string $from The source
-     * @param string $to   The target
+     * @param  string $from The source
+     * @param  string $to   The target
+     * @throws Exception
      */
 
     public function pack($from, $to)
@@ -83,8 +86,9 @@ class Compress
     /**
      * Uncompresses a file.
      *
-     * @param string $from The source
-     * @param string $to   The target
+     * @param  string $from The source
+     * @param  string $to   The target
+     * @throws Exception
      */
 
     public function unpack($from, $to)

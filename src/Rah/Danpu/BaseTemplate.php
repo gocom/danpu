@@ -37,13 +37,15 @@ interface BaseTemplate
     /**
      * Constructor.
      *
-     * @param Rah\Danpu\Dump The config
+     * @param Config $config The config
      */
 
     public function __construct(Config $config);
 
     /**
      * Initializes the action.
+     *
+     * @throws Exception
      */
 
     public function init();

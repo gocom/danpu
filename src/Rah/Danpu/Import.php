@@ -29,7 +29,7 @@ namespace Rah\Danpu;
 /**
  * Restores a database from a SQL dump file.
  *
- * @example
+ * <code>
  * use Rah\Danpu\Dump;
  * use Rah\Danpu\Import;
  * $config = new Dump;
@@ -41,6 +41,7 @@ namespace Rah\Danpu;
  *    ->tmp('/tmp');
  *
  * new Import($config);
+ * </code>
  */
 
 class Import extends Base

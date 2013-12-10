@@ -29,12 +29,13 @@ namespace Rah\Danpu;
 /**
  * Configures a dump instance.
  *
- * @example
+ * <code>
  * use Rah\Danpu\Dump;
  * $dump = new Dump();
  * $dump
  *     ->dsn('mysql:dbname=database;host=localhost')
  *     ->file('/path/to/dump.sql');
+ * </code>
  */
 
 class Dump extends Config
@@ -55,7 +56,7 @@ class Dump extends Config
     /**
      * Sets database connection details.
      *
-     * @return Rah\Danpu\Dump
+     * @return Dump
      */
 
     public function __call($name, $args)

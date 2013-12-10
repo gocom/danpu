@@ -35,7 +35,7 @@ abstract class Base implements BaseTemplate
     /**
      * The config.
      *
-     * @var Rah\Danpu\Dump
+     * @var Config
      */
 
     protected $config;
@@ -198,7 +198,8 @@ abstract class Base implements BaseTemplate
     /**
      * Gets a path to a temporary file acting as a buffer.
      *
-     * @since 2.4.0
+     * @throws Exception
+     * @since  2.4.0
      */
 
     protected function tmpFile()
@@ -226,8 +227,9 @@ abstract class Base implements BaseTemplate
     /**
      * Opens a file for writing.
      *
-     * @param string $filename The filename
-     * @param string $flags    Flags
+     * @param  string $filename The filename
+     * @param  string $flags    Flags
+     * @throws Exception
      */
 
     protected function open($filename, $flags)
@@ -272,6 +274,9 @@ abstract class Base implements BaseTemplate
 
     /**
      * Moves a temporary file to the final location.
+     *
+     * @return bool
+     * @throws Exception
      */
 
     protected function move()

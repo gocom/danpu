@@ -151,6 +151,8 @@ abstract class Config
     /**
      * Table prefix.
      *
+     * Include only tables starting with the prefix.
+     *
      * @var   string
      * @since 2.6.0
      */
