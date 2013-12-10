@@ -155,5 +155,5 @@ abstract class Config
      * @since 2.6.0
      */
 
-    public $prefix = null;
+    public $prefix;
 }
