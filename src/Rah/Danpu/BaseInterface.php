@@ -32,7 +32,7 @@ namespace Rah\Danpu;
  * @since 2.6.0
  */
 
-interface BaseTemplate
+interface BaseInterface
 {
     /**
      * Constructor.

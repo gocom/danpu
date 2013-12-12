@@ -78,7 +78,7 @@ Changelog
 
 ### Version 2.6.0 - upcoming
 
-* Added: Rah\Danpu\BaseTemplate interface.
+* Added: Rah\Danpu\BaseInterface.
 * Added: Support for filtering tables by prefix.
 
 ### Version 2.5.0 - 2013/05/22

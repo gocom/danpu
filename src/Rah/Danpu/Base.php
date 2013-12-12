@@ -30,7 +30,7 @@ namespace Rah\Danpu;
  * The base class.
  */
 
-abstract class Base implements BaseTemplate
+abstract class Base implements BaseInterface
 {
     /**
      * The config.
