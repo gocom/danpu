@@ -132,7 +132,7 @@ class Export extends Base
                 continue;
             }
 
-            if (($structure = $this->pdo->query('show create table `'.$table.'`')) === false)
+            if (($structure = $this->pdo->query('SHOW CREATE TABLE `'.$table.'`')) === false)
             {
                 throw new Exception('Unable to get the structure for "'.$table.'"');
             }
@@ -188,7 +188,7 @@ class Export extends Base
                 continue;
             }
 
-            if (($structure = $this->pdo->query('show create view `'.$view.'`')) === false)
+            if (($structure = $this->pdo->query('SHOW CREATE VIEW `'.$view.'`')) === false)
             {
                 throw new Exception('Unable to get the structure for view "'.$view.'"');
             }
@@ -212,7 +212,7 @@ class Export extends Base
     {
         if ($this->config->triggers)
         {
-            $triggers = $this->pdo->prepare('show triggers');
+            $triggers = $this->pdo->prepare('SHOW TRIGGERS');
             $triggers->execute();
 
             while ($a = $triggers->fetch(\PDO::FETCH_ASSOC))

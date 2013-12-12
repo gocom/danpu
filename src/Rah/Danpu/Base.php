@@ -162,7 +162,7 @@ abstract class Base implements BaseInterface
 
     protected function getTables()
     {
-        $this->tables = $this->pdo->prepare('show full tables');
+        $this->tables = $this->pdo->prepare('SHOW FULL TABLES');
     }
 
     /**
