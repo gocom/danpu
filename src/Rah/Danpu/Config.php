@@ -151,7 +151,7 @@ abstract class Config
     public $triggers = true;
 
     /**
-     * A prefix used by tables, views and triggers.
+     * A prefix used by tables, views and triggers based on the target table.
      *
      * Taken backup will only include items that start
      * with the prefix.
