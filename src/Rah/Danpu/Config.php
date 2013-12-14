@@ -173,4 +173,16 @@ abstract class Config
      */
 
     public $disableForeignKeyChecks = false;
+
+    /**
+     * Disables unique key checks.
+     *
+     * Set TRUE to disable checks. Will speed up
+     * large imports to InnoDB tables.
+     *
+     * @var   bool
+     * @since 2.6.0
+     */
+
+    public $disableUniqueKeyChecks = false;
 }

@@ -107,15 +107,26 @@ class Export extends Base
             $this->write('SET FOREIGN_KEY_CHECKS = 0');
         }
 
+        if ($this->config->disableUniqueKeyChecks === true)
+        {
+            $this->write('SET UNIQUE_CHECKS = 0');
+        }
+
         $this->dumpTables();
         $this->dumpViews();
         $this->dumpTriggers();
-        $this->write("\n-- Completed on: ".date('c'), false);
 
         if ($this->config->disableForeignKeyChecks === true)
         {
             $this->write('SET FOREIGN_KEY_CHECKS = 1');
         }
+
+        if ($this->config->disableUniqueKeyChecks === true)
+        {
+            $this->write('SET UNIQUE_CHECKS = 1');
+        }
+
+        $this->write("\n-- Completed on: ".date('c'), false);
     }
 
     /**
