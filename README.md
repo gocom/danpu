@@ -80,6 +80,7 @@ Changelog
 
 * Added: Rah\Danpu\BaseInterface.
 * Added: Support for filtering tables by prefix.
+* Added: Option to get configuration values from the Rah\Danpu\Dump class.
 
 ### Version 2.5.0 - 2013/05/22
 

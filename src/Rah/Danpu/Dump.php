@@ -54,24 +54,41 @@ class Dump extends Config
     }
 
     /**
-     * Sets a configuration property.
+     * Sets or gets a configuration property.
+     *
+     * To set a property:
      *
      * <code>
      * $dump = new \Rah\Danpu\Dump();
      * $dump->name('value');
      * </code>
      *
-     * @param  string $name Method
-     * @param  array  $args Arguments
-     * @return Dump
+     * To get a property:
+     *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->name();
+     * </code>
+     *
+     * The method throws an exception if the property does not
+     * exists.
+     *
+     * @param  string     $name Method
+     * @param  array      $args Arguments
+     * @return Dump|mixed The instance, or the current configuration value
      * @throws Exception
      */
 
-    public function __call($name, $args)
+    public function __call($name, array $args = null)
     {
         if (property_exists($this, $name) === false)
         {
             throw new Exception('Unknown config option given: '.$name);
+        }
+
+        if (!$args)
+        {
+            return $this->$name;
         }
 
         $this->$name = $args[0];
