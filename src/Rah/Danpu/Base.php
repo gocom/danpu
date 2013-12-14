@@ -126,19 +126,15 @@ abstract class Base implements BaseInterface
 
     public function connect()
     {
-        if ($this->config->dsn)
+        if (!$this->config->dsn && $this->config->db)
         {
-            $dsn = $this->config->dsn;
-        }
-        else
-        {
-            $dsn = "mysql:dbname={$this->config->db};host={$this->config->host}";
+            $this->config->dsn = "mysql:dbname={$this->config->db};host={$this->config->host}";
         }
 
         try
         {
             $this->pdo = new \PDO(
-                $dsn,
+                $this->config->dsn,
                 $this->config->user,
                 $this->config->pass
             );
