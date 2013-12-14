@@ -104,7 +104,7 @@ class Export extends Base
         $this->dumpTables();
         $this->dumpViews();
         $this->dumpTriggers();
-        $this->write("\n\n-- Completed on: ".date('c'), false);
+        $this->write("\n-- Completed on: ".date('c'), false);
     }
 
     /**
@@ -137,7 +137,7 @@ class Export extends Base
                 throw new Exception('Unable to get the structure for "'.$table.'"');
             }
 
-            $this->write("\n\n-- Table structure for table `{$table}`\n\n", false);
+            $this->write("\n-- Table structure for table `{$table}`\n", false);
             $this->write('DROP TABLE IF EXISTS `'.$table.'`');
 
             foreach ($structure as $row)
@@ -147,7 +147,7 @@ class Export extends Base
 
             if ($this->config->data)
             {
-                $this->write("\n\n-- Dumping data for table `{$table}`\n\n", false);
+                $this->write("\n-- Dumping data for table `{$table}`\n", false);
                 $this->write("LOCK TABLES `{$table}` WRITE");
 
                 $rows = $this->pdo->prepare('select * from `'.$table.'`');
@@ -195,7 +195,7 @@ class Export extends Base
 
             if ($structure = $structure->fetch(\PDO::FETCH_ASSOC))
             {
-                $this->write("\n\n-- Structure for view `{$view}`\n\n", false);
+                $this->write("\n-- Structure for view `{$view}`\n", false);
                 $this->write('DROP VIEW IF EXISTS `'.$view.'`');
                 $this->write($structure['Create View']);
             }
@@ -227,7 +227,7 @@ class Export extends Base
                     continue;
                 }
 
-                $this->write("\n\n-- Trigger structure `{$a['Trigger']}`\n\n", false);
+                $this->write("\n-- Trigger structure `{$a['Trigger']}`\n", false);
                 $this->write('DROP TRIGGER IF EXISTS `'.$a['Trigger'].'`');
                 $this->write("DELIMITER //\nCREATE TRIGGER `{$a['Trigger']}` {$a['Timing']} {$a['Event']} ON `{$a['Table']}` FOR EACH ROW\n{$a['Statement']}\n//\nDELIMITER ;\n", false);
             }

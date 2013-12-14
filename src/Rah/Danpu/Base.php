@@ -263,8 +263,10 @@ abstract class Base implements BaseInterface
     {
         if ($format)
         {
-            $string .= $this->delimiter . "\n";
+            $string .= $this->delimiter;
         }
+
+        $string .= "\n";
 
         if (fwrite($this->file, $string, strlen($string)) === false)
         {
