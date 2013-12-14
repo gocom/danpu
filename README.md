@@ -103,6 +103,7 @@ Changelog
 * Added: Support for filtering tables by prefix.
 * Added: Option to get configuration values from the Rah\Danpu\Dump class.
 * Added: Generated dump file now ends to linefeed.
+* Added: Option to disable foreign and unique key checks.
 * Changed: Writes the DSN to the dump header instead of the old database property and host.
 
 ### Version 2.5.0 - 2013/05/22
