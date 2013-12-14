@@ -126,7 +126,7 @@ abstract class Base implements BaseInterface
 
     public function connect()
     {
-        if (!$this->config->dsn && $this->config->db)
+        if ($this->config->dsn === null && $this->config->db !== null)
         {
             $this->config->dsn = "mysql:dbname={$this->config->db};host={$this->config->host}";
         }
