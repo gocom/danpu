@@ -195,9 +195,12 @@ class Export extends Base
 
             if ($structure = $structure->fetch(\PDO::FETCH_ASSOC))
             {
-                $this->write("\n-- Structure for view `{$view}`\n", false);
-                $this->write('DROP VIEW IF EXISTS `'.$view.'`');
-                $this->write($structure['Create View']);
+                if (isset($structure['Create View']))
+                {
+                    $this->write("\n-- Structure for view `{$view}`\n", false);
+                    $this->write('DROP VIEW IF EXISTS `'.$view.'`');
+                    $this->write($structure['Create View']);
+                }
             }
         }
     }
