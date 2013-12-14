@@ -8,6 +8,7 @@ use Rah\Danpu\Import;
 class BasicTest extends \PHPUnit_Framework_TestCase
 {
     private $dump;
+    private $target;
 
     /**
      * @dataProvider provider
@@ -15,6 +16,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
 
     public function testDump($source, $target)
     {
+        $this->target = $target;
+
         $this->dump->file($source);
         new Import($this->dump);
 
@@ -32,8 +35,6 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->assertEquals($files[0], $files[1]);
-
-        unlink($target);
     }
 
     public function provider()
@@ -64,5 +65,10 @@ class BasicTest extends \PHPUnit_Framework_TestCase
             ->file(dirname(dirname(dirname(__DIR__))) . '/flush.sql');
 
         new Import($this->dump);
+    }
+
+    public function tearDown()
+    {
+        unlink($this->target);
     }
 }
