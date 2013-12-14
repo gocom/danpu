@@ -100,7 +100,7 @@ class Export extends Base
 
     protected function dump()
     {
-        $this->write('-- '.date('c').' - '.$this->escape($this->config->dsn), false);
+        $this->write('-- '.date('c').' - '.$this->config->dsn, false);
         $this->dumpTables();
         $this->dumpViews();
         $this->dumpTriggers();
