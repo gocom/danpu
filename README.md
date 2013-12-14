@@ -1,7 +1,7 @@
 Danpu - MySQL dump tool for PHP
 =========
 
-[Packagist](https://packagist.org/packages/rah/danpu) | [Twitter](http://twitter.com/gocom) | [Donate](http://rahforum.biz/donate/danpu)
+[Packagist](https://packagist.org/packages/rah/danpu) | [Downloads](https://github.com/gocom/danpu/releases) | [Issues](https://github.com/gocom/danpu/issues) | [Donate](http://rahforum.biz/donate/danpu)
 
 [![Build Status](https://travis-ci.org/gocom/danpu.png?branch=master)](https://travis-ci.org/gocom/danpu) [![Latest Stable Version](https://poser.pugx.org/rah/danpu/v/stable.png)](https://packagist.org/packages/rah/danpu)
 
