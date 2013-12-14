@@ -101,10 +101,21 @@ class Export extends Base
     protected function dump()
     {
         $this->write('-- '.date('c').' - '.$this->config->dsn, false);
+
+        if ($this->config->disableForeignKeyChecks === true)
+        {
+            $this->write('SET FOREIGN_KEY_CHECKS = 0');
+        }
+
         $this->dumpTables();
         $this->dumpViews();
         $this->dumpTriggers();
         $this->write("\n-- Completed on: ".date('c'), false);
+
+        if ($this->config->disableForeignKeyChecks === true)
+        {
+            $this->write('SET FOREIGN_KEY_CHECKS = 1');
+        }
     }
 
     /**
