@@ -1,4 +1,4 @@
--- 2013-12-14T15:45:28+01:00 - 'mysql:dbname=abc;host=localhost'
+-- 2013-12-14T15:45:28+01:00 - mysql:dbname=abc;host=localhost
 
 -- Table structure for table `organization`
 
