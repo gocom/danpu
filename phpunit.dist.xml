@@ -4,6 +4,7 @@
         <const name="test_db_dsn" value="mysql:dbname=danpu;host=localhost"/>
         <const name="test_db_user" value="root"/>
         <const name="test_db_pass" value=""/>
+        <const name="test_tmp_dir" value="/tmp"/>
     </php>
 
     <testsuites>
