@@ -3,14 +3,33 @@ Danpu - MySQL dump tool for PHP
 
 [Packagist](https://packagist.org/packages/rah/danpu) | [Twitter](http://twitter.com/gocom) | [Donate](http://rahforum.biz/donate/danpu) | Master/2.0: [![Build Status](https://travis-ci.org/gocom/danpu.png?branch=master)](https://travis-ci.org/gocom/danpu) Legacy/1.0: [![Build Status](https://travis-ci.org/gocom/danpu.png?branch=1.0)](https://travis-ci.org/gocom/danpu)
 
-Danpu is a dependency-free, cross-platform, portable PHP library for backing up MySQL databases. It has no hard dependencies, and is fit for restricted, shared-hosting environments. It requires nothing more than access to your database, PDO and a directory it can write the backup to. The script is optimized and has low memory-footprint, allowing it to handle even larger databases.
+Danpu is a dependency-free, cross-platform, portable PHP library for backing up MySQL databases. It has no hard dependencies, and is fit for restricted environments where security is key and access is limited. Danpu requires nothing more than access to your database, PDO and a directory it can write the backup to. The script is optimized and has low memory-footprint, allowing it to handle even larger databases.
+
+Danpu supports backing up table structures, the data itself, views and triggers. Created dump files can optionally be compressed to save space, and generated SQL output is optimized for compatibility.
+
+Requirements
+---------
+
+Minimum:
+
+* PHP 5.3.0 or newer
+* MySQL 4.1.0 or newer
+* [PDO](http://php.net/pdo)
+
+Recommended, but optional:
+
+* PHP 5.4.0 or newer
+* MySQL 5.0.11 or newer
+* [zlib](http://www.php.net/manual/en/book.zlib.php)
+
+Backing up views and triggers requires MySQL 5.0.11 or newer.
 
 Install
 ---------
 
 Using [Composer](http://getcomposer.org):
 
-    $ composer require rah/danpu
+    $ composer require rah/danpu:2.5.*
 
 Usage
 ---------
@@ -18,7 +37,7 @@ Usage
 To create a new backup or import one, configure a new ```Dump``` instance and pass it to one of the worker classes. To begin, first make sure you have included Composer's autoloader file in your project:
 
 ```php
-include './vendor/autoload.php';
+require './vendor/autoload.php';
 ```
 
 If you are already using other Composer packages, or a modern Composer-managed framework, this should be taken care of already. If not, merely add the autoloader to your base bootstrap includes. See [Composer's documentation](http://getcomposer.org) for more information.
