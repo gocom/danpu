@@ -54,9 +54,17 @@ class Dump extends Config
     }
 
     /**
-     * Sets database connection details.
+     * Sets a configuration property.
      *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->name('value');
+     * </code>
+     *
+     * @param  string $name Method
+     * @param  array  $args Arguments
      * @return Dump
+     * @throws Exception
      */
 
     public function __call($name, $args)
