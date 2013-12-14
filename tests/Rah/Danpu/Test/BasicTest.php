@@ -5,7 +5,7 @@ use Rah\Danpu\Dump;
 use Rah\Danpu\Export;
 use Rah\Danpu\Import;
 
-class SimpleTest extends \PHPUnit_Framework_TestCase
+class BasicTest extends \PHPUnit_Framework_TestCase
 {
     private $dump;
 
