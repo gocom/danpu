@@ -105,6 +105,8 @@ Changelog
 * Added: Generated dump file now ends to linefeed.
 * Added: Option to disable foreign and unique key checks.
 * Changed: Writes the DSN to the dump header instead of the old database property and host.
+* Changed: Dump setter and Config values inheritance. Workers now require instance of Dump, but Dump can be fed a different Config instance. This makes sure the methods implemented in the setter, Dump, are available in the consumer class. Extending Config class still works as previously, just pass your Config through Dump to the consumer.
+* Changed: Improved PHPdoc blocks.
 
 ### Version 2.5.0 - 2013/05/22
 
