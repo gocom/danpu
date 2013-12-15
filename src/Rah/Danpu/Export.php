@@ -102,6 +102,11 @@ class Export extends Base
     {
         $this->write('-- '.date('c').' - '.$this->config->dsn, false);
 
+        if ($this->config->disableAutoCommit === true)
+        {
+            $this->write('SET AUTOCOMMIT = 0');
+        }
+
         if ($this->config->disableForeignKeyChecks === true)
         {
             $this->write('SET FOREIGN_KEY_CHECKS = 0');
@@ -124,6 +129,12 @@ class Export extends Base
         if ($this->config->disableUniqueKeyChecks === true)
         {
             $this->write('SET UNIQUE_CHECKS = 1');
+        }
+
+        if ($this->config->disableAutoCommit === true)
+        {
+            $this->write('COMMIT');
+            $this->write('SET AUTOCOMMIT = 1');
         }
 
         $this->write("\n-- Completed on: ".date('c'), false);

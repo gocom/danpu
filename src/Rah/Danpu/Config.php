@@ -185,4 +185,24 @@ abstract class Config
      */
 
     public $disableUniqueKeyChecks = false;
+
+    /**
+     * Disables auto-commit mode.
+     *
+     * Set TRUE to disable automatic commits. Will speed up
+     * large imports to InnoDB tables as each commit is not
+     * written to the disk right after.
+     *
+     * When the generated dump is imported, MySQL is instructed
+     * to do the actions in memory and write them to the disk
+     * only once the dump has been successfully processed. This
+     * option will not work if the import is larger than there
+     * is memory to be allocated on the system where the
+     * resulting backup is imported.
+     *
+     * @var   bool
+     * @since 2.6.0
+     */
+
+    public $disableAutoCommit = false;
 }
