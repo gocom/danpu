@@ -119,7 +119,7 @@ abstract class Base implements BaseInterface
     {
         if ($this->config->dsn === null && $this->config->db !== null)
         {
-            $this->config->dsn = "mysql:dbname={$this->config->db};host={$this->config->host}";
+            $this->config->dsn("mysql:dbname={$this->config->db};host={$this->config->host}");
         }
 
         try
