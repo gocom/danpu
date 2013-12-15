@@ -32,7 +32,8 @@ new Export($dump);
 new Import($dump);
 
 // Alternatively you could create a personalized config instance
-// by extending.
+// by extending Config and then passing it to Dump through
+// the constructor.
 
 class MyAppConfig extends Config
 {
@@ -45,8 +46,8 @@ class MyAppConfig extends Config
 
 // Export again using MyAppConfig.
 
-new Export(new MyAppConfig);
+new Export(new Dump(new MyAppConfig));
 
 // Or import.
 
-new Import(new MyAppConfig);
+new Import(new Dump(new MyAppConfig));
