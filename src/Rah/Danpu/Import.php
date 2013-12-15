@@ -58,11 +58,11 @@ class Import extends Base
         if ($this->compress)
         {
             $gzip = new Compress();
-            $gzip->unpack($this->filename, $this->temp);
+            $gzip->unpack($this->config->file, $this->temp);
         }
         else
         {
-            copy($this->filename, $this->temp);
+            copy($this->config->file, $this->temp);
         }
 
         $this->open($this->temp, 'r');

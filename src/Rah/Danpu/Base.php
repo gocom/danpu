@@ -65,14 +65,6 @@ abstract class Base implements BaseInterface
     protected $file;
 
     /**
-     * The filename.
-     *
-     * @var string
-     */
-
-    protected $filename;
-
-    /**
      * Path to the temporary file.
      *
      * @var string
@@ -104,8 +96,7 @@ abstract class Base implements BaseInterface
     public function __construct(Dump $config)
     {
         $this->config = $config;
-        $this->filename = $this->config->file;
-        $this->compress = pathinfo($this->filename, PATHINFO_EXTENSION) === 'gz';
+        $this->compress = pathinfo($this->config->file, PATHINFO_EXTENSION) === 'gz';
         $this->init();
     }
 
@@ -281,18 +272,18 @@ abstract class Base implements BaseInterface
     {
         if ($this->compress)
         {
-            $gzip = new Compress();
-            $gzip->pack($this->temp, $this->filename);
+            $gzip = new Compress($this->config);
+            $gzip->pack($this->temp, $this->config->file);
             unlink($this->temp);
             return true;
         }
 
-        if (@rename($this->temp, $this->filename))
+        if (@rename($this->temp, $this->config->file))
         {
             return true;
         }
 
-        if (@copy($this->temp, $this->filename) && unlink($this->temp))
+        if (@copy($this->temp, $this->config->file) && unlink($this->temp))
         {
             return true;
         }
@@ -306,6 +297,6 @@ abstract class Base implements BaseInterface
 
     public function __toString()
     {
-        return (string) $this->filename;
+        return (string) $this->config->file;
     }
 }
