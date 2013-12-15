@@ -29,15 +29,57 @@ namespace Rah\Danpu;
 /**
  * Dump config.
  *
+ * Configure and pass to a worker class as
+ * the constructors first argument.
+ *
+ * The preferred way of creating a new configuration
+ * is with the Dump class. Initialize it and set
+ * the properties.
+ *
  * <code>
- * class myConfig Extends \Rah\Danpu\Config
+ * $dump = new \Rah\Danpu\Dump();
+ * $dump
+ *    ->file('/path/to/target/dump/file.sql')
+ *    ->dsn('mysql:dbname=database;host=localhost')
+ *    ->user('username')
+ *    ->pass('password')
+ *    ->tmp('/tmp');
+ * </code>
+ *
+ * When done pass the instance to a worker class such as Export
+ * through the constructor.
+ *
+ * <code>
+ * new \Rah\Danpu\Export($dump);
+ * </code>
+ *
+ * Alternative to Dump class, the Config class can be extended.
+ *
+ * <code>
+ * namespace App\Dump;
+ * class Config extends \Rah\Danpu\Config
  * {
- *  $this->dsn = 'mysql:dbname=database;host=localhost';
- *  $this->file = '/path/to/dump.sql';
+ *     public $file = '/path/to/dump.sql';
+ *     public $dsn = 'mysql:dbname=database;host=localhost';
+ *     public $user = 'username';
+ *     public $pass = 'password';
+ *     public $tmp = '/tmp';
  * }
  * </code>
  *
+ * Extending could be used to generate application wide
+ * pre-populated configuration sets. Just pass an instance of
+ * your config class to a worker class.
+ *
+ * <code>
+ * new \Rah\Danpu\Export(new \App\Dump\Config);
+ * </code>
+ *
+ * Just note that any processing invoked by Dump class is
+ * not done if the Config class is extended directly.
+ *
  * @since 2.3.0
+ * @see   Dump
  */
 
 abstract class Config
