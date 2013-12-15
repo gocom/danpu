@@ -101,7 +101,7 @@ abstract class Base implements BaseInterface
      * {@inheritdoc}
      */
 
-    public function __construct(Config $config)
+    public function __construct(Dump $config)
     {
         $this->config = $config;
         $this->filename = $this->config->file;

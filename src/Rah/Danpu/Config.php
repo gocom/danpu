@@ -69,20 +69,20 @@ namespace Rah\Danpu;
  *
  * Extending could be used to generate application wide
  * pre-populated configuration sets. Just pass an instance of
- * your config class to a worker class.
+ * your config class to a worker class through Dump:
  *
  * <code>
- * new \Rah\Danpu\Export(new \App\Dump\Config);
+ * use App\Dump\Config;
+ * use Rah\Danpu\Export;
+ * use Rah\Danpu\Dump;
+ * new Export(new Dump(new Config));
  * </code>
- *
- * Just note that any processing invoked by Dump class is
- * not done if the Config class is extended directly.
  *
  * @since 2.3.0
  * @see   Dump
  */
 
-abstract class Config
+class Config
 {
     /**
      * Data source name.

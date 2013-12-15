@@ -37,10 +37,10 @@ interface BaseInterface
     /**
      * Constructor.
      *
-     * @param Config $config The config
+     * @param Dump $config The config
      */
 
-    public function __construct(Config $config);
+    public function __construct(Dump $config);
 
     /**
      * Initializes the action.

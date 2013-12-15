@@ -38,15 +38,30 @@ namespace Rah\Danpu;
  * </code>
  */
 
-class Dump extends Config
+class Dump
 {
     /**
-     * Constructor.
+     * Stores the configuration instance.
+     *
+     * @var Config
      */
 
-    public function __construct()
+    protected $config;
+
+    /**
+     * Constructor.
+     *
+     * @param Config|null $config The config, defaults to Config
+     */
+
+    public function __construct(Config $config = null)
     {
-        $this->attributes = array(
+        if ($this->config === null)
+        {
+            $this->config = new Config;
+        }
+
+        $this->config->attributes = array(
             \PDO::ATTR_ORACLE_NULLS             => \PDO::NULL_NATURAL,
             \PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false,
             \PDO::ATTR_ERRMODE                  => \PDO::ERRMODE_EXCEPTION,
@@ -54,20 +69,37 @@ class Dump extends Config
     }
 
     /**
-     * Sets or gets a configuration property.
+     * Gets a configuration property.
      *
-     * To set a property:
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * echo $dump->name;
+     * </code>
+     *
+     * The method throws an exception if the property does not
+     * exists.
+     *
+     * @param  string     $name The property
+     * @return mixed      The current configuration value
+     * @throws Exception
+     */
+
+    public function __get($name)
+    {
+        if (property_exists($this->config, $name) === false)
+        {
+            throw new Exception('Unknown property: '.$name);
+        }
+
+        return $this->config->$name;
+    }
+
+    /**
+     * Sets a configuration property.
      *
      * <code>
      * $dump = new \Rah\Danpu\Dump();
      * $dump->name('value');
-     * </code>
-     *
-     * To get a property:
-     *
-     * <code>
-     * $dump = new \Rah\Danpu\Dump();
-     * $dump->name();
      * </code>
      *
      * The method throws an exception if the property does not
@@ -81,17 +113,12 @@ class Dump extends Config
 
     public function __call($name, array $args = null)
     {
-        if (property_exists($this, $name) === false)
+        if (property_exists($this->config, $name) === false)
         {
-            throw new Exception('Unknown config option given: '.$name);
+            throw new Exception('Unknown property: '.$name);
         }
 
-        if (!$args)
-        {
-            return $this->$name;
-        }
-
-        $this->$name = $args[0];
+        $this->config->$name = $args[0];
         return $this;
     }
 }
