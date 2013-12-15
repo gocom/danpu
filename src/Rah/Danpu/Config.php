@@ -45,8 +45,23 @@ abstract class Config
     /**
      * Data source name.
      *
+     * The DSN used to connect to the database. Basically specifies
+     * the database location. In general, a DSN consists of the PDO driver name,
+     * followed by a colon, followed by the PDO driver-specific connection syntax.
+     *
+     * For instance to connect to a MySQL database hosted locally:
+     *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->dsn('mysql:dbname=database;host=localhost');
+     * </code>
+     *
+     * Where 'database' is the name of the database and 'localhost'
+     * is the hostname.
+     *
      * @var   string
      * @since 2.2.0
+     * @link  http://www.php.net/manual/en/ref.pdo-mysql.connection.php
      */
 
     public $dsn;
@@ -70,7 +85,12 @@ abstract class Config
     public $host = 'localhost';
 
     /**
-     * The username.
+     * The username used to connect to the database.
+     *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->user('DatabaseUsername');
+     * </code>
      *
      * @var string
      */
@@ -78,7 +98,15 @@ abstract class Config
     public $user;
 
     /**
-     * The password.
+     * The password used to connect to the database.
+     *
+     * Database user's password. Defaults to
+     * an empty string.
+     *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->password('DatabasePassword');
+     * </code>
      *
      * @var string
      */
@@ -88,13 +116,39 @@ abstract class Config
     /**
      * Connection attributes.
      *
+     * An array of driver-specific connection options. This
+     * affect to the connection that is used for taking
+     * the backup.
+     *
+     * For instance, you can use this to increase the
+     * timeout limit if its too little.
+     *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->attributes(array(
+     *     \PDO::ATTR_TIMEOUT => 900,
+     * ));
+     * </code>
+     *
      * @var array
      */
 
     public $attributes = array();
 
     /**
-     * Encoding.
+     * Database encoding.
+     *
+     * Set this to what your data in your
+     * database uses. Defaults to 'utf8'.
+     *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->encoding('utf16');
+     * </code>
+     *
+     * To minimize issues, don't mix different encodings
+     * in your database. All data should be encoded
+     * using the same.
      *
      * @var string
      */
@@ -105,9 +159,14 @@ abstract class Config
      * An array of ignored tables, views and triggers based on the target table.
      *
      * This can be used to exclude confidential or temporary
-     * data from the backup.
+     * data from the backup, like passwords and sessions values.
      *
-     * @var   string
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->ignore(array('user_sessions', 'user_credentials'));
+     * </code>
+     *
+     * @var   array
      * @since 2.1.0
      */
 
@@ -115,6 +174,22 @@ abstract class Config
 
     /**
      * Temporary directory.
+     *
+     * Absolute path to the temporary directory without
+     * trailing slash. Defaults to '/tmp'.
+     *
+     * This directory is used as a temporary storage for
+     * writing the backup, a on-disk buffer so to speak.
+     *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->tmp('/path/to/temporary/directory');
+     * </code>
+     *
+     * This directory must be writable and private. You
+     * may not want to use a virtual one stored in memory,
+     * given that we are writing your database backup
+     * in there, and it might be a large one.
      *
      * @var string
      */
@@ -124,8 +199,14 @@ abstract class Config
     /**
      * The target SQL dump file.
      *
-     * To enable Gzipping, add '.gz' extension
+     * Your backup is written to the specified
+     * location. To enable Gzipping, add '.gz' extension
      * to the filename.
+     *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->file('/path/to/dump.sql');
+     * </code>
      *
      * @var string
      */
@@ -135,6 +216,14 @@ abstract class Config
     /**
      * Dump table data.
      *
+     * Set FALSE to only dump structure. No
+     * data and inserts will be added.
+     *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->data(false);
+     * </code>
+     *
      * @var   bool
      * @since 2.4.0
      */
@@ -143,6 +232,14 @@ abstract class Config
 
     /**
      * Dump triggers.
+     *
+     * Set FALSE to skip triggers. The dump
+     * file will not contain any triggers.
+     *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->trigger(false);
+     * </code>
      *
      * @var   bool
      * @since 2.5.0
@@ -156,6 +253,11 @@ abstract class Config
      * Taken backup will only include items that start
      * with the prefix.
      *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->prefix('user_');
+     * </code>
+     *
      * @var   string
      * @since 2.6.0
      */
@@ -165,8 +267,15 @@ abstract class Config
     /**
      * Disables foreign key checks.
      *
-     * Set TRUE to disable checks. Will speed up
-     * large imports to InnoDB tables.
+     * Set TRUE to disable checks. The generated dump
+     * file will contain statements that temporarily disable
+     * unique key checks. This will speed up large data
+     * imports to InnoDB tables.
+     *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->disableForeignKeyChecks(true);
+     * </code>
      *
      * @var   bool
      * @since 2.6.0
@@ -177,8 +286,15 @@ abstract class Config
     /**
      * Disables unique key checks.
      *
-     * Set TRUE to disable checks. Will speed up
-     * large imports to InnoDB tables.
+     * Set TRUE to disable checks. The generated dump
+     * file will contain statements that temporarily disable
+     * unique key checks. This will speed up large data
+     * imports to InnoDB tables.
+     *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->disableUniqueKeyChecks(true);
+     * </code>
      *
      * @var   bool
      * @since 2.6.0
@@ -189,8 +305,10 @@ abstract class Config
     /**
      * Disables auto-commit mode.
      *
-     * Set TRUE to disable automatic commits. Will speed up
-     * large imports to InnoDB tables as each commit is not
+     * Set TRUE to disable automatic commits. The generated dump
+     * file will contain statements that temporarily disable
+     * unique key checks. This will speed up large data
+     * imports to InnoDB tables as each commit is not
      * written to the disk right after.
      *
      * When the generated dump is imported, MySQL is instructed
@@ -198,7 +316,12 @@ abstract class Config
      * only once the dump has been successfully processed. This
      * option will not work if the import is larger than there
      * is memory to be allocated on the system where the
-     * resulting backup is imported.
+     * resulting backup is ran at.
+     *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->disableAutoCommit(true);
+     * </code>
      *
      * @var   bool
      * @since 2.6.0
