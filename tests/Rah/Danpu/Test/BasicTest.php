@@ -35,7 +35,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
 
             if (pathinfo($file, PATHINFO_EXTENSION) === 'gz')
             {
-                $data = gzdecode($data);
+                $data = gzinflate(substr($data, 10, -8));
             }
 
             $file = join("\n", array_slice(explode("\n", $data), 1, -2));
