@@ -31,7 +31,14 @@ class BasicTest extends \PHPUnit_Framework_TestCase
 
         foreach ($files as &$file)
         {
-            $file = join("\n", array_slice(explode("\n", file_get_contents($file)), 1, -2));
+            $data = file_get_contents($file);
+
+            if (pathinfo($file, PATHINFO_EXTENSION) === 'gz')
+            {
+                $data = gzdecode($data);
+            }
+
+            $file = join("\n", array_slice(explode("\n", $data), 1, -2));
         }
 
         $this->assertEquals($files[0], $files[1]);
@@ -39,7 +46,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
 
     public function provider()
     {
-        $path = dirname(dirname(dirname(__DIR__))) . '/fixtures/*.sql';
+        $path = dirname(dirname(dirname(__DIR__))) . '/fixtures/*[.sql|.gz]';
 
         if ($files = glob($path, GLOB_NOSORT))
         {
