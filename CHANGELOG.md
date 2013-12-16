@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Version 2.6.0 - upcoming
+Version 2.6.0 - 2013/12/16
 ----
 
 * Added: Rah\Danpu\BaseInterface.
