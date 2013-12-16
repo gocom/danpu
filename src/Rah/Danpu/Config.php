@@ -114,24 +114,6 @@ class Config
     public $dsn;
 
     /**
-     * The database name.
-     *
-     * @var        string
-     * @deprecated 2.2.0
-     */
-
-    public $db;
-
-    /**
-     * The hostname.
-     *
-     * @var        string
-     * @deprecated 2.2.0
-     */
-
-    public $host = 'localhost';
-
-    /**
      * The username used to connect to the database.
      *
      * <code>
@@ -220,6 +202,23 @@ class Config
     public $ignore = array();
 
     /**
+     * A prefix used by tables, views and triggers based on the target table.
+     *
+     * Taken backup will only include items that start
+     * with the prefix.
+     *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->prefix('user_');
+     * </code>
+     *
+     * @var   string
+     * @since 2.6.0
+     */
+
+    public $prefix;
+
+    /**
      * Temporary directory.
      *
      * Absolute path to the temporary directory without
@@ -295,23 +294,6 @@ class Config
     public $triggers = true;
 
     /**
-     * A prefix used by tables, views and triggers based on the target table.
-     *
-     * Taken backup will only include items that start
-     * with the prefix.
-     *
-     * <code>
-     * $dump = new \Rah\Danpu\Dump();
-     * $dump->prefix('user_');
-     * </code>
-     *
-     * @var   string
-     * @since 2.6.0
-     */
-
-    public $prefix;
-
-    /**
      * Disables foreign key checks.
      *
      * Set TRUE to disable checks. The generated dump
@@ -375,4 +357,22 @@ class Config
      */
 
     public $disableAutoCommit = false;
+
+    /**
+     * The database name.
+     *
+     * @var        string
+     * @deprecated 2.2.0
+     */
+
+    public $db;
+
+    /**
+     * The hostname.
+     *
+     * @var        string
+     * @deprecated 2.2.0
+     */
+
+    public $host = 'localhost';
 }
