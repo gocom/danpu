@@ -63,12 +63,9 @@ class Export extends Base
         $this->getTables();
         $this->lock();
 
-        try
-        {
+        try {
             $this->dump();
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             throw new Exception('Exporting database failed: '.$e->getMessage());
         }
 
@@ -86,13 +83,11 @@ class Export extends Base
 
     protected function escape($value)
     {
-        if ($value === null)
-        {
+        if ($value === null) {
             return 'NULL';
         }
 
-        if ((string) intval($value) === $value)
-        {
+        if ((string) intval($value) === $value) {
             return (int) $value;
         }
 
@@ -107,18 +102,15 @@ class Export extends Base
     {
         $this->write('-- '.date('c').' - '.$this->config->dsn, false);
 
-        if ($this->config->disableAutoCommit === true)
-        {
+        if ($this->config->disableAutoCommit === true) {
             $this->write('SET AUTOCOMMIT = 0');
         }
 
-        if ($this->config->disableForeignKeyChecks === true)
-        {
+        if ($this->config->disableForeignKeyChecks === true) {
             $this->write('SET FOREIGN_KEY_CHECKS = 0');
         }
 
-        if ($this->config->disableUniqueKeyChecks === true)
-        {
+        if ($this->config->disableUniqueKeyChecks === true) {
             $this->write('SET UNIQUE_CHECKS = 0');
         }
 
@@ -126,18 +118,15 @@ class Export extends Base
         $this->dumpViews();
         $this->dumpTriggers();
 
-        if ($this->config->disableForeignKeyChecks === true)
-        {
+        if ($this->config->disableForeignKeyChecks === true) {
             $this->write('SET FOREIGN_KEY_CHECKS = 1');
         }
 
-        if ($this->config->disableUniqueKeyChecks === true)
-        {
+        if ($this->config->disableUniqueKeyChecks === true) {
             $this->write('SET UNIQUE_CHECKS = 1');
         }
 
-        if ($this->config->disableAutoCommit === true)
-        {
+        if ($this->config->disableAutoCommit === true) {
             $this->write('COMMIT');
             $this->write('SET AUTOCOMMIT = 1');
         }
@@ -156,44 +145,45 @@ class Export extends Base
     {
         $this->tables->execute();
 
-        foreach ($this->tables->fetchAll(\PDO::FETCH_ASSOC) as $a)
-        {
+        foreach ($this->tables->fetchAll(\PDO::FETCH_ASSOC) as $a) {
             $table = current($a);
 
-            if ((isset($a['Table_type']) && $a['Table_type'] === 'VIEW') || in_array($table, (array) $this->config->ignore, true))
-            {
+            if (isset($a['Table_type']) && $a['Table_type'] === 'VIEW') {
                 continue;
             }
 
-            if ((string) $this->config->prefix !== '' && strpos($table, $this->config->prefix) !== 0)
-            {
+            if (in_array($table, (array) $this->config->ignore, true)) {
                 continue;
             }
 
-            if (($structure = $this->pdo->query('SHOW CREATE TABLE `'.$table.'`')) === false)
-            {
+            if ((string) $this->config->prefix !== '' && strpos($table, $this->config->prefix) !== 0) {
+                continue;
+            }
+
+            if (($structure = $this->pdo->query('SHOW CREATE TABLE `'.$table.'`')) === false) {
                 throw new Exception('Unable to get the structure for "'.$table.'"');
             }
 
             $this->write("\n-- Table structure for table `{$table}`\n", false);
             $this->write('DROP TABLE IF EXISTS `'.$table.'`');
 
-            foreach ($structure as $row)
-            {
+            foreach ($structure as $row) {
                 $this->write(end($row));
             }
 
-            if ($this->config->data)
-            {
+            if ($this->config->data) {
                 $this->write("\n-- Dumping data for table `{$table}`\n", false);
                 $this->write("LOCK TABLES `{$table}` WRITE");
 
                 $rows = $this->pdo->prepare('select * from `'.$table.'`');
                 $rows->execute();
 
-                while ($a = $rows->fetch(\PDO::FETCH_ASSOC))
-                {
-                    $this->write("INSERT INTO `{$table}` VALUES (".implode(',', array_map(array($this, 'escape'), $a)).")");
+                while ($a = $rows->fetch(\PDO::FETCH_ASSOC)) {
+                    $this->write(
+                        "INSERT INTO `{$table}` VALUES (".
+                        implode(',', array_map(array($this, 'escape'), $a)).
+                        ")"
+                    );
                 }
 
                 $this->write('UNLOCK TABLES');
@@ -212,29 +202,27 @@ class Export extends Base
     {
         $this->tables->execute();
 
-        foreach ($this->tables->fetchAll(\PDO::FETCH_ASSOC) as $a)
-        {
+        foreach ($this->tables->fetchAll(\PDO::FETCH_ASSOC) as $a) {
             $view = current($a);
 
-            if (!isset($a['Table_type']) || $a['Table_type'] !== 'VIEW' || in_array($view, (array) $this->config->ignore, true))
-            {
+            if (!isset($a['Table_type']) || $a['Table_type'] !== 'VIEW') {
                 continue;
             }
 
-            if ((string) $this->config->prefix !== '' && strpos($view, $this->config->prefix) !== 0)
-            {
+            if (in_array($view, (array) $this->config->ignore, true)) {
                 continue;
             }
 
-            if (($structure = $this->pdo->query('SHOW CREATE VIEW `'.$view.'`')) === false)
-            {
+            if ((string) $this->config->prefix !== '' && strpos($view, $this->config->prefix) !== 0) {
+                continue;
+            }
+
+            if (($structure = $this->pdo->query('SHOW CREATE VIEW `'.$view.'`')) === false) {
                 throw new Exception('Unable to get the structure for view "'.$view.'"');
             }
 
-            if ($structure = $structure->fetch(\PDO::FETCH_ASSOC))
-            {
-                if (isset($structure['Create View']))
-                {
+            if ($structure = $structure->fetch(\PDO::FETCH_ASSOC)) {
+                if (isset($structure['Create View'])) {
                     $this->write("\n-- Structure for view `{$view}`\n", false);
                     $this->write('DROP VIEW IF EXISTS `'.$view.'`');
                     $this->write($structure['Create View']);
@@ -251,26 +239,27 @@ class Export extends Base
 
     protected function dumpTriggers()
     {
-        if ($this->config->triggers)
-        {
+        if ($this->config->triggers) {
             $triggers = $this->pdo->prepare('SHOW TRIGGERS');
             $triggers->execute();
 
-            while ($a = $triggers->fetch(\PDO::FETCH_ASSOC))
-            {
-                if (in_array($a['Table'], (array) $this->config->ignore, true))
-                {
+            while ($a = $triggers->fetch(\PDO::FETCH_ASSOC)) {
+                if (in_array($a['Table'], (array) $this->config->ignore, true)) {
                     continue;
                 }
 
-                if ((string) $this->config->prefix !== '' && strpos($a['Table'], $this->config->prefix) !== 0)
-                {
+                if ((string) $this->config->prefix !== '' && strpos($a['Table'], $this->config->prefix) !== 0) {
                     continue;
                 }
 
                 $this->write("\n-- Trigger structure `{$a['Trigger']}`\n", false);
                 $this->write('DROP TRIGGER IF EXISTS `'.$a['Trigger'].'`');
-                $this->write("DELIMITER //\nCREATE TRIGGER `{$a['Trigger']}` {$a['Timing']} {$a['Event']} ON `{$a['Table']}` FOR EACH ROW\n{$a['Statement']}\n//\nDELIMITER ;", false);
+                $this->write(
+                    "DELIMITER //\nCREATE TRIGGER `{$a['Trigger']}`".
+                    " {$a['Timing']} {$a['Event']} ON `{$a['Table']}`".
+                    " FOR EACH ROW\n{$a['Statement']}\n//\nDELIMITER ;",
+                    false
+                );
             }
         }
     }

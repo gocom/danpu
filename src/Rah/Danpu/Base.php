@@ -122,13 +122,11 @@ abstract class Base implements BaseInterface
 
     public function connect()
     {
-        if ($this->config->dsn === null && $this->config->db !== null)
-        {
+        if ($this->config->dsn === null && $this->config->db !== null) {
             $this->config->dsn("mysql:dbname={$this->config->db};host={$this->config->host}");
         }
 
-        try
-        {
+        try {
             $this->pdo = new \PDO(
                 $this->config->dsn,
                 $this->config->user,
@@ -137,13 +135,10 @@ abstract class Base implements BaseInterface
 
             $this->pdo->exec('SET NAMES '.$this->config->encoding);
 
-            foreach ($this->config->attributes as $name => $value)
-            {
+            foreach ($this->config->attributes as $name => $value) {
                 $this->pdo->setAttribute($name, $value);
             }
-        }
-        catch (\PDOException $e)
-        {
+        } catch (\PDOException $e) {
             throw new Exception('Connecting to database failed with message: '.$e->getMessage());
         }
     }
@@ -168,8 +163,7 @@ abstract class Base implements BaseInterface
         $this->tables->execute();
         $table = array();
 
-        while ($a = $this->tables->fetch(\PDO::FETCH_ASSOC))
-        {
+        while ($a = $this->tables->fetch(\PDO::FETCH_ASSOC)) {
             $table[] = current($a);
         }
 
@@ -196,8 +190,7 @@ abstract class Base implements BaseInterface
 
     protected function tmpFile()
     {
-        if (($this->temp = tempnam($this->config->tmp, 'Rah_Danpu_')) === false || unlink($this->temp) === false)
-        {
+        if (($this->temp = tempnam($this->config->tmp, 'Rah_Danpu_')) === false || unlink($this->temp) === false) {
             throw new Exception('Unable to create a temporary file, check the configured tmp directory.');
         }
     }
@@ -210,8 +203,7 @@ abstract class Base implements BaseInterface
 
     protected function clean()
     {
-        if (file_exists($this->temp))
-        {
+        if (file_exists($this->temp)) {
             unlink($this->temp);
         }
     }
@@ -226,8 +218,7 @@ abstract class Base implements BaseInterface
 
     protected function open($filename, $flags)
     {
-        if (($this->file = fopen($filename, $flags)) === false)
-        {
+        if (($this->file = fopen($filename, $flags)) === false) {
             throw new Exception('Unable to open the target file.');
         }
     }
@@ -238,8 +229,7 @@ abstract class Base implements BaseInterface
 
     protected function close()
     {
-        if (is_resource($this->file))
-        {
+        if (is_resource($this->file)) {
             fclose($this->file);
         }
     }
@@ -253,15 +243,13 @@ abstract class Base implements BaseInterface
 
     protected function write($string, $format = true)
     {
-        if ($format)
-        {
+        if ($format) {
             $string .= $this->delimiter;
         }
 
         $string .= "\n";
 
-        if (fwrite($this->file, $string, strlen($string)) === false)
-        {
+        if (fwrite($this->file, $string, strlen($string)) === false) {
             throw new Exception('Unable to write '.strlen($string).' bytes to the dumpfile.');
         }
     }
@@ -275,21 +263,18 @@ abstract class Base implements BaseInterface
 
     protected function move()
     {
-        if ($this->compress)
-        {
+        if ($this->compress) {
             $gzip = new Compress($this->config);
             $gzip->pack($this->temp, $this->config->file);
             unlink($this->temp);
             return true;
         }
 
-        if (@rename($this->temp, $this->config->file))
-        {
+        if (@rename($this->temp, $this->config->file)) {
             return true;
         }
 
-        if (@copy($this->temp, $this->config->file) && unlink($this->temp))
-        {
+        if (@copy($this->temp, $this->config->file) && unlink($this->temp)) {
             return true;
         }
 

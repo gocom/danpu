@@ -1,6 +1,7 @@
 <?php
 
 namespace Examples;
+
 use Rah\Danpu\Dump;
 use Rah\Danpu\Config;
 use Rah\Danpu\Export;

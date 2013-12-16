@@ -52,8 +52,7 @@ class Compress
 
     public function __construct()
     {
-        if (!function_exists('gzopen'))
-        {
+        if (!function_exists('gzopen')) {
             throw new Exception('Zlib support is not enabled in PHP. Try uncompressed file.');
         }
     }
@@ -68,18 +67,15 @@ class Compress
 
     public function pack($from, $to)
     {
-        if (($gzip = gzopen($to, 'wb')) === false)
-        {
+        if (($gzip = gzopen($to, 'wb')) === false) {
             throw new Exception('Unable create compressed file.');
         }
 
-        if (($source = fopen($from, 'rb')) === false)
-        {
+        if (($source = fopen($from, 'rb')) === false) {
             throw new Exception('Unable open the compression source file.');
         }
 
-        while (!feof($source))
-        {
+        while (!feof($source)) {
             $content = fread($source, 4096);
             gzwrite($gzip, $content, strlen($content));
         }
@@ -98,18 +94,15 @@ class Compress
 
     public function unpack($from, $to)
     {
-        if (($gzip = gzopen($from, 'rb')) === false)
-        {
+        if (($gzip = gzopen($from, 'rb')) === false) {
             throw new Exception('Unable to read compressed file.');
         }
 
-        if (($target = fopen($to, 'w')) === false)
-        {
+        if (($target = fopen($to, 'w')) === false) {
             throw new Exception('Unable to open the target.');
         }
 
-        while ($string = gzread($gzip, 4096))
-        {
+        while ($string = gzread($gzip, 4096)) {
             fwrite($target, $string, strlen($string));
         }
 

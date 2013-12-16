@@ -60,13 +60,10 @@ class Import extends Base
         $this->connect();
         $this->tmpFile();
 
-        if ($this->compress)
-        {
+        if ($this->compress) {
             $gzip = new Compress();
             $gzip->unpack($this->config->file, $this->temp);
-        }
-        else
-        {
+        } else {
             copy($this->config->file, $this->temp);
         }
 
@@ -92,26 +89,22 @@ class Import extends Base
     {
         $query = '';
 
-        while (!feof($this->file))
-        {
+        while (!feof($this->file)) {
             $line = fgets($this->file, 4096);
             $trim = trim($line);
 
-            if ($trim === '' || strpos($trim, '--') === 0 || strpos($trim, '/*') === 0)
-            {
+            if ($trim === '' || strpos($trim, '--') === 0 || strpos($trim, '/*') === 0) {
                 continue;
             }
 
-            if (strpos($trim, 'DELIMITER ') === 0)
-            {
+            if (strpos($trim, 'DELIMITER ') === 0) {
                 $this->delimiter = substr($trim, 10);
                 continue;
             }
 
             $query .= $line;
 
-            if (substr($trim, strlen($this->delimiter) * -1) === $this->delimiter)
-            {
+            if (substr($trim, strlen($this->delimiter) * -1) === $this->delimiter) {
                 $this->pdo->exec(substr(trim($query), 0, strlen($this->delimiter) * -1));
                 $query = '';
             }

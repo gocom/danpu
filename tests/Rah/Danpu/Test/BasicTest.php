@@ -1,6 +1,7 @@
 <?php
 
 namespace Rah\Danpu\Test;
+
 use Rah\Danpu\Dump;
 use Rah\Danpu\Export;
 use Rah\Danpu\Import;
@@ -29,12 +30,10 @@ class BasicTest extends \PHPUnit_Framework_TestCase
 
         $files = array($source, $target);
 
-        foreach ($files as &$file)
-        {
+        foreach ($files as &$file) {
             $data = file_get_contents($file);
 
-            if (pathinfo($file, PATHINFO_EXTENSION) === 'gz')
-            {
+            if (pathinfo($file, PATHINFO_EXTENSION) === 'gz') {
                 $data = gzinflate(substr($data, 10, -8));
             }
 
@@ -48,10 +47,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     {
         $path = dirname(dirname(dirname(__DIR__))) . '/fixtures/*[.sql|.gz]';
 
-        if ($files = glob($path, GLOB_NOSORT))
-        {
-            foreach ($files as &$file)
-            {
+        if ($files = glob($path, GLOB_NOSORT)) {
+            foreach ($files as &$file) {
                 $file = array($file, \test_tmp_dir . '/rah_danpu_' . md5(uniqid(rand(), true)) . '_' . basename($file));
             }
 

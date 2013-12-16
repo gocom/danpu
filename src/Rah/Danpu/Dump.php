@@ -61,8 +61,7 @@ class Dump
 
     public function __construct(Config $config = null)
     {
-        if ($this->config === null)
-        {
+        if ($this->config === null) {
             $this->config = new Config;
         }
 
@@ -91,8 +90,7 @@ class Dump
 
     public function __get($name)
     {
-        if (property_exists($this->config, $name) === false)
-        {
+        if (property_exists($this->config, $name) === false) {
             throw new Exception('Unknown property: '.$name);
         }
 
@@ -118,8 +116,7 @@ class Dump
 
     public function __call($name, array $args = null)
     {
-        if (property_exists($this->config, $name) === false)
-        {
+        if (property_exists($this->config, $name) === false) {
             throw new Exception('Unknown property: '.$name);
         }
 
