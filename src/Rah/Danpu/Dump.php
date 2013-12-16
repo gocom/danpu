@@ -52,7 +52,7 @@ namespace Rah\Danpu;
  * @method Dump file(string $filename)
  * @method Dump data(bool $includeRows)
  * @method Dump triggers(bool $includeTriggers)
- * @method Dump prefix(string filterByPrefix)
+ * @method Dump prefix(string filterByTableViewPrefix)
  * @method Dump disableForeignKeyChecks(bool $disabled)
  * @method Dump disableUniqueKeyChecks(bool $disabled)
  * @method Dump disableAutoCommit(bool $disabled)
