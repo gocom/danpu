@@ -3,7 +3,9 @@
 /**
  * Danpu - Database backup library
  *
- * @link https://github.com/gocom/danpu
+ * @author  Jukka Svahn
+ * @license MIT
+ * @link    https://github.com/gocom/danpu
  */
 
 /*
