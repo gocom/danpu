@@ -8,10 +8,11 @@ Version 2.6.0 - upcoming
 * Added: Support for filtering tables by prefix.
 * Added: Option to get configuration values from the Rah\Danpu\Dump class.
 * Added: Generated dump file now ends to linefeed.
-* Added: Option to disable foreign and unique key checks.
+* Added: Option to disable auto-commit, foreign and unique key checks. These can be used to generated SQL dumps that import faster to InnoDB tables.
 * Changed: Writes the DSN to the dump header instead of the old database property and host.
 * Changed: Dump setter and Config values inheritance. Workers now require instance of Dump, but Dump can be fed a different Config instance. This makes sure the methods implemented in the setter, Dump, are available in the consumer class. Extending Config class still works as previously, just pass your Config through Dump to the consumer.
 * Changed: Improved PHPdoc blocks.
+* Changed: Adopted full [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) and [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) standards compliance.
 
 Version 2.5.0 - 2013/05/22
 ----
