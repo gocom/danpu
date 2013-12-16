@@ -41,6 +41,36 @@ namespace Rah\Danpu;
  *     ->dsn('mysql:dbname=database;host=localhost')
  *     ->file('/path/to/dump.sql');
  * </code>
+ *
+ * @method Dump dsn(string $dsn)
+ * @method Dump user(string $username)
+ * @method Dump pass(string $password)
+ * @method Dump attributes(array $attributes)
+ * @method Dump encoding(string $encoding)
+ * @method Dump ignore(array $ignoredTablesViews)
+ * @method Dump tmp(string $directory)
+ * @method Dump file(string $filename)
+ * @method Dump data(bool $includeRows)
+ * @method Dump triggers(bool $includeTriggers)
+ * @method Dump prefix(string filterByPrefix)
+ * @method Dump disableForeignKeyChecks(bool $disabled)
+ * @method Dump disableUniqueKeyChecks(bool $disabled)
+ * @method Dump disableAutoCommit(bool $disabled)
+ * @property-read string $dsn
+ * @property-read string $user
+ * @property-read string $pass
+ * @property-read array $attributes
+ * @property-read string $encoding
+ * @property-read array $ignore
+ * @property-read string $tmp
+ * @property-read string $file
+ * @property-read bool $data
+ * @property-read bool $triggers
+ * @property-read string $prefix
+ * @property-read bool $disableForeignKeyChecks
+ * @property-read bool $disableUniqueKeyChecks
+ * @property-read bool $disableAutoCommit
+ * @see Config
  */
 
 class Dump
