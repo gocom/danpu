@@ -77,7 +77,7 @@ use Rah\Danpu\Import;
 
 $dump = new Dump;
 $dump
-    ->file('/path/to/target/dump/file.sql')
+    ->file('/path/to/imported/file.sql')
     ->dsn('mysql:dbname=database;host=localhost')
     ->user('username')
     ->pass('password')
