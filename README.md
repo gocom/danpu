@@ -72,10 +72,23 @@ Danpu can also import its own backups using the Import class. While the importer
 To import a backup, create a new instance of the Import class. It uncompresses any .gz files before importing.
 
 ```php
-new Rah\Danpu\Import($dump);
+use Rah\Danpu\Dump;
+use Rah\Danpu\Import;
+
+$dump = new Dump;
+$dump
+    ->file('/path/to/target/dump/file.sql')
+    ->dsn('mysql:dbname=database;host=localhost')
+    ->user('username')
+    ->pass('password')
+    ->tmp('/tmp');
+
+new Import($dump);
 ```
 
-Where the ```$dump``` would be an instance of Rah\Danpu\Dump as in the *Take backup* example.
+### Options
+
+In addition to the mandatory connection and file location, Danpu accepts various optional configuration options. These include filtering tables and views by prefix, ignoring tables and creating dumps without row data. See the [Config.php](https://github.com/gocom/danpu/blob/master/src/Rah/Danpu/Config.php) for full list of options. The source file contains detailed documentation blocks, outlining each option.
 
 Troubleshooting
 ---------
