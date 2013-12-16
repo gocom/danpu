@@ -1,9 +1,12 @@
 <?php
 
-/*
+/**
  * Danpu - Database backup library
- * https://github.com/gocom/danpu
  *
+ * @link https://github.com/gocom/danpu
+ */
+
+/*
  * Copyright (C) 2013 Jukka Svahn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
