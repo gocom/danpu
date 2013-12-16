@@ -88,7 +88,7 @@ new Import($dump);
 
 ### Options
 
-In addition to the mandatory connection and file location, Danpu accepts various optional configuration options. These include filtering tables and views by prefix, ignoring tables and creating dumps without row data. See the [Config.php](https://github.com/gocom/danpu/blob/master/src/Rah/Danpu/Config.php) for full list of options. The source file contains detailed documentation blocks, outlining each option.
+In addition to the mandatory connection and file location, Danpu accepts various optional configuration options. These include filtering tables and views by prefix, ignoring tables and creating dumps without row data. See the [src/Rah/Danpu/Config.php](https://github.com/gocom/danpu/blob/master/src/Rah/Danpu/Config.php) for full list of options. The source file contains detailed documentation blocks, outlining each option.
 
 Troubleshooting
 ---------
