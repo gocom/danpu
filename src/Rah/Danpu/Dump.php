@@ -91,8 +91,10 @@ class Dump
 
     public function __construct(Config $config = null)
     {
-        if ($this->config === null) {
+        if ($config === null) {
             $this->config = new Config;
+        } else {
+            $this->config = $config;
         }
 
         $this->config->attributes = array(
