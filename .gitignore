@@ -1,4 +1,6 @@
 .DS_Store
+/build
 /vendor
+/.coveralls.yml
 /composer.lock
 /phpunit.xml
