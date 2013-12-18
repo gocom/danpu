@@ -73,6 +73,18 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $dump->invalidProperty;
     }
 
+    /**
+     * @expectedException PHPUnit_Framework_Error_Warning
+     * @expectedException \Rah\Danpu\Exception
+     */
+
+    public function testInvalidSourceFile()
+    {
+        $dump = new Dump(new Config);
+        $dump->file('invalidFile.sql');
+        new Import($dump);
+    }
+
     public function provider()
     {
         $path = dirname(dirname(dirname(__DIR__))) . '/fixtures/*[.sql|.gz]';
