@@ -108,7 +108,11 @@ class BasicTest extends \PHPUnit_Framework_TestCase
 
         if ($files = glob($path, GLOB_NOSORT)) {
             foreach ($files as &$file) {
-                $file = array(basename(dirname($file)), $file, \test_tmp_dir . '/rah_danpu_' . md5(uniqid(rand(), true)) . '_' . basename($file));
+                $file = array(
+                    basename(dirname($file)),
+                    $file,
+                    \test_tmp_dir . '/rah_danpu_' . md5(uniqid(rand(), true)) . '_' . basename($file)
+                );
             }
 
             return $files;
