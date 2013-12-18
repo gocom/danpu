@@ -17,4 +17,4 @@ script:
   - ./vendor/bin/phpunit --configuration tests/travis/phpunit.$DB.xml
 
 after_script:
-  - ./vendor/bin/coveralls
+  - ./vendor/bin/coveralls -v
