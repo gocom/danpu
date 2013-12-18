@@ -1,6 +1,10 @@
 Changelog
 =========
 
+Version 2.6.1 - upcoming
+
+* Fixed: Rah\Danpu\Dump::__construct() $config argument.
+
 Version 2.6.0 - 2013/12/16
 ----
 
