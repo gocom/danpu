@@ -140,13 +140,13 @@ class Dump
      * The method throws an exception if the property does not
      * exists.
      *
-     * @param  string     $name Method
-     * @param  array      $args Arguments
-     * @return Dump|mixed The instance, or the current configuration value
+     * @param  string $name Method
+     * @param  array  $args Arguments
+     * @return Dump
      * @throws Exception
      */
 
-    public function __call($name, array $args = null)
+    public function __call($name, array $args)
     {
         if (property_exists($this->config, $name) === false) {
             throw new Exception('Unknown property: '.$name);
