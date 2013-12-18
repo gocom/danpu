@@ -13,13 +13,6 @@
         </testsuite>
     </testsuites>
 
-    <filter>
-        <blacklist>
-            <file>../../src/Rah/Danpu/BaseInterface.php</file>
-            <file>../../src/Rah/Danpu/Config.php</file>
-        </blacklist>
-    </filter>
-
     <logging>
         <log type="coverage-clover" target="../../build/logs/clover.xml"/>
     </logging>
