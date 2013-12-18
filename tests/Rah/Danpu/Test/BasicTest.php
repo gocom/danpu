@@ -6,14 +6,6 @@ use Rah\Danpu\Dump;
 use Rah\Danpu\Export;
 use Rah\Danpu\Import;
 
-class Config extends \Rah\Danpu\Config
-{
-    public $dsn = \test_db_dsn;
-    public $user = \test_db_user;
-    public $pass = \test_db_pass;
-    public $tmp = \test_tmp_dir;
-}
-
 class BasicTest extends \PHPUnit_Framework_TestCase
 {
     private $dump;
@@ -91,8 +83,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        if ($this->target)
-        {
+        if ($this->target) {
             unlink($this->target);
             $this->target = null;
         }
