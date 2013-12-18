@@ -15,9 +15,16 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      * @dataProvider provider
      */
 
-    public function testDump($source, $target)
+    public function testDump($method, $source, $target)
     {
         $this->target = $target;
+
+        if ($method === 'disablekeyschecks') {
+            $this->dump
+                ->disableAutoCommit(true)
+                ->disableUniqueKeyChecks(true)
+                ->disableForeignKeyChecks(true);
+        }
 
         $this->dump->file($source);
         $this->assertEquals($source, (string) new Import($this->dump));
@@ -47,10 +54,10 @@ class BasicTest extends \PHPUnit_Framework_TestCase
      * @dataProvider provider
      */
 
-    public function testExtending($source, $target)
+    public function testExtending($method, $source, $target)
     {
         $this->dump = new Dump(new Config);
-        $this->testDump($source, $target);
+        $this->testDump($method, $source, $target);
     }
 
     /**
@@ -97,11 +104,11 @@ class BasicTest extends \PHPUnit_Framework_TestCase
 
     public function provider()
     {
-        $path = dirname(dirname(dirname(__DIR__))) . '/fixtures/*[.sql|.gz]';
+        $path = dirname(dirname(dirname(__DIR__))) . '/fixtures/*/*[.sql|.gz]';
 
         if ($files = glob($path, GLOB_NOSORT)) {
             foreach ($files as &$file) {
-                $file = array($file, \test_tmp_dir . '/rah_danpu_' . md5(uniqid(rand(), true)) . '_' . basename($file));
+                $file = array(basename(dirname($file)), $file, \test_tmp_dir . '/rah_danpu_' . md5(uniqid(rand(), true)) . '_' . basename($file));
             }
 
             return $files;
