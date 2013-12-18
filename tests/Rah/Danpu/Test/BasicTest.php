@@ -59,8 +59,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidConfigPropertySet()
     {
-        $this->dump = new Dump(new Config);
-        $this->dump->invalidProperty('value');
+        $dump = new Dump(new Config);
+        $dump->invalidProperty('value');
     }
 
     /**
@@ -69,8 +69,8 @@ class BasicTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidConfigPropertyGet()
     {
-        $this->dump = new Dump(new Config);
-        $this->dump->invalidProperty;
+        $dump = new Dump(new Config);
+        $dump->invalidProperty;
     }
 
     public function provider()
