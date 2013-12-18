@@ -20,10 +20,10 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->target = $target;
 
         $this->dump->file($source);
-        new Import($this->dump);
+        $this->assertEquals($source, (string) new Import($this->dump));
 
         $this->dump->file($target);
-        new Export($this->dump);
+        $this->assertEquals($target, (string) new Export($this->dump));
 
         $this->assertFileExists($source);
         $this->assertFileExists($target);
