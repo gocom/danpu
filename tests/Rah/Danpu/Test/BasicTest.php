@@ -53,6 +53,26 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->testDump($source, $target);
     }
 
+    /**
+     * @expectedException \Rah\Danpu\Exception
+     */
+
+    public function testInvalidConfigPropertySet()
+    {
+        $this->dump = new Dump(new Config);
+        $this->dump->invalidProperty('value');
+    }
+
+    /**
+     * @expectedException \Rah\Danpu\Exception
+     */
+
+    public function testInvalidConfigPropertyGet()
+    {
+        $this->dump = new Dump(new Config);
+        $this->dump->invalidProperty;
+    }
+
     public function provider()
     {
         $path = dirname(dirname(dirname(__DIR__))) . '/fixtures/*[.sql|.gz]';
