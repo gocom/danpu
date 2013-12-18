@@ -102,6 +102,27 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         new Export($dump);
     }
 
+    public function testIgnoring()
+    {
+        $this->target = \test_tmp_dir . '/rah_danpu_' . md5(uniqid(rand(), true));
+        $expect = __DIR__ . '/../../../fixtures/ignore/triggers_views.sql';
+
+        $this->dump->file(__DIR__ . '/../../../fixtures/default/triggers_views.sql');
+        new Import($this->dump);
+
+        $this->dump->file($this->target);
+        $this->dump->prefix('test_')->ignore(array('test_table_2'));
+        new Export($this->dump);
+
+        $this->assertFileExists($this->target);
+        $this->assertFileExists($expect);
+
+        $this->assertEquals(
+            join("\n", array_slice(explode("\n", file_get_contents($expect)), 1, -2)),
+            join("\n", array_slice(explode("\n", file_get_contents($this->target)), 1, -2))
+        );
+    }
+
     public function provider()
     {
         $path = dirname(dirname(dirname(__DIR__))) . '/fixtures/*/*[.sql|.gz]';
