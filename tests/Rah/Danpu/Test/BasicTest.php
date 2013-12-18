@@ -74,15 +74,25 @@ class BasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Error_Warning
      * @expectedException \Rah\Danpu\Exception
      */
 
-    public function testInvalidSourceFile()
+    public function testInvalidImportSourceFile()
     {
         $dump = new Dump(new Config);
-        $dump->file('invalidFile.sql');
+        $dump->file('invalid/invalidFile.sql');
         new Import($dump);
+    }
+
+    /**
+     * @expectedException \Rah\Danpu\Exception
+     */
+
+    public function testInvalidExportTargetFile()
+    {
+        $dump = new Dump(new Config);
+        $dump->file('invalid/invalidFile.sql');
+        new Export($dump);
     }
 
     public function provider()
