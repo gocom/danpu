@@ -2,6 +2,7 @@ Changelog
 =========
 
 Version 2.6.1 - upcoming
+----
 
 * Fixed: Rah\Danpu\Dump::__construct() $config argument.
 * Added: Test for test code coverage.
