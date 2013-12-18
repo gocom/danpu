@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Version 2.6.1 - upcoming
+Version 2.6.1 - 2013/12/18
 ----
 
 * Fixed: Rah\Danpu\Dump::__construct() $config argument. Now properly uses passed Rah\Danpu\Config instances.
