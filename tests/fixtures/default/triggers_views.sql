@@ -32,7 +32,7 @@ CREATE TABLE `person` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `organization` int(12) NOT NULL DEFAULT '0',
-  `login` varchar(64) NOT NULL,
+  `login` varchar(64) DEFAULT NULL,
   `pass` varchar(126) NOT NULL,
   `email` varchar(254) NOT NULL,
   `pub_session_id` varchar(126) NOT NULL,
@@ -50,6 +50,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 INSERT INTO `person` VALUES (1,'John Doe',1,'john','','john.doe@example.com','','','','0000-00-00 00:00:00','',2);
+INSERT INTO `person` VALUES (2,'Jane Doe',1,NULL,'','jane.doe@example.com','','','','0000-00-00 00:00:00','',2);
 UNLOCK TABLES;
 
 -- Table structure for table `privs`
