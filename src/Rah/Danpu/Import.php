@@ -60,6 +60,10 @@ class Import extends Base
         $this->connect();
         $this->tmpFile();
 
+        if (!is_file($this->config->file) || !is_readable($this->config->file)) {
+            throw new Exception('Unable to access the source file.');
+        }
+
         if ($this->compress) {
             $gzip = new Compress();
             $gzip->unpack($this->config->file, $this->temp);

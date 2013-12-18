@@ -190,7 +190,7 @@ abstract class Base implements BaseInterface
 
     protected function tmpFile()
     {
-        if (($this->temp = tempnam($this->config->tmp, 'Rah_Danpu_')) === false || unlink($this->temp) === false) {
+        if (($this->temp = tempnam($this->config->tmp, 'Rah_Danpu_')) === false) {
             throw new Exception('Unable to create a temporary file, check the configured tmp directory.');
         }
     }
@@ -218,7 +218,7 @@ abstract class Base implements BaseInterface
 
     protected function open($filename, $flags)
     {
-        if (($this->file = fopen($filename, $flags)) === false) {
+        if (is_file($filename) === false || ($this->file = fopen($filename, $flags)) === false) {
             throw new Exception('Unable to open the target file.');
         }
     }
