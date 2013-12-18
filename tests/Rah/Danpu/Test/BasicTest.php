@@ -108,4 +108,11 @@ class BasicTest extends \PHPUnit_Framework_TestCase
             $this->target = null;
         }
     }
+
+    public static function tearDownAfterClass()
+    {
+        $dump = new Dump(new Config);
+        $dump->file(dirname(dirname(dirname(__DIR__))) . '/flush.sql');
+        new Import($dump);
+    }
 }
