@@ -86,6 +86,21 @@ class Dump
     /**
      * Constructor.
      *
+     * The constructor can be optionally be given a
+     * pre-configured Config class instance. If left
+     * to NULL, it defaults to Config.
+     *
+     * The config argument can for instance be your Config
+     * class implementation that you've created by extending.
+     *
+     * <code>
+     * class MyAppConfig extends \Rah\Danpu\Config
+     * {
+     *     public $dsn = 'mysql:dbname=database;host=localhost';
+     * }
+     * new Dump(new MyAppConfig);
+     * </code>
+     *
      * @param Config|null $config The config, defaults to Config
      */
 
@@ -138,7 +153,7 @@ class Dump
      * </code>
      *
      * The method throws an exception if the property does not
-     * exists.
+     * exist.
      *
      * @param  string $name Method
      * @param  array  $args Arguments

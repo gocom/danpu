@@ -51,6 +51,7 @@ interface BaseInterface
      * Initializes the action.
      *
      * @throws Exception
+     * @internal
      */
 
     public function init();
@@ -69,7 +70,9 @@ interface BaseInterface
      * Populates $this->pdo with new
      * PDO connection instance.
      *
-     * @see \PDO
+     * @see    \PDO
+     * @throws Exception
+     * @internal
      */
 
     public function connect();
@@ -77,7 +80,7 @@ interface BaseInterface
     /**
      * Returns a path to the target file.
      *
-     * @return string
+     * @return string The path
      */
 
     public function __toString();

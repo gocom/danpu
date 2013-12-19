@@ -39,6 +39,8 @@ namespace Rah\Danpu;
  * $gz = new Compress();
  * $gz->pack('/source/dump.sql', '/target/dump.sql.gz');
  * </code>
+ *
+ * @internal
  */
 
 class Compress
