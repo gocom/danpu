@@ -1,6 +1,12 @@
 Changelog
 =========
 
+Version 2.6.2 - upcoming
+
+* Fixed: Rah\Danpu\Dump::__call() now requires properly requires $args, rather than having the second argument optional.
+* Updated: Documentation.
+* Started testing the project on [HHVM](http://hhvm.com/); passes all tests.
+
 Version 2.6.1 - 2013/12/18
 ----
 
