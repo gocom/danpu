@@ -102,6 +102,17 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         new Export($dump);
     }
 
+    /**
+     * @expectedException \Rah\Danpu\Exception
+     */
+
+    public function testInvalidDsn()
+    {
+        $dump = new Dump(new Config);
+        $dump->dsn('invalid');
+        new Export($dump);
+    }
+
     public function testIgnoring()
     {
         $this->target = \test_tmp_dir . '/rah_danpu_' . md5(uniqid(rand(), true));
