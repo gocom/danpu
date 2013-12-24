@@ -121,8 +121,12 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $this->dump->file(__DIR__ . '/../../../fixtures/default/triggers_views.sql');
         new Import($this->dump);
 
-        $this->dump->file($this->target);
-        $this->dump->prefix('test_')->ignore(array('test_table_2'));
+        $this->file($this->target)->dump->prefix('test_')->ignore(array(
+            'user_groups',
+            'test_table_2',
+            'organization_view',
+        ));
+
         new Export($this->dump);
 
         $this->assertFileExists($this->target);
