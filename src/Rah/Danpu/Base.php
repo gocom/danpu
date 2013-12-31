@@ -123,6 +123,7 @@ abstract class Base implements BaseInterface
     public function connect()
     {
         if ($this->config->dsn === null && $this->config->db !== null) {
+            trigger_error('Config::$db is deprecated, see Config::$dsn.', E_USER_DEPRECATED);
             $this->config->dsn("mysql:dbname={$this->config->db};host={$this->config->host}");
         }
 
