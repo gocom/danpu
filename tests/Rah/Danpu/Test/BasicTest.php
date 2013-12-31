@@ -157,6 +157,17 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         throw new \Exception('Unable to read fixtures.');
     }
 
+    /**
+     * @expectedException \PHPUnit_Framework_Error
+     */
+
+    public function testDeprecatedDbConfigValue()
+    {
+        $dump = new Dump;
+        $dump->db('invalidTestDatabase');
+        new Export($dump);
+    }
+
     public function setUp()
     {
         $this->dump = new Dump;
