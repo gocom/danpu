@@ -2,6 +2,7 @@ Changelog
 =========
 
 Version 2.6.2 - 2013/12/22
+----
 
 * Fixed: Rah\Danpu\Dump::__call() now properly requires $args, rather than having the second argument optional.
 * Changed: Check that the source file exists before trying to import it.
