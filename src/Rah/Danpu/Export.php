@@ -109,13 +109,11 @@ class Export extends Base
         }
 
         if ($this->config->createDatabase === true) {
-            $database = $this->pdo->query('SELECT DATABASE() FROM DUAL');
-            $database = end($database);
             $this->write(
-                'CREATE DATABASE IF NOT EXISTS `'.$database.'` '.
+                'CREATE DATABASE IF NOT EXISTS `'.$this->database.'` '.
                 'DEFAULT CHARACTER SET = '.$this->escape($this->config->charset)
             );
-            $this->write('USE `'.$database.'`');
+            $this->write('USE `'.$this->database.'`');
         }
 
         $this->dumpTables();
@@ -265,6 +263,46 @@ class Export extends Base
 
                 $delimiter = $this->getDelimiter('//', $query);
                 $this->write("DELIMITER {$delimiter}\n{$query}\n{$delimiter}\nDELIMITER ;", false);
+            }
+        }
+    }
+
+    /**
+     * Dumps events.
+     *
+     * @since 2.7.0
+     */
+
+    protected function dumpEvents()
+    {
+        if ($this->config->events) {
+            $events = $this->pdo->prepare('SHOW EVENTS');
+            $events->execute();
+
+            foreach ($this->events->fetchAll(\PDO::FETCH_ASSOC) as $a) {
+                $event = $a['Name'];
+
+                if (in_array($event, (array) $this->config->ignore, true)) {
+                    continue;
+                }
+
+                if ((string) $this->config->prefix !== '' && strpos($event, $this->config->prefix) !== 0) {
+                    continue;
+                }
+
+                if (($structure = $this->pdo->query('SHOW CREATE EVENT `'.$event.'`')) === false) {
+                    throw new Exception('Unable to get the structure for event "'.$event.'"');
+                }
+
+                if ($structure = $structure->fetch(\PDO::FETCH_ASSOC)) {
+                    if (isset($structure['Create Event'])) {
+                        $query = $structure['Create Event'];
+                        $delimiter = $this->getDelimiter('//', $query);
+                        $this->write("\n-- Structure for event `{$event}`\n", false);
+                        $this->write('DROP EVENT IF EXISTS `'.$event.'`');
+                        $this->write("DELIMITER {$delimiter}\n{$query}\n{$delimiter}\nDELIMITER ;", false);
+                    }
+                }
             }
         }
     }

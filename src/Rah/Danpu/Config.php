@@ -294,6 +294,23 @@ class Config
     public $triggers = true;
 
     /**
+     * Dump events.
+     *
+     * Set FALSE to skip events. The dump
+     * file will not contain any events.
+     *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->trigger(false);
+     * </code>
+     *
+     * @var   bool
+     * @since 2.7.0
+     */
+
+    public $events = true;
+
+    /**
      * Disables dumping the database.
      * 
      * Set to TRUE to add create database statement

@@ -95,6 +95,15 @@ abstract class Base implements BaseInterface
     protected $delimiter = ';';
 
     /**
+     * The current database name.
+     *
+     * @var   string
+     * @since 2.7.0
+     */
+
+    protected $database;
+
+    /**
      * {@inheritdoc}
      */
 
@@ -139,6 +148,9 @@ abstract class Base implements BaseInterface
             foreach ($this->config->attributes as $name => $value) {
                 $this->pdo->setAttribute($name, $value);
             }
+
+            $database = $this->pdo->query('SELECT DATABASE() FROM DUAL');
+            $this->database = end($database);
         } catch (\PDOException $e) {
             throw new Exception('Connecting to database failed with message: '.$e->getMessage());
         }
