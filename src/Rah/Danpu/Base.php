@@ -308,10 +308,8 @@ abstract class Base implements BaseInterface
 
     protected function getDelimiter($delimiter = ';', $query = null)
     {
-        while (1)
-        {
-            if ($query === null || strpos($query, $delimiter) === false)
-            {
+        while (1) {
+            if ($query === null || strpos($query, $delimiter) === false) {
                 return $delimiter;
             }
 
