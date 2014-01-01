@@ -294,6 +294,18 @@ class Config
     public $triggers = true;
 
     /**
+     * Disables dumping the database.
+     * 
+     * Set to TRUE to add create database statement
+     * to the created SQL dump file.
+     *
+     * @var   bool
+     * @since 2.7.0
+     */
+
+    public $createDatabase = false;
+
+    /**
      * Disables foreign key checks.
      *
      * Set TRUE to disable checks. The generated dump

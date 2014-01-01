@@ -108,6 +108,16 @@ class Export extends Base
             $this->write('SET UNIQUE_CHECKS = 0');
         }
 
+        if ($this->config->createDatabase === true) {
+            $database = $this->pdo->query('SELECT DATABASE() FROM DUAL');
+            $database = end($database);
+            $this->write(
+                'CREATE DATABASE IF NOT EXISTS `'.$database.'` '.
+                'DEFAULT CHARACTER SET = '.$this->escape($this->config->charset)
+            );
+            $this->write('USE `'.$database.'`');
+        }
+
         $this->dumpTables();
         $this->dumpViews();
         $this->dumpTriggers();
