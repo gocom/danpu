@@ -119,6 +119,7 @@ class Export extends Base
         $this->dumpTables();
         $this->dumpViews();
         $this->dumpTriggers();
+        $this->dumpEvents();
 
         if ($this->config->disableForeignKeyChecks === true) {
             $this->write('SET FOREIGN_KEY_CHECKS = 1');
@@ -279,7 +280,7 @@ class Export extends Base
             $events = $this->pdo->prepare('SHOW EVENTS');
             $events->execute();
 
-            foreach ($this->events->fetchAll(\PDO::FETCH_ASSOC) as $a) {
+            foreach ($events->fetchAll(\PDO::FETCH_ASSOC) as $a) {
                 $event = $a['Name'];
 
                 if (in_array($event, (array) $this->config->ignore, true)) {
