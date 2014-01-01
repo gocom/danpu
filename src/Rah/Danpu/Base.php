@@ -149,7 +149,11 @@ abstract class Base implements BaseInterface
                 $this->pdo->setAttribute($name, $value);
             }
 
-            $database = $this->pdo->query('SELECT DATABASE() FROM DUAL');
+            if (($sth = $this->pdo->query('SELECT DATABASE() FROM DUAL')) === false) {
+                throw new Exception('Unable to get database name.');
+            }
+
+            $database = $sth->fetch();
             $this->database = end($database);
         } catch (\PDOException $e) {
             throw new Exception('Connecting to database failed with message: '.$e->getMessage());
