@@ -258,12 +258,13 @@ class Export extends Base
 
                 $this->write("\n-- Trigger structure `{$a['Trigger']}`\n", false);
                 $this->write('DROP TRIGGER IF EXISTS `'.$a['Trigger'].'`');
-                $this->write(
-                    "DELIMITER //\nCREATE TRIGGER `{$a['Trigger']}`".
+
+                $query = "CREATE TRIGGER `{$a['Trigger']}`".
                     " {$a['Timing']} {$a['Event']} ON `{$a['Table']}`".
-                    " FOR EACH ROW\n{$a['Statement']}\n//\nDELIMITER ;",
-                    false
-                );
+                    " FOR EACH ROW\n{$a['Statement']}";
+
+                $delimiter = $this->getDelimiter('//', $query);
+                $this->write("DELIMITER {$delimiter}\n{$query}\n{$delimiter}\nDELIMITER ;", false);
             }
         }
     }

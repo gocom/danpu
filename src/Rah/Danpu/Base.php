@@ -283,6 +283,31 @@ abstract class Base implements BaseInterface
     }
 
     /**
+     * Gets a SQL delimiter.
+     *
+     * Gives out a character sequence that isn't
+     * in the given query.
+     *
+     * @param  string      $delimiter Delimiter character
+     * @param  string|null $query     The query to check
+     * @return string      Unique delimiter character sequence
+     * @since  2.7.0
+     */
+
+    protected function getDelimiter($delimiter = ';', $query = null)
+    {
+        while (1)
+        {
+            if ($query === null || strpos($query, $delimiter) === false)
+            {
+                return $delimiter;
+            }
+
+            $delimiter .= $delimiter;
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
 
