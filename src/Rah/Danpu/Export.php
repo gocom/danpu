@@ -242,7 +242,7 @@ class Export extends Base
 
     protected function dumpTriggers()
     {
-        if ($this->config->triggers === true) {
+        if ($this->config->triggers === true && version_compare($this->version, '5.0.10') >= 0) {
             $triggers = $this->pdo->prepare('SHOW TRIGGERS');
             $triggers->execute();
 
@@ -276,7 +276,7 @@ class Export extends Base
 
     protected function dumpEvents()
     {
-        if ($this->config->events === true) {
+        if ($this->config->events === true && version_compare($this->version, '5.1.12') >= 0) {
             $events = $this->pdo->prepare('SHOW EVENTS');
             $events->execute();
 

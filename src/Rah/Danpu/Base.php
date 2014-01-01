@@ -104,6 +104,15 @@ abstract class Base implements BaseInterface
     protected $database;
 
     /**
+     * Server version number.
+     *
+     * @var   string
+     * @since 2.7.0
+     */
+
+    protected $version;
+
+    /**
      * {@inheritdoc}
      */
 
@@ -155,6 +164,7 @@ abstract class Base implements BaseInterface
 
             $database = $sth->fetch();
             $this->database = end($database);
+            $this->version = (string) $this->pdo->getAttribute(\PDO::ATTR_SERVER_VERSION);
         } catch (\PDOException $e) {
             throw new Exception('Connecting to database failed with message: '.$e->getMessage());
         }
