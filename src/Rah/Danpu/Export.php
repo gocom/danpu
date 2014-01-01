@@ -174,7 +174,7 @@ class Export extends Base
                 $this->write(end($row));
             }
 
-            if ($this->config->data) {
+            if ($this->config->data === true) {
                 $this->write("\n-- Dumping data for table `{$table}`\n", false);
                 $this->write("LOCK TABLES `{$table}` WRITE");
 
@@ -242,7 +242,7 @@ class Export extends Base
 
     protected function dumpTriggers()
     {
-        if ($this->config->triggers) {
+        if ($this->config->triggers === true) {
             $triggers = $this->pdo->prepare('SHOW TRIGGERS');
             $triggers->execute();
 
@@ -276,7 +276,7 @@ class Export extends Base
 
     protected function dumpEvents()
     {
-        if ($this->config->events) {
+        if ($this->config->events === true) {
             $events = $this->pdo->prepare('SHOW EVENTS');
             $events->execute();
 
