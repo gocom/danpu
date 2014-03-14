@@ -1,6 +1,15 @@
 Changelog
 =========
 
+Version 2.7.0 - upcoming
+----
+
+* Added: Safe SQL delimiter generation. Checks that the contained query does not contain the delimiter rather than using hard-coded slash or semicolon.
+* Added: Invokes informative ```E_USER_DEPRECATED``` messages when using deprecated configuration options.
+* Added: Supports dumping events.
+* Added: Checks MySQL version before dumping triggers or events.
+* Changed: All configuration values are now strictly type strict.
+
 Version 2.6.2 - 2013/12/22
 ----
 
