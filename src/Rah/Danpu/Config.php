@@ -311,10 +311,15 @@ class Config
     public $events = true;
 
     /**
-     * Disables dumping the database.
-     * 
+     * Enables dumping the database create statement.
+     *
      * Set to TRUE to add create database statement
      * to the created SQL dump file.
+     *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->createDatabase(true);
+     * </code>
      *
      * @var   bool
      * @since 2.7.0
