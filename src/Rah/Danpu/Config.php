@@ -301,7 +301,7 @@ class Config
      *
      * <code>
      * $dump = new \Rah\Danpu\Dump();
-     * $dump->trigger(false);
+     * $dump->events(false);
      * </code>
      *
      * @var   bool
