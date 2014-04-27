@@ -111,7 +111,7 @@ class Export extends Base
         if ($this->config->createDatabase === true) {
             $this->write(
                 'CREATE DATABASE IF NOT EXISTS `'.$this->database.'` '.
-                'DEFAULT CHARACTER SET = '.$this->escape($this->config->charset)
+                'DEFAULT CHARACTER SET = '.$this->escape($this->config->encoding)
             );
             $this->write('USE `'.$this->database.'`');
         }
