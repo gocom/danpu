@@ -32,6 +32,16 @@ new Export($dump);
 
 new Import($dump);
 
+// Any caught failures are thrown as exceptions. You can use try
+// statements to see whether the action was success or not.
+
+try {
+    new Export($dump);
+    echo 'Success.';
+} catch (\Exception $e) {
+    echo 'Failure: ' . $e->getMessage();
+}
+
 // Alternatively you could create a personalized config instance
 // by extending Config and then passing it to Dump through
 // the constructor.

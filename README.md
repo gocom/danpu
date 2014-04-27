@@ -52,15 +52,19 @@ Backups can be created with the ```Export``` class. The class exports the databa
 use Rah\Danpu\Dump;
 use Rah\Danpu\Export;
 
-$dump = new Dump;
-$dump
-    ->file('/path/to/target/dump/file.sql')
-    ->dsn('mysql:dbname=database;host=localhost')
-    ->user('username')
-    ->pass('password')
-    ->tmp('/tmp');
+try {
+    $dump = new Dump;
+    $dump
+        ->file('/path/to/target/dump/file.sql')
+        ->dsn('mysql:dbname=database;host=localhost')
+        ->user('username')
+        ->pass('password')
+        ->tmp('/tmp');
 
-new Export($dump);
+    new Export($dump);
+} catch (\Exception $e) {
+    echo 'Export failed with message: ' . $e->getMessage();
+}
 ```
 
 The database is dumped in chunks, one row at the time without buffering huge amount of data to the memory. This makes the script very memory efficient, and can allow Danpu to handle databases of any size, given the system limitations of course. You physically won't be able backup rows that take more memory than can be allocated to PHP, nor write backups if there isn't enough space for the files.
@@ -75,15 +79,19 @@ To import a backup, create a new instance of the Import class. It uncompresses a
 use Rah\Danpu\Dump;
 use Rah\Danpu\Import;
 
-$dump = new Dump;
-$dump
-    ->file('/path/to/imported/file.sql')
-    ->dsn('mysql:dbname=database;host=localhost')
-    ->user('username')
-    ->pass('password')
-    ->tmp('/tmp');
+try {
+    $dump = new Dump;
+    $dump
+        ->file('/path/to/imported/file.sql')
+        ->dsn('mysql:dbname=database;host=localhost')
+        ->user('username')
+        ->pass('password')
+        ->tmp('/tmp');
 
-new Import($dump);
+    new Import($dump);
+} catch (\Exception $e) {
+    echo 'Import failed with message: ' . $e->getMessage();
+}
 ```
 
 ### Options
