@@ -368,10 +368,8 @@ class Config
     /**
      * Disables auto-commit mode.
      *
-     * Set TRUE to disable automatic commits. The generated dump
-     * file will contain statements that temporarily disable
-     * unique key checks. This will speed up large data
-     * imports to InnoDB tables as each commit is not
+     * Set TRUE to disable automatic commits. This will speed up
+     * large data imports to InnoDB tables as each commit is not
      * written to the disk right after.
      *
      * When the generated dump is imported, MySQL is instructed
