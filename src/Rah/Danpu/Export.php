@@ -140,7 +140,6 @@ class Export extends Base
     /**
      * Dumps tables.
      *
-     * @throws Exception
      * @since  2.5.0
      */
 
@@ -163,9 +162,7 @@ class Export extends Base
                 continue;
             }
 
-            if (($structure = $this->pdo->query('SHOW CREATE TABLE `'.$table.'`')) === false) {
-                throw new Exception('Unable to get the structure for "'.$table.'"');
-            }
+            $structure = $this->pdo->query('SHOW CREATE TABLE `'.$table.'`');
 
             $this->write("\n-- Table structure for table `{$table}`\n", false);
             $this->write('DROP TABLE IF EXISTS `'.$table.'`');
@@ -197,7 +194,6 @@ class Export extends Base
     /**
      * Dumps views.
      *
-     * @throws Exception
      * @since  2.5.0
      */
 
@@ -220,9 +216,7 @@ class Export extends Base
                 continue;
             }
 
-            if (($structure = $this->pdo->query('SHOW CREATE VIEW `'.$view.'`')) === false) {
-                throw new Exception('Unable to get the structure for view "'.$view.'"');
-            }
+            $structure = $this->pdo->query('SHOW CREATE VIEW `'.$view.'`');
 
             if ($structure = $structure->fetch(\PDO::FETCH_ASSOC)) {
                 if (isset($structure['Create View'])) {
@@ -291,9 +285,7 @@ class Export extends Base
                     continue;
                 }
 
-                if (($structure = $this->pdo->query('SHOW CREATE EVENT `'.$event.'`')) === false) {
-                    throw new Exception('Unable to get the structure for event "'.$event.'"');
-                }
+                $structure = $this->pdo->query('SHOW CREATE EVENT `'.$event.'`');
 
                 if ($structure = $structure->fetch(\PDO::FETCH_ASSOC)) {
                     if (isset($structure['Create Event'])) {
