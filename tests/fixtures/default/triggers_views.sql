@@ -155,6 +155,11 @@ UNLOCK TABLES;
 DROP VIEW IF EXISTS `organization_view`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `organization_view` AS select `organization`.`id` AS `id`,`organization`.`name` AS `name`,`organization`.`website` AS `website` from `organization`;
 
+-- Structure for view `person_view`
+
+DROP VIEW IF EXISTS `person_view`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `person_view` AS select `person`.`id` AS `id` from `person`;
+
 -- Trigger structure `user_group_delete`
 
 DROP TRIGGER IF EXISTS `user_group_delete`;
