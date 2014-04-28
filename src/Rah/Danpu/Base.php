@@ -158,10 +158,7 @@ abstract class Base implements BaseInterface
                 $this->pdo->setAttribute($name, $value);
             }
 
-            if (($sth = $this->pdo->query('SELECT DATABASE() FROM DUAL')) === false) {
-                throw new Exception('Unable to get database name.');
-            }
-
+            $sth = $this->pdo->query('SELECT DATABASE() FROM DUAL');
             $database = $sth->fetch();
             $this->database = end($database);
             $this->version = (string) $this->pdo->getAttribute(\PDO::ATTR_SERVER_VERSION);
