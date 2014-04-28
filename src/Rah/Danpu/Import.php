@@ -94,7 +94,7 @@ class Import extends Base
         $query = '';
 
         while (!feof($this->file)) {
-            $line = fgets($this->file, 4096);
+            $line = fgets($this->file);
             $trim = trim($line);
 
             if ($trim === '' || strpos($trim, '--') === 0 || strpos($trim, '/*') === 0) {
