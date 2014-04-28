@@ -9,7 +9,7 @@
  */
 
 /*
- * Copyright (C) 2013 Jukka Svahn
+ * Copyright (C) 2014 Jukka Svahn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
