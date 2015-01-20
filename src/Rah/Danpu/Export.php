@@ -71,21 +71,74 @@ class Export extends Base
     /**
      * Escapes a value for a use in a SQL statement.
      *
-     * @param  mixed $value
-     * @return string
+     * @param  mixed &$value
+     * @param  mixed $key
+     * @param  mixed[] $tableCols
+     * @param  boolean $return
      */
 
-    protected function escape($value)
+    protected function escape(&$value, $key = false, $tableCols = [], $return = false)
     {
         if ($value === null) {
-            return 'NULL';
+            $value = 'NULL';
+        }
+        else {
+            switch ($tableCols[$key]) {
+                case 'BIT':
+                case 'TINYINT':
+                case 'SMALLINT':
+                case 'MEDIUMINT':
+                case 'INT':
+                case 'INTEGER':
+                case 'BIGINT':
+                    $value = (int)$value;
+                    break;
+                case 'REAL':
+                case 'DOUBLE':
+                case 'FLOAT':
+                case 'DECIMAL':
+                case 'NUMERIC':
+                    $value = (float)$value;
+                    break;
+                case 'DATE':
+                case 'TIME':
+                case 'TIMESTAMP':
+                case 'DATETIME':
+                case 'YEAR':
+                    $value = $this->pdo->quote($value);
+                    break;
+                case 'BINARY':
+                case 'VARBINARY':
+                case 'TINYBLOB':
+                case 'BLOB':
+                case 'MEDIUMBLOB':
+                case 'LONGBLOB':
+                    $value = $this->pdo->quote($value);
+                    break;
+                case 'CHAR':
+                case 'VARCHAR':
+                case 'TINYTEXT':
+                case 'TEXT':
+                case 'MEDIUMTEXT':
+                case 'LONGTEXT':
+                case 'ENUM':
+                case 'SET':
+                    $value = $this->pdo->quote($value);
+                    break;
+                default:
+                    $value = $this->pdo->quote($value);
+                    break;
+            }
         }
 
-        if ((string) intval($value) === $value) {
-            return (int) $value;
+        /**
+         * If method don't recognize datatype, intouched value stay in $value
+         */
+        if($return)
+        {
+            return $value;
         }
-
-        return $this->pdo->quote($value);
+        return;
     }
 
     /**
@@ -111,7 +164,7 @@ class Export extends Base
         if ($this->config->createDatabase === true) {
             $this->write(
                 'CREATE DATABASE IF NOT EXISTS `'.$this->database.'` '.
-                'DEFAULT CHARACTER SET = '.$this->escape($this->config->encoding)
+                'DEFAULT CHARACTER SET = '.$this->escape($this->config->encoding, false, [], true)
             );
             $this->write('USE `'.$this->database.'`');
         }
@@ -149,6 +202,7 @@ class Export extends Base
 
         foreach ($this->tables->fetchAll(\PDO::FETCH_ASSOC) as $a) {
             $table = current($a);
+            $tableCols = [];
 
             if (isset($a['Table_type']) && $a['Table_type'] === 'VIEW') {
                 continue;
@@ -166,7 +220,22 @@ class Export extends Base
 
             $this->write("\n-- Table structure for table `{$table}`\n", false);
             $this->write('DROP TABLE IF EXISTS `'.$table.'`');
-            $this->write(end($structure));
+            $createStatement = end($structure);
+            $this->write($createStatement);
+
+            preg_match_all('/^((.*) ((?|BIT|TINYINT|SMALLINT|MEDIUMINT|INT|INTEGER|BIGINT|REAL|DOUBLE|FLOAT|DECIMAL|NUMERIC|DATE|TIME|TIMESTAMP|DATETIME|YEAR|CHAR|VARCHAR|BINARY|VARBINARY|TINYBLOB|BLOB|MEDIUMBLOB|LONGBLOB|TINYTEXT|TEXT|MEDIUMTEXT|LONGTEXT|ENUM|SET)).* (.*),)$/miU', $createStatement, $matches);
+
+            if(isset($matches[2]) && isset($matches[3]))
+            {
+                foreach($matches[2] as $key => $rowName)
+                {
+                    $rowName = trim($rowName, ' `');
+                    if(isset($matches[3][$key]))
+                    {
+                        $tableCols[$rowName] = strtoupper(trim($matches[3][$key]));
+                    }
+                }
+            }
 
             if ($this->config->data === true) {
                 $this->write("\n-- Dumping data for table `{$table}`\n", false);
@@ -176,11 +245,8 @@ class Export extends Base
                 $rows->execute();
 
                 while ($a = $rows->fetch(\PDO::FETCH_ASSOC)) {
-                    $this->write(
-                        "INSERT INTO `{$table}` VALUES (".
-                        implode(',', array_map(array($this, 'escape'), $a)).
-                        ")"
-                    );
+                    array_walk($a, [$this, 'escape'], $tableCols);
+                    $this->write("INSERT INTO `{$table}` VALUES (".implode(',', $a).")");
                 }
 
                 $this->write('UNLOCK TABLES');

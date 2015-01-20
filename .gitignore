@@ -4,3 +4,5 @@
 /.coveralls.yml
 /composer.lock
 /phpunit.xml
+/.idea
+/console
