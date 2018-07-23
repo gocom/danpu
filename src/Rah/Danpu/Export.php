@@ -162,11 +162,13 @@ class Export extends Base
                 continue;
             }
 
-            $structure = $this->pdo->query('SHOW CREATE TABLE `'.$table.'`')->fetch(\PDO::FETCH_ASSOC);
+            if ($this->config->structure === true) {
+                $structure = $this->pdo->query('SHOW CREATE TABLE `'.$table.'`')->fetch(\PDO::FETCH_ASSOC);
 
-            $this->write("\n-- Table structure for table `{$table}`\n", false);
-            $this->write('DROP TABLE IF EXISTS `'.$table.'`');
-            $this->write(end($structure));
+                $this->write("\n-- Table structure for table `{$table}`\n", false);
+                $this->write('DROP TABLE IF EXISTS `'.$table.'`');
+                $this->write(end($structure));
+            }
 
             if ($this->config->data === true) {
                 $this->write("\n-- Dumping data for table `{$table}`\n", false);
