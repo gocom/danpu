@@ -108,7 +108,7 @@ class Config
      *
      * @var   string
      * @since 2.2.0
-     * @link  http://www.php.net/manual/en/ref.pdo-mysql.connection.php
+     * @link  https://www.php.net/manual/en/ref.pdo-mysql.connection.php
      */
 
     public $dsn;
