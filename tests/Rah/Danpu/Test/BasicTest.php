@@ -38,10 +38,20 @@ class BasicTest extends \PHPUnit_Framework_TestCase
         $files = array($source, $target);
 
         foreach ($files as &$file) {
-            $data = file_get_contents($file);
-
             if (pathinfo($file, PATHINFO_EXTENSION) === 'gz') {
-                $data = gzinflate(substr($data, 10, -8));
+                $data = '';
+
+                if (($gzip = gzopen($file, 'rb')) === false) {
+                    throw new Exception('Unable to read compressed file.');
+                }
+
+                while ($string = gzread($gzip, 4096)) {
+                    $data .= $string;
+                }
+
+                gzclose($gzip);
+            } else {
+              $data = file_get_contents($file);
             }
 
             $file = join("\n", array_slice(explode("\n", $data), 1, -2));

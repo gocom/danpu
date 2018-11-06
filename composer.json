@@ -25,16 +25,20 @@
         "ext-pdo": "*"
     },
     "suggest": {
-        "ext-zlib": "*"  
+        "ext-zlib": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "3.7.*",
-        "squizlabs/php_codesniffer": "1.5.*",
+        "phpunit/phpunit": "5.7.*",
+        "squizlabs/php_codesniffer": "3.*",
         "satooshi/php-coveralls": "0.6.*"
     },
     "extra": {
         "branch-alias": {
             "dev-master": "2.x-dev"
         }
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit",
+        "cs": "./vendor/bin/phpcs --standard=PSR1,PSR2 src test"
     }
 }

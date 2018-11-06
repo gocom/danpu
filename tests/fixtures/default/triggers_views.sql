@@ -38,7 +38,7 @@ CREATE TABLE `person` (
   `pub_session_id` varchar(126) NOT NULL,
   `prv_session_id` varchar(126) NOT NULL,
   `access_token` text NOT NULL,
-  `last_access` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `last_access` datetime NOT NULL,
   `reset_token` varchar(126) NOT NULL,
   `user_group` int(12) NOT NULL,
   PRIMARY KEY (`id`),
@@ -49,8 +49,8 @@ CREATE TABLE `person` (
 -- Dumping data for table `person`
 
 LOCK TABLES `person` WRITE;
-INSERT INTO `person` VALUES (1,'John Doe',1,'john','','john.doe@example.com','','','','0000-00-00 00:00:00','',2);
-INSERT INTO `person` VALUES (2,'Jane Doe',1,NULL,'','jane.doe@example.com','','','','0000-00-00 00:00:00','',2);
+INSERT INTO `person` VALUES (1,'John Doe',1,'john','','john.doe@example.com','','','','2018-11-15 03:43:12','',2);
+INSERT INTO `person` VALUES (2,'Jane Doe',1,NULL,'','jane.doe@example.com','','','','2017-06-03 08:15:56','',2);
 UNLOCK TABLES;
 
 -- Table structure for table `privs`
