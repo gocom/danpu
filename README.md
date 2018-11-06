@@ -31,7 +31,7 @@ Install
 
 Using [Composer](http://getcomposer.org):
 
-    $ composer require rah/danpu:2.6.*
+    $ composer require rah/danpu
 
 Usage
 ---------
