@@ -51,7 +51,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
 
                 gzclose($gzip);
             } else {
-              $data = file_get_contents($file);
+                $data = file_get_contents($file);
             }
 
             $file = join("\n", array_slice(explode("\n", $data), 1, -2));
