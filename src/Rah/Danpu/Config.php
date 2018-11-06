@@ -277,6 +277,21 @@ class Config
     public $data = true;
 
     /**
+     * Dump table structure.
+     *
+     * Set FALSE to only dump data.
+     *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->structure(false);
+     * </code>
+     *
+     * @var bool
+     */
+
+    public $structure = true;
+
+    /**
      * Dump triggers.
      *
      * Set FALSE to skip triggers. The dump
