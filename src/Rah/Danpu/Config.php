@@ -279,14 +279,15 @@ class Config
     /**
      * Dump table structure.
      *
-     * Set FALSE to only dump data.
+     * Set FALSE to only dump table data.
      *
      * <code>
      * $dump = new \Rah\Danpu\Dump();
      * $dump->structure(false);
      * </code>
      *
-     * @var bool
+     * @var   bool
+     * @since 2.7.0
      */
 
     public $structure = true;
