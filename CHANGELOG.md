@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Version 2.7.0 - upcoming
+Version 2.7.0 - 2018/11/07
 ----
 
 * Fixed: Test suite compatibility on PHP >= 7.2.
