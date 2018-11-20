@@ -147,6 +147,8 @@ class Export extends Base
     {
         $this->tables->execute();
 
+        $additionalClauses = (array)$this->config->additionalSelectClauses;
+
         foreach ($this->tables->fetchAll(\PDO::FETCH_ASSOC) as $a) {
             $table = current($a);
 
@@ -174,7 +176,16 @@ class Export extends Base
                 $this->write("\n-- Dumping data for table `{$table}`\n", false);
                 $this->write("LOCK TABLES `{$table}` WRITE");
 
-                $rows = $this->pdo->prepare('SELECT * FROM `'.$table.'`');
+                $query = 'SELECT * FROM `'.$table.'`';
+
+                if( isset($additionalClauses[$table]) && $additionalClauses[$table] ){
+                    $query .= ' '.$additionalClauses[$table];
+                }
+                elseif( isset($additionalClauses['default']) && $additionalClauses['default'] ){
+                    $query .= ' '.$additionalClauses['default'];
+                }
+
+                $rows = $this->pdo->prepare($query);
                 $rows->execute();
 
                 while ($a = $rows->fetch(\PDO::FETCH_ASSOC)) {

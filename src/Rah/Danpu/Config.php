@@ -405,6 +405,20 @@ class Config
      */
 
     public $disableAutoCommit = false;
+    
+    /**
+     * Adds additional clauses to SELECT statements when dumping tables
+     * 
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->additionalSelectClauses(array(
+     *     'default' => 'LIMIT 0,1000' // apply additional clause to all tables, except defined tables below
+     *     'shop_orders' => "WHERE YEAR(`placed_date`) = 2018 AND `status` = 'success'" // apply additional clause to shop_orders table only
+     * ));
+     * </code>
+     */
+    
+    public $additionalSelectClauses = array();
 
     /**
      * The database name.
