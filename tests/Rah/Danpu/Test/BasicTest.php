@@ -125,7 +125,6 @@ class BasicTest extends \PHPUnit_Framework_TestCase
 
     public function testIgnoring()
     {
-        $this->target = \test_tmp_dir . '/rah_danpu_' . md5(uniqid(rand(), true));
         $expect = __DIR__ . '/../../../fixtures/ignore/triggers_views.sql';
 
         $this->dump->file(__DIR__ . '/../../../fixtures/default/triggers_views.sql');
@@ -146,6 +145,19 @@ class BasicTest extends \PHPUnit_Framework_TestCase
             join("\n", array_slice(explode("\n", file_get_contents($expect)), 1, -2)),
             join("\n", array_slice(explode("\n", file_get_contents($this->target)), 1, -2))
         );
+    }
+
+    public function testCreateDatabase()
+    {
+        $this->dump->createDatabase(true);
+        new Export($this->dump);
+        $this->assertFileExists($this->target);
+        $this->assertContains('DATABASE', file_get_contents($this->target));
+
+        $this->dump->createDatabase('newname');
+        new Export($this->dump);
+        $this->assertFileExists($this->target);
+        $this->assertContains('newname', file_get_contents($this->target));
     }
 
     public function provider()
@@ -180,6 +192,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $this->target = \test_tmp_dir . '/rah_danpu_' . md5(uniqid(rand(), true));
         $this->dump = new Dump;
         $this->dump
             ->dsn(\test_db_dsn)
@@ -189,11 +202,13 @@ class BasicTest extends \PHPUnit_Framework_TestCase
             ->file(dirname(dirname(dirname(__DIR__))) . '/flush.sql');
 
         new Import($this->dump);
+
+        $this->dump->file($this->target);
     }
 
     public function tearDown()
     {
-        if ($this->target) {
+        if ($this->target && file_exists($this->target)) {
             unlink($this->target);
             $this->target = null;
         }

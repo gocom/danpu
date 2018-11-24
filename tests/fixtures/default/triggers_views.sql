@@ -160,6 +160,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP VIEW IF EXISTS `person_view`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `person_view` AS select `person`.`id` AS `id` from `person`;
 
+-- Trigger structure `test_table_delete`
+
+DROP TRIGGER IF EXISTS `test_table_delete`;
+DELIMITER //
+CREATE TRIGGER `test_table_delete` BEFORE DELETE ON `test_table` FOR EACH ROW
+delete from test_table_1 where test_table_1.id = OLD.id
+//
+DELIMITER ;
+
 -- Trigger structure `user_group_delete`
 
 DROP TRIGGER IF EXISTS `user_group_delete`;

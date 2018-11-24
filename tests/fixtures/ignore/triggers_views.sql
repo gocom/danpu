@@ -46,4 +46,13 @@ CREATE TABLE `test_table_3` (
 LOCK TABLES `test_table_3` WRITE;
 UNLOCK TABLES;
 
+-- Trigger structure `test_table_delete`
+
+DROP TRIGGER IF EXISTS `test_table_delete`;
+DELIMITER //
+CREATE TRIGGER `test_table_delete` BEFORE DELETE ON `test_table` FOR EACH ROW
+delete from test_table_1 where test_table_1.id = OLD.id
+//
+DELIMITER ;
+
 -- Completed on: 2013-12-14T15:45:28+01:00
