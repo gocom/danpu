@@ -6,6 +6,11 @@ License
 
 [MIT](https://raw.github.com/gocom/danpu/master/LICENSE).
 
+Versioning
+----
+
+[Semantic Versioning](https://semver.org/).
+
 Configure Git
 ----
 
@@ -19,27 +24,30 @@ Make sure to use an email address that is linked to your GitHub account. It can 
 Dependencies
 ----
 
-Dependencies are managed using [Composer](http://getcomposer.org).
+Dependencies are managed using [Composer](http://getcomposer.org). After you have cloned the repository, run composer install:
+
+    $ composer install
+
+And update before testing and committing:
+
+    $ composer update
 
 Coding standard
 ----
 
-The project follows the [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) and [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide-meta.md) standards. You can use PHP_CodeSniffer to make sure your additions follow them too:
+The project follows the [PSR-4](https://www.php-fig.org/psr/psr-4/) and [PSR-2](https://www.php-fig.org/psr/psr-2/) standards. You can use PHP_CodeSniffer to make sure your additions follow them too:
 
-    $ composer install
-    $ ./vendor/bin/phpcs --standard=PSR1,PSR2 src tests
+    $ composer cs
 
 Testing
 ----
 
-The project uses [PHPunit](http://phpunit.de) for running its unit tests. Before pushing anything public run the tests and make sure they pass. First make sure you've installed dev-requirements using Composer:
+The project uses [PHPunit](http://phpunit.de) for running its unit tests. To run tests, first set up your own copy of `phpunit.xml` config, saved to the project root directory. This should be done to define your database connection.
 
-    $ composer install
+    $ cp phpunit.dist.xml phpunit.xml
 
-To run tests, specify your PHPunit config and boom:
+The config should follow the [phpunit.dist.xml](https://github.com/gocom/danpu/blob/master/phpunit.dist.xml) template. Tests require an empty MySQL database and a MySQL user with super-privileges. After you have configured phpunit, you can run the tests:
 
-    $ ./vendor/bin/phpunit /path/to/your/phpunit.xml
-
-The config should follow the [phpunit.dist.xml](https://github.com/gocom/danpu/blob/master/phpunit.dist.xml) template. Tests require an empty MySQL database and a MySQL user with super-privileges.
+    $ composer test
 
 Tests should pass before the changes can be merged to the codebase. If you create a pull requests that does not pass tests, CI will complain in the pull request thread. To get your changes merged, you should rework the code until everything works smoothly.
