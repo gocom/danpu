@@ -41,7 +41,7 @@ namespace Rah\Danpu;
  * is with the Dump class. Initialize it and set
  * the properties.
  *
- * <code>
+ * ```php
  * $dump = new \Rah\Danpu\Dump();
  * $dump
  *    ->file('/path/to/target/dump/file.sql')
@@ -49,18 +49,18 @@ namespace Rah\Danpu;
  *    ->user('username')
  *    ->pass('password')
  *    ->tmp('/tmp');
- * </code>
+ * ```
  *
  * When done pass the instance to a worker class such as Export
  * through the constructor.
  *
- * <code>
+ * ```php
  * new \Rah\Danpu\Export($dump);
- * </code>
+ * ```
  *
  * Alternative to Dump class, the Config class can be extended.
  *
- * <code>
+ * ```php
  * namespace App\Dump;
  * class Config extends \Rah\Danpu\Config
  * {
@@ -70,18 +70,18 @@ namespace Rah\Danpu;
  *     public $pass = 'password';
  *     public $tmp = '/tmp';
  * }
- * </code>
+ * ```
  *
  * Extending could be used to generate application wide
  * pre-populated configuration sets. Just pass an instance of
  * your config class to a worker class through Dump:
  *
- * <code>
+ * ```php
  * use App\Dump\Config;
  * use Rah\Danpu\Export;
  * use Rah\Danpu\Dump;
  * new Export(new Dump(new Config));
- * </code>
+ * ```
  *
  * @since 2.3.0
  * @see   Dump
@@ -98,10 +98,10 @@ class Config
      *
      * For instance to connect to a MySQL database hosted locally:
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->dsn('mysql:dbname=database;host=localhost');
-     * </code>
+     * ```
      *
      * Where 'database' is the name of the database and 'localhost'
      * is the hostname.
@@ -116,10 +116,10 @@ class Config
     /**
      * The username used to connect to the database.
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->user('DatabaseUsername');
-     * </code>
+     * ```
      *
      * @var string
      */
@@ -132,10 +132,10 @@ class Config
      * Database user's password. Defaults to
      * an empty string.
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->password('DatabasePassword');
-     * </code>
+     * ```
      *
      * @var string
      */
@@ -152,12 +152,12 @@ class Config
      * For instance, you can use this to increase the
      * timeout limit if its too little.
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->attributes(array(
      *     \PDO::ATTR_TIMEOUT => 900,
      * ));
-     * </code>
+     * ```
      *
      * @var array
      */
@@ -170,10 +170,10 @@ class Config
      * Set this to what your data in your
      * database uses. Defaults to 'utf8'.
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->encoding('utf16');
-     * </code>
+     * ```
      *
      * To minimize issues, don't mix different encodings
      * in your database. All data should be encoded
@@ -190,10 +190,10 @@ class Config
      * This can be used to exclude confidential or temporary
      * data from the backup, like passwords and sessions values.
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->ignore(array('user_sessions', 'user_credentials'));
-     * </code>
+     * ```
      *
      * @var   array
      * @since 2.1.0
@@ -207,10 +207,10 @@ class Config
      * Taken backup will only include items that start
      * with the prefix.
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->prefix('user_');
-     * </code>
+     * ```
      *
      * @var   string
      * @since 2.6.0
@@ -227,10 +227,10 @@ class Config
      * This directory is used as a temporary storage for
      * writing the backup, a on-disk buffer so to speak.
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->tmp('/path/to/temporary/directory');
-     * </code>
+     * ```
      *
      * This directory must be writable and private. You
      * may not want to use a virtual one stored in memory,
@@ -249,10 +249,10 @@ class Config
      * location. To enable Gzipping, add '.gz' extension
      * to the filename.
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->file('/path/to/dump.sql');
-     * </code>
+     * ```
      *
      * @var string
      */
@@ -265,10 +265,10 @@ class Config
      * Set FALSE to only dump structure. No
      * data and inserts will be added.
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->data(false);
-     * </code>
+     * ```
      *
      * @var   bool
      * @since 2.4.0
@@ -281,10 +281,10 @@ class Config
      *
      * Set FALSE to only dump table data.
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->structure(false);
-     * </code>
+     * ```
      *
      * @var   bool
      * @since 2.7.0
@@ -298,10 +298,10 @@ class Config
      * Set FALSE to skip triggers. The dump
      * file will not contain any triggers.
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->trigger(false);
-     * </code>
+     * ```
      *
      * @var   bool
      * @since 2.5.0
@@ -315,10 +315,10 @@ class Config
      * Set FALSE to skip events. The dump
      * file will not contain any events.
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->events(false);
-     * </code>
+     * ```
      *
      * @var   bool
      * @since 2.7.0
@@ -332,17 +332,17 @@ class Config
      * Set to TRUE to add create database statement
      * to the created SQL dump file.
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->createDatabase(true);
-     * </code>
+     * ```
      *
      * Optionally a new name can be given for the database:
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->createDatabase('newdb');
-     * </code>
+     * ```
      *
      * @var   bool|string
      * @since 2.7.0
@@ -358,10 +358,10 @@ class Config
      * unique key checks. This will speed up large data
      * imports to InnoDB tables.
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->disableForeignKeyChecks(true);
-     * </code>
+     * ```
      *
      * @var   bool
      * @since 2.6.0
@@ -377,10 +377,10 @@ class Config
      * unique key checks. This will speed up large data
      * imports to InnoDB tables.
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->disableUniqueKeyChecks(true);
-     * </code>
+     * ```
      *
      * @var   bool
      * @since 2.6.0
@@ -402,10 +402,10 @@ class Config
      * is memory to be allocated on the system where the
      * resulting backup is ran at.
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->disableAutoCommit(true);
-     * </code>
+     * ```
      *
      * @var   bool
      * @since 2.6.0
@@ -419,12 +419,12 @@ class Config
      * Only the rows matching the specified statement will be backed up. The
      * key is the name of the table and the value is the select statement.
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->select(array(
      *     'orders' => 'select * from orders where date >= 2017-01-01'
      * ));
-     * </code>
+     * ```
      *
      * @var   array
      * @since 2.8.0

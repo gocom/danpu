@@ -34,13 +34,13 @@ namespace Rah\Danpu;
 /**
  * Configures a dump instance.
  *
- * <code>
+ * ```php
  * use Rah\Danpu\Dump;
  * $dump = new Dump();
  * $dump
  *     ->dsn('mysql:dbname=database;host=localhost')
  *     ->file('/path/to/dump.sql');
- * </code>
+ * ```
  *
  * @method Dump dsn(string $dsn)
  * @method Dump user(string $username)
@@ -96,13 +96,13 @@ class Dump
      * The config argument can for instance be your Config
      * class implementation that you've created by extending.
      *
-     * <code>
+     * ```php
      * class MyAppConfig extends \Rah\Danpu\Config
      * {
      *     public $dsn = 'mysql:dbname=database;host=localhost';
      * }
      * new Dump(new MyAppConfig);
-     * </code>
+     * ```
      *
      * @param Config|null $config The config, defaults to Config
      */
@@ -127,10 +127,10 @@ class Dump
     /**
      * Gets a configuration property.
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * echo $dump->name;
-     * </code>
+     * ```
      *
      * The method throws an exception if the property does not
      * exists.
@@ -152,10 +152,10 @@ class Dump
     /**
      * Sets a configuration property.
      *
-     * <code>
+     * ```php
      * $dump = new \Rah\Danpu\Dump();
      * $dump->name('value');
-     * </code>
+     * ```
      *
      * The method throws an exception if the property does not
      * exist.

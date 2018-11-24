@@ -34,7 +34,7 @@ namespace Rah\Danpu;
 /**
  * Creates a SQL dump file from a database.
  *
- * <code>
+ * ```php
  * use Rah\Danpu\Dump;
  * use Rah\Danpu\Export;
  * $config = new Dump;
@@ -46,7 +46,7 @@ namespace Rah\Danpu;
  *    ->tmp('/tmp');
  *
  * new Export($config);
- * </code>
+ * ```
  */
 
 class Export extends Base

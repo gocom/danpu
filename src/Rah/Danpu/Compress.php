@@ -34,11 +34,11 @@ namespace Rah\Danpu;
 /**
  * Creates a gzip file from the backup.
  *
- * <code>
+ * ```php
  * use Rah\Danpu\Compress;
  * $gz = new Compress();
  * $gz->pack('/source/dump.sql', '/target/dump.sql.gz');
- * </code>
+ * ```
  *
  * @internal
  */
