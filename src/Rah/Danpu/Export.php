@@ -81,8 +81,8 @@ class Export extends Base
             return 'NULL';
         }
 
-        if ((string) intval($value) === $value) {
-            return (int) $value;
+        if (is_integer($value) || is_float($value)) {
+            return $value;
         }
 
         return $this->pdo->quote($value);
