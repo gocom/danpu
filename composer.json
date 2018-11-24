@@ -16,8 +16,8 @@
         "source": "https://github.com/gocom/danpu"
     },
     "autoload": {
-        "psr-0": {
-            "Rah\\Danpu\\": "src/"
+        "psr-4": {
+            "Rah\\Danpu\\": "src/Rah/Danpu/"
         }
     },
     "require": {
