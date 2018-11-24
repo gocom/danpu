@@ -149,11 +149,7 @@ abstract class Base implements BaseInterface
             $this->pdo = new \PDO(
                 $this->config->dsn,
                 $this->config->user,
-                $this->config->pass,
-                array(
-                    \PDO::ATTR_EMULATE_PREPARES => false,
-                    \PDO::ATTR_STRINGIFY_FETCHES => false
-                )
+                $this->config->pass
             );
 
             $this->pdo->exec('SET NAMES '.$this->config->encoding);
