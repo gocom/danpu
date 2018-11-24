@@ -108,12 +108,18 @@ class Export extends Base
             $this->write('SET UNIQUE_CHECKS = 0');
         }
 
-        if ($this->config->createDatabase === true) {
+        if ($this->config->createDatabase) {
+            if ($this->config->createDatabase === true) {
+                $database = $this->database;
+            } else {
+                $database = (string) $this->config->createDatabase;
+            }
+
             $this->write(
-                'CREATE DATABASE IF NOT EXISTS `'.$this->database.'` '.
+                'CREATE DATABASE IF NOT EXISTS `'.$database.'` '.
                 'DEFAULT CHARACTER SET = '.$this->escape($this->config->encoding)
             );
-            $this->write('USE `'.$this->database.'`');
+            $this->write('USE `'.$database.'`');
         }
 
         $this->dumpTables();

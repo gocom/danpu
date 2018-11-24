@@ -337,7 +337,14 @@ class Config
      * $dump->createDatabase(true);
      * </code>
      *
-     * @var   bool
+     * Optionally a new name can be given for the database:
+     *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->createDatabase('newdb');
+     * </code>
+     *
+     * @var   bool|string
      * @since 2.7.0
      */
 
