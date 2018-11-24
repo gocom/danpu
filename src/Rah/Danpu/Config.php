@@ -407,6 +407,25 @@ class Config
     public $disableAutoCommit = false;
 
     /**
+     * An array of select statement used to filter rows.
+     *
+     * Only the rows matching the specified statement will be backed up. The
+     * key is the name of the table and the value is the select statement.
+     *
+     * <code>
+     * $dump = new \Rah\Danpu\Dump();
+     * $dump->select(array(
+     *     'orders' => 'select * from orders where date >= 2017-01-01'
+     * ));
+     * </code>
+     *
+     * @var   array
+     * @since 2.8.0
+     */
+
+    public $select = array();
+
+    /**
      * The database name.
      *
      * @var        string

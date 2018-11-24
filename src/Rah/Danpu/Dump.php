@@ -57,6 +57,7 @@ namespace Rah\Danpu;
  * @method Dump disableForeignKeyChecks(bool $disabled)
  * @method Dump disableUniqueKeyChecks(bool $disabled)
  * @method Dump disableAutoCommit(bool $disabled)
+ * @method Dump select(array $rows)
  * @property-read string $dsn
  * @property-read string $user
  * @property-read string $pass
@@ -71,6 +72,7 @@ namespace Rah\Danpu;
  * @property-read bool $disableForeignKeyChecks
  * @property-read bool $disableUniqueKeyChecks
  * @property-read bool $disableAutoCommit
+ * @property-read array $select
  * @see Config
  */
 

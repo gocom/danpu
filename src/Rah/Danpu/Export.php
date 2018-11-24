@@ -174,7 +174,13 @@ class Export extends Base
                 $this->write("\n-- Dumping data for table `{$table}`\n", false);
                 $this->write("LOCK TABLES `{$table}` WRITE");
 
-                $rows = $this->pdo->prepare('SELECT * FROM `'.$table.'`');
+                if (isset($this->config->select[$table])) {
+                    $query = $this->config->select[$table];
+                } else {
+                    $query = 'SELECT * FROM `'.$table.'`';
+                }
+
+                $rows = $this->pdo->prepare($query);
                 $rows->execute();
 
                 while ($a = $rows->fetch(\PDO::FETCH_ASSOC)) {
