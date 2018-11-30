@@ -20,6 +20,11 @@
             "Rah\\Danpu\\": "src/Rah/Danpu/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Rah\\Danpu\\Test\\": "tests/Rah/Danpu/Test/"
+        }
+    },
     "require": {
         "php": ">=5.3.0",
         "ext-pdo": "*"
