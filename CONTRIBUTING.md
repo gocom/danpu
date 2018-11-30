@@ -24,7 +24,7 @@ Make sure to use an email address that is linked to your GitHub account. It can 
 Dependencies
 ----
 
-Dependencies are managed using [Composer](http://getcomposer.org). After you have cloned the repository, run composer install:
+Dependencies are managed using [Composer](https://getcomposer.org). After you have cloned the repository, run composer install:
 
     $ composer install
 
@@ -42,7 +42,7 @@ The project follows the [PSR-4](https://www.php-fig.org/psr/psr-4/) and [PSR-2](
 Testing
 ----
 
-The project uses [PHPunit](http://phpunit.de) for running its unit tests. To run tests, first set up your own copy of `phpunit.xml` config, saved to the project root directory. This should be done to define your database connection.
+The project uses [PHPunit](https://phpunit.de) for running its unit tests. To run tests, first set up your own copy of `phpunit.xml` config, saved to the project root directory. This should be done to define your database connection.
 
     $ cp phpunit.dist.xml phpunit.xml
 
